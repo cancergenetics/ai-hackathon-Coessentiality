@@ -1,0 +1,44 @@
+# input datasets (DepMap, hu.MAP, HGNC): never commit; only the placeholder READMEs are tracked
+datasets/**
+!datasets/**/
+!datasets/**/README.md
+data/raw/
+*.csv
+!data/protein_assignment.csv
+*.npy
+*.npz
+*.parquet
+*.feather
+
+# outputs and caches
+outputs/
+out/
+cache/
+data_cache/
+*.run.json
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+
+# environments
+.env/
+.venv/
+venv/
+env/
+.conda/
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# derived score files you generate locally
+*.tsv
+*.tsv.gz
+!predictions/genome_wide_top_pairs.tsv.gz
+*.txt
+!requirements.txt

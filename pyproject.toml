@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "coessential"
+version = "0.1.0"
+description = "Label-free prediction of protein co-complex membership from DepMap CRISPR co-essentiality (zavg_BEF)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.26", "scipy>=1.11", "pandas>=2.0", "scikit-learn>=1.3"]
+
+[project.urls]
+Repository = "https://github.com/cancergenetics/ai-hackathon-Coessentiality"
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+coessential-predict = "coessential.cli:predict_pairs_main"
+coessential-genome-wide = "coessential.cli:genome_wide_main"
+coessential-evaluate = "coessential.cli:evaluate_main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "tests"]
+testpaths = ["tests"]

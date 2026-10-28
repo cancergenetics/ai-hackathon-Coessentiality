@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software or the predictions, please cite it as below, and cite DepMap and hu.MAP 3.0 (see README)."
+title: "ai-hackathon-Coessentiality: label-free prediction of protein co-complex membership from DepMap co-essentiality"
+type: software
+authors:
+  - name: "The authors"          # TODO: replace with author list
+version: 0.1.0
+date-released: "2026-XX-XX"      # TODO: set on release
+repository-code: "https://github.com/cancergenetics/ai-hackathon-Coessentiality"
+keywords:
+  - co-essentiality
+  - DepMap
+  - protein complexes
+  - hu.MAP
+  - AI agents
+# preferred-citation:            # TODO: add the manuscript once available
+#   type: article
+#   title: "..."
+#   authors: [...]
+#   journal: "..."
+#   year: 2026
+#   doi: "..."
