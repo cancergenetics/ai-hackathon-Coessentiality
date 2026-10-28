@@ -381,18 +381,23 @@ class CoessentialityModel:
         return out / len(components), Z
 
     # -------------------------------------------------------------------------- genome-wide
-    def zavg_block(self, rows) -> np.ndarray:
-        """zavg_BEF of genes `rows` against all genes (dense block; for genome-wide ranking)."""
+    def z_block(self, rows) -> dict:
+        """Fixed-null z-scores {B, E, F} of genes `rows` against all genes (dense float64 blocks)."""
         Z64 = self.profiles()[0]
-        out = np.zeros((len(rows), self.G))
+        out = {}
         mu, sd = self.null_moments("B")
         m, s = self.so_row_stats()
         S = self._so_block(rows)
-        out += (0.5 * ((S - m[rows, None]) / s[rows, None] + (S - m[None, :]) / s[None, :]) - mu) / sd
+        out["B"] = (0.5 * ((S - m[rows, None]) / s[rows, None] + (S - m[None, :]) / s[None, :]) - mu) / sd
         del S
         Em = self.embedding()
         mu, sd = self.null_moments("E")
-        out += (Em[rows] @ Em.T - mu) / sd
+        out["E"] = (Em[rows] @ Em.T - mu) / sd
         mu, sd = self.null_moments("F")
-        out += (Z64[rows] @ Z64.T - mu) / sd
-        return out / 3.0
+        out["F"] = (Z64[rows] @ Z64.T - mu) / sd
+        return out
+
+    def zavg_block(self, rows) -> np.ndarray:
+        """zavg_BEF of genes `rows` against all genes (dense block; for genome-wide ranking)."""
+        Z = self.z_block(rows)
+        return (Z["B"] + Z["E"] + Z["F"]) / 3.0

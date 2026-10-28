@@ -1,0 +1,501 @@
+{
+ "tool": "mvp/scripts/predict_all_pairs.py",
+ "created": "2026-10-28T12:44:12",
+ "method": {
+  "name": "zavg_BEF",
+  "definition": "(z_B + z_E + z_F) / 3, fixed-null z-scores (mvp/src/coessential/method.py)",
+  "config": {
+   "k": 20,
+   "tau": 0.1,
+   "q": 0.25,
+   "d": 512,
+   "max_nan": 0.1,
+   "standardize": true,
+   "center": "gene",
+   "n_null": 200000,
+   "seed": 0,
+   "block": 1024
+  },
+  "null_moments": {
+   "B": {
+    "mean": 0.003540567936314927,
+    "sd": 0.9961739653154259
+   },
+   "E": {
+    "mean": 0.00025775948106724825,
+    "sd": 0.046658479093283155
+   },
+   "F": {
+    "mean": 0.0003131672446658825,
+    "sd": 0.026499871218646533
+   }
+  },
+  "label_free": "no pair labels (hu.MAP or other) are read"
+ },
+ "definitions": {
+  "gene_universe": "DepMap CRISPRGeneEffect gene columns",
+  "protein_gene": "Entrez ID of the DepMap column 'SYMBOL (ENTREZ)' is the entrez_id of an HGNC Approved record with >= 1 uniprot_ids accession",
+  "low_coverage": "NaN fraction >= 0.1 (non-background genes: scored as predict_pairs does, flagged)",
+  "pairs": "all unordered pairs i < j of protein genes (genes.tsv index = DepMap column order)",
+  "matrices": "dense n x n; upper triangle (row < col) = computed value, lower triangle = its exact mirror, diagonal NaN",
+  "pair_table": "zavg_BEF >= 3; ranked by zavg_BEF (float64 before storage) descending, ties by index_a, index_b; scores stored as float32",
+  "low_coverage_any": "either gene has low_coverage = 1"
+ },
+ "inputs": {
+  "depmap": {
+   "path": "datasets/DepMAP/CRISPRGeneEffect.csv",
+   "sha256": "1e0c492944a7297c0eda179081a1e81a1cfe41a97628facd7eddbdda1a7504ee"
+  },
+  "hgnc": {
+   "path": "datasets/HGNC/hgnc_complete_set.txt",
+   "sha256": "0f2d3f035e0e6583c055a1d9e008f275376a4b66f72af380dfc2ac730272c247"
+  }
+ },
+ "code": {
+  "commit": "028747083b3780d74c20d8c28f513e616d2f2fd7",
+  "dirty_files": []
+ },
+ "counts": {
+  "n_depmap_genes": 18434,
+  "n_depmap_entrez_in_hgnc_approved": 18434,
+  "n_depmap_not_in_hgnc_approved": 0,
+  "n_excluded_no_uniprot": 5,
+  "excluded_genes": [
+   "ABHD4 (63874)",
+   "C10orf90 (118611)",
+   "GUCA1ANB-GUCA1A (118142757)",
+   "HSD17B8 (7923)",
+   "UBE2O (63893)"
+  ],
+  "n_protein_genes": 18429,
+  "n_protein_genes_low_coverage": 908,
+  "n_protein_genes_background": 17521,
+  "protein_genes_by_n_uniprot_accessions": {
+   "1": 18390,
+   "2": 38,
+   "4": 1
+  },
+  "n_pairs": 169804806,
+  "n_pairs_background_only": 153483960
+ },
+ "files": {
+  "zavg_BEF.npy": {
+   "dtype": "float32",
+   "shape": [
+    18429,
+    18429
+   ],
+   "bytes": 1358512292,
+   "sha256": "8a1d821a1033a978acc1298c06752a5b215c608a270a33883893860292a9ce02"
+  },
+  "z_B.npy": {
+   "dtype": "float16",
+   "shape": [
+    18429,
+    18429
+   ],
+   "bytes": 679256210,
+   "sha256": "0e1f1223925871346589774557ed1574dd204a33dcc976c25127cdd53a420b84"
+  },
+  "z_E.npy": {
+   "dtype": "float16",
+   "shape": [
+    18429,
+    18429
+   ],
+   "bytes": 679256210,
+   "sha256": "6bd372c7fb6913f233c8931daeb1015ab0442cd43e38ccae9e6c296a1b1cd39c"
+  },
+  "z_F.npy": {
+   "dtype": "float16",
+   "shape": [
+    18429,
+    18429
+   ],
+   "bytes": 679256210,
+   "sha256": "0c3bd84c916f37eeab76384eb1a8f403c55bc687df29fc01acd9f6b81830de5f"
+  },
+  "genes.tsv": {
+   "rows": 18429,
+   "columns": [
+    "index",
+    "symbol",
+    "entrez",
+    "uniprot_ids",
+    "hgnc_id",
+    "low_coverage",
+    "nan_fraction",
+    "depmap_column",
+    "depmap_index"
+   ],
+   "bytes": 1096403,
+   "sha256": "06f45707e35e3dbaa19a724eb6282f2cf53ae198e6b1ca1566d91df6cd5a67cd"
+  },
+  "top_pairs.parquet": {
+   "rows": 667677,
+   "columns": {
+    "symbol_a": "str",
+    "symbol_b": "str",
+    "entrez_a": "int64",
+    "entrez_b": "int64",
+    "uniprot_a": "str",
+    "uniprot_b": "str",
+    "zavg_BEF": "float32",
+    "z_B": "float32",
+    "z_E": "float32",
+    "z_F": "float32",
+    "rank": "int64",
+    "low_coverage_any": "bool"
+   },
+   "rule": "zavg_BEF >= 3",
+   "bytes": 19943306,
+   "sha256": "79f225fd669cb38de66a80d444979421e2ca6ba81a97253611e5495866b0d1fd"
+  }
+ },
+ "scores": {
+  "zavg_BEF_over_all_pairs": {
+   "n": 169804806,
+   "mean": -0.002501359345042395,
+   "sd": 0.7001336845427221,
+   "quantiles": {
+    "0": -6.922501564025879,
+    "0.0001": -1.9185741544365882,
+    "0.001": -1.546674321293831,
+    "0.01": -1.164410227537155,
+    "0.05": -0.842078447341919,
+    "0.1": -0.6756529808044434,
+    "0.25": -0.40226051211357117,
+    "0.5": -0.09423165768384933,
+    "0.75": 0.25294962525367737,
+    "0.9": 0.7203337550163269,
+    "0.95": 1.194593995809555,
+    "0.99": 2.2488906264305086,
+    "0.999": 4.9096523928640465,
+    "0.9999": 13.850743448253638,
+    "0.99999": 21.399035657025138,
+    "0.999999": 27.963258896978857,
+    "1": 38.043983459472656
+   },
+   "count_ge": {
+    "2": 2433687,
+    "3": 667677,
+    "4": 278986,
+    "5": 163445
+   }
+  },
+  "components_over_all_pairs": {
+   "z_B": {
+    "mean": -0.0022183202057668894,
+    "sd": 0.9949189224239576
+   },
+   "z_E": {
+    "mean": -0.0013802538998369171,
+    "sd": 1.001701422738428
+   },
+   "z_F": {
+    "mean": -0.0039054821419559297,
+    "sd": 1.0089507692646993
+   }
+  },
+  "n_ge_from_float64": {
+   ">=2": 2433685,
+   ">=3": 667677,
+   ">=4": 278986,
+   ">=5": 163445
+  },
+  "n_nonfinite_upper": 0,
+  "note": "quantiles / count_ge from the stored float32 matrix; n_ge_from_float64 from the unrounded block values (the pair-table threshold is applied to these)"
+ },
+ "pair_table": {
+  "rule": "zavg_BEF >= 3",
+  "rows": 667677,
+  "n_pairs_above_threshold": 667677,
+  "threshold": 3.0
+ },
+ "runtime": {
+  "total_s": 145.8,
+  "load_and_model_init_s": 3.1,
+  "genome_wide_state_and_null_s": 98.0,
+  "block_scoring_s": 31.8,
+  "distribution_s": 7.0,
+  "write_and_hash_s": 5.5,
+  "peak_rss_gb": 6.59
+ },
+ "env": {
+  "python": "3.12.16",
+  "numpy": "2.5.4",
+  "pandas": "3.1.0",
+  "machine": "arm64",
+  "platform": "macOS-26.5.2-arm64-arm-64bit"
+ },
+ "checks": {
+  "tool": "scripts/verify/check_all_pairs.py",
+  "a_sample_pairs": {
+   "random": {
+    "n_low_coverage_pairs": 203,
+    "vs_research_predict_pairs": {
+     "zavg_BEF": {
+      "max_abs_diff": 2.3476383397280642e-06,
+      "n_fail": 0,
+      "tol": 0.0001
+     },
+     "z_B": {
+      "max_abs_diff": 0.004662324169334653,
+      "n_fail_abs_1e2": 0,
+      "n_fail_float16_bound": 0,
+      "max_abs_ref": 30.479712675830665
+     },
+     "z_E": {
+      "max_abs_diff": 0.0077344958883571735,
+      "n_fail_abs_1e2": 0,
+      "n_fail_float16_bound": 0,
+      "max_abs_ref": 19.570234495888357
+     },
+     "z_F": {
+      "max_abs_diff": 0.0009212962841607109,
+      "n_fail_abs_1e2": 0,
+      "n_fail_float16_bound": 0,
+      "max_abs_ref": 5.011912747599375
+     },
+     "pass": true,
+     "pass_strict_abs_1e2": true,
+     "n": 2000
+    },
+    "vs_mvp_predict_pairs": {
+     "zavg_BEF": {
+      "max_abs_diff": 3.2631891677681324e-07,
+      "n_fail": 0,
+      "tol": 0.0001
+     },
+     "z_B": {
+      "max_abs_diff": 0.004662324169334653,
+      "n_fail_abs_1e2": 0,
+      "n_fail_float16_bound": 0,
+      "max_abs_ref": 30.479712675830665
+     },
+     "z_E": {
+      "max_abs_diff": 0.007741605932643836,
+      "n_fail_abs_1e2": 0,
+      "n_fail_float16_bound": 0,
+      "max_abs_ref": 19.570241605932644
+     },
+     "z_F": {
+      "max_abs_diff": 0.0009212962841607109,
+      "n_fail_abs_1e2": 0,
+      "n_fail_float16_bound": 0,
+      "max_abs_ref": 5.011912747599375
+     },
+     "pass": true,
+     "pass_strict_abs_1e2": true,
+     "n": 2000
+    },
+    "research_vs_mvp_max_abs_diff_zavg": 2.3700147586680487e-06
+   },
+   "low_cov_any": {
+    "n_low_coverage_pairs": 500,
+    "vs_research_predict_pairs": {
+     "zavg_BEF": {
+      "max_abs_diff": 6.33262572158344e-07,
+      "n_fail": 0,
+      "tol": 0.0001
+     },
+     "z_B": {
+      "max_abs_diff": 0.001366712225660649,
+      "n_fail_abs_1e2": 0,
+      "n_fail_float16_bound": 0,
+      "max_abs_ref": 5.403460211843945
+     },
+     "z_E": {
+      "max_abs_diff": 0.0009588390155697013,
+      "n_fail_abs_1e2": 0,
+      "n_fail_float16_bound": 0,
+      "max_abs_ref": 4.734965099014224
+     },
+     "z_F": {
+      "max_abs_diff": 0.0009679625471892273,
+      "n_fail_abs_1e2": 0,
+      "n_fail_float16_bound": 0,
+      "max_abs_ref": 3.8031214949977548
+     },
+     "pass": true,
+     "pass_strict_abs_1e2": true,
+     "n": 500
+    },
+    "vs_mvp_predict_pairs": {
+     "zavg_BEF": {
+      "max_abs_diff": 1.1836363045247822e-07,
+      "n_fail": 0,
+      "tol": 0.0001
+     },
+     "z_B": {
+      "max_abs_diff": 0.001366712225660649,
+      "n_fail_abs_1e2": 0,
+      "n_fail_float16_bound": 0,
+      "max_abs_ref": 5.403460211843945
+     },
+     "z_E": {
+      "max_abs_diff": 0.0009582645417052227,
+      "n_fail_abs_1e2": 0,
+      "n_fail_float16_bound": 0,
+      "max_abs_ref": 4.734965096721379
+     },
+     "z_F": {
+      "max_abs_diff": 0.0009679625471892273,
+      "n_fail_abs_1e2": 0,
+      "n_fail_float16_bound": 0,
+      "max_abs_ref": 3.8031214949977548
+     },
+     "pass": true,
+     "pass_strict_abs_1e2": true,
+     "n": 500
+    },
+    "research_vs_mvp_max_abs_diff_zavg": 5.976239974003761e-07
+   },
+   "low_cov_both": {
+    "n_low_coverage_pairs": 199,
+    "vs_research_predict_pairs": {
+     "zavg_BEF": {
+      "max_abs_diff": 8.495087593374251e-07,
+      "n_fail": 0,
+      "tol": 0.0001
+     },
+     "z_B": {
+      "max_abs_diff": 0.0021403430038606786,
+      "n_fail_abs_1e2": 0,
+      "n_fail_float16_bound": 0,
+      "max_abs_ref": 15.17754715699614
+     },
+     "z_E": {
+      "max_abs_diff": 0.0019015627082712427,
+      "n_fail_abs_1e2": 0,
+      "n_fail_float16_bound": 0,
+      "max_abs_ref": 5.840974847296186
+     },
+     "z_F": {
+      "max_abs_diff": 0.0038603214152352905,
+      "n_fail_abs_1e2": 0,
+      "n_fail_float16_bound": 0,
+      "max_abs_ref": 8.282517810421803
+     },
+     "pass": true,
+     "pass_strict_abs_1e2": true,
+     "n": 199
+    },
+    "vs_mvp_predict_pairs": {
+     "zavg_BEF": {
+      "max_abs_diff": 2.1604829214538768e-07,
+      "n_fail": 0,
+      "tol": 0.0001
+     },
+     "z_B": {
+      "max_abs_diff": 0.0021403430038606786,
+      "n_fail_abs_1e2": 0,
+      "n_fail_float16_bound": 0,
+      "max_abs_ref": 15.17754715699614
+     },
+     "z_E": {
+      "max_abs_diff": 0.0019023823879775748,
+      "n_fail_abs_1e2": 0,
+      "n_fail_float16_bound": 0,
+      "max_abs_ref": 5.840975985759428
+     },
+     "z_F": {
+      "max_abs_diff": 0.0038603214152352905,
+      "n_fail_abs_1e2": 0,
+      "n_fail_float16_bound": 0,
+      "max_abs_ref": 8.282517810421803
+     },
+     "pass": true,
+     "pass_strict_abs_1e2": true,
+     "n": 199
+    },
+    "research_vs_mvp_max_abs_diff_zavg": 7.250648241807767e-07
+   },
+   "n_unique_pairs": 2699,
+   "n_scored_via_uniprot_input": 2689,
+   "n_scored_via_gene_index": 10,
+   "research_null_moments": {
+    "B": {
+     "mean": 0.003540567936314927,
+     "sd": 0.9961739653154259
+    },
+    "E": {
+     "mean": 0.00025775943667355754,
+     "sd": 0.04665847923240877
+    },
+    "F": {
+     "mean": 0.0003131672446658825,
+     "sd": 0.026499871218646533
+    }
+   }
+  },
+  "a_existing_genome_wide_file": {
+   "zavg_BEF": {
+    "max_abs_diff": 5.889282228110915e-06,
+    "n_fail": 0,
+    "tol": 0.0001
+   },
+   "z_B": {
+    "max_abs_diff": 0.015619999999998413,
+    "n_fail_abs_1e2": 1032,
+    "n_fail_float16_bound": 0,
+    "max_abs_ref": 65.38263
+   },
+   "z_E": {
+    "max_abs_diff": 0.007815000000000794,
+    "n_fail_abs_1e2": 0,
+    "n_fail_float16_bound": 0,
+    "max_abs_ref": 21.28617
+   },
+   "z_F": {
+    "max_abs_diff": 0.007815000000000794,
+    "n_fail_abs_1e2": 0,
+    "n_fail_float16_bound": 0,
+    "max_abs_ref": 31.72763
+   },
+   "pass": true,
+   "pass_strict_abs_1e2": false,
+   "n": 199896,
+   "n_file_pairs": 200000,
+   "n_non_protein_pairs_skipped": 104,
+   "note": "file values are rounded to 5 decimals"
+  },
+  "b_symmetry_diagonal": {
+   "exact_symmetry": {
+    "zavg_BEF": true,
+    "z_B": true,
+    "z_E": true,
+    "z_F": true
+   },
+   "diagonal_all_nan": {
+    "zavg_BEF": true,
+    "z_B": true,
+    "z_E": true,
+    "z_F": true
+   },
+   "offdiag_nonfinite": {
+    "zavg_BEF": 0,
+    "z_B": 0,
+    "z_E": 0,
+    "z_F": 0
+   },
+   "zavg_vs_mean_of_float16_components_max_ratio_to_rounding_bound": 0.9821548750709995,
+   "pass": true
+  },
+  "c_top_pairs_reproduced": {
+   "N": 199896,
+   "n_background_protein_genes": 17521,
+   "n_existing_pairs_all_background": 199896,
+   "n_common": 199896,
+   "n_only_new": 0,
+   "n_only_existing": 0,
+   "cutoff_float32": 4.381059646606445,
+   "n_candidates_at_floor": 201039,
+   "boundary_values_only_new": [],
+   "boundary_values_only_existing": [],
+   "pass": true
+  },
+  "runtime_s": 304.8,
+  "all_pass": true
+ }
+}

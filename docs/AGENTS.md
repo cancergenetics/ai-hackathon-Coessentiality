@@ -35,7 +35,7 @@ The project was run as a test of autonomous AI-agent research. Humans wrote the 
   - The research tree recorded decisions, with milestone summaries.
   - An append-only trial log recorded 845 started and 844 completed evaluations.
   - An internal-test look log, design reviews, retrospectives and a lessons file were also kept.
-  - All of these stay in the private research repository. This public repository contains the final method, its tests, the predictions and the summary tables.
+  - All of these are included in this repository (record files at the top level, reviews and retrospectives in `reviews/`, logs in `results/`).
 
 ## What the humans did
 

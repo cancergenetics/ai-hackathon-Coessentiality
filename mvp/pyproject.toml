@@ -19,6 +19,7 @@ test = ["pytest>=7"]
 [project.scripts]
 coessential-predict = "coessential.cli:predict_pairs_main"
 coessential-genome-wide = "coessential.cli:genome_wide_main"
+coessential-all-pairs = "coessential.all_pairs:main"
 coessential-evaluate = "coessential.cli:evaluate_main"
 
 [tool.setuptools.packages.find]

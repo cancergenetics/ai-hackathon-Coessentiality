@@ -1,0 +1,249 @@
+<title>Co-complex Scoring Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="What the zavg_BEF co-essentiality method does, how AI agents arrived at it, and what was learned.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a reading column (≈68ch) under a sticky tab bar; figures and tables may run wider than the column. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --ink: #14161a; --muted: #5a5f69; --rule: #d9dce2; --tint: #eef2f8;
+  --accent: #2a78d6; --accent-ink: #1c5cab; --comp: #1baf7a; --warn: #c2541f; --warn-tint: #fbefe8; --base: #8a8d94;
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --pl-bg: transparent; --pl-in: #eceef2; --pl-step: #e8f0fb; --pl-stroke: #b8bcc5; --pl-line: #6b707a;
+  --pl-ink: #14161a; --pl-muted: #5a5f69; --pl-accent: #2a78d6; --pl-accent-ink: #1c5cab; --pl-out: #2a78d6; --pl-out-ink: #ffffff;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121418; --surface: #1a1d22; --ink: #eceef1; --muted: #a6abb5; --rule: #30343c; --tint: #1d2633;
+  --accent: #5598e7; --accent-ink: #86b6ef; --comp: #2bbf88; --warn: #e8875c; --warn-tint: #2c1f19; --base: #8c9099;
+  --pl-in: #22262d; --pl-step: #1b2a3e; --pl-stroke: #444a55; --pl-line: #9097a3; --pl-ink: #eceef1; --pl-muted: #a6abb5;
+  --pl-accent: #5598e7; --pl-accent-ink: #86b6ef; --pl-out: #3987e5; --pl-out-ink: #ffffff; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #121418; --surface: #1a1d22; --ink: #eceef1; --muted: #a6abb5; --rule: #30343c; --tint: #1d2633;
+  --accent: #5598e7; --accent-ink: #86b6ef; --comp: #2bbf88; --warn: #e8875c; --warn-tint: #2c1f19; --base: #8c9099;
+  --pl-in: #22262d; --pl-step: #1b2a3e; --pl-stroke: #444a55; --pl-line: #9097a3; --pl-ink: #eceef1; --pl-muted: #a6abb5;
+  --pl-accent: #5598e7; --pl-accent-ink: #86b6ef; --pl-out: #3987e5; --pl-out-ink: #ffffff; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 17px; line-height: 1.6; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap { max-width: 1040px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header.top { padding-block: 40px 20px; }
+.eyebrow { font-family: var(--font-display); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+h1.title { font-family: var(--font-display); font-stretch: 85%; font-weight: 800; font-size: clamp(30px, 5vw, 46px); line-height: 1.05; margin: 8px 0 14px; text-wrap: balance; letter-spacing: -.01em; }
+.lede { max-width: 68ch; font-size: 18.5px; margin: 0; }
+.lede b { font-weight: 600; }
+.disclaimer { max-width: 68ch; font-size: 14px; color: var(--muted); margin-top: 14px; }
+nav.tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--rule); }
+nav.tabs .wrap { display: flex; gap: 4px; overflow-x: auto; }
+.tab { font-family: var(--font-display); font-size: 15px; font-weight: 600; background: none; border: 0; color: var(--muted); padding: 14px 14px 12px; border-bottom: 3px solid transparent; cursor: pointer; white-space: nowrap; }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+.tab:focus-visible, button:focus-visible, .pl-node:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.panel { padding-block: 28px 80px; }
+.prose { max-width: 1040px; }
+.prose > :is(p, ul, ol, blockquote, h2, h3, h4, details, .callout) { max-width: 68ch; }
+.prose > pre { max-width: 100%; }
+[id] { scroll-margin-top: 64px; }
+.prose h2 { font-family: var(--font-display); font-stretch: 90%; font-weight: 750; font-size: 27px; line-height: 1.2; margin: 52px 0 12px; text-wrap: balance; }
+.prose h3 { font-family: var(--font-display); font-weight: 700; font-size: 20px; margin: 34px 0 8px; text-wrap: balance; }
+.prose h4 { font-family: var(--font-display); font-weight: 700; font-size: 17px; margin: 22px 0 6px; }
+.prose p, .prose li { margin: 0 0 12px; }
+.prose ul, .prose ol { padding-left: 1.3em; }
+.prose a { color: var(--accent-ink); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+.prose code { font-family: var(--font-mono); font-size: .82em; background: var(--tint); padding: 1px 5px; border-radius: 4px; }
+.prose pre { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 14px 16px; overflow-x: auto; font-size: 13.5px; line-height: 1.5; }
+.prose pre code { background: none; padding: 0; font-size: inherit; }
+.prose blockquote { margin: 16px 0; padding: 10px 16px; border-left: 3px solid var(--accent); background: var(--surface); }
+.prose blockquote p:last-child { margin-bottom: 0; }
+.prose table { border-collapse: collapse; font-size: 14.5px; font-variant-numeric: tabular-nums; margin: 8px 0 20px; min-width: 100%; }
+.prose th, .prose td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.prose th { font-family: var(--font-display); font-weight: 650; font-size: 13.5px; color: var(--muted); }
+.tablewrap { overflow-x: auto; max-width: 100%; }
+.prose img { display: block; max-width: 100%; height: auto; background: #ffffff; border-radius: 6px; margin: 10px 0 4px; }
+.prose p:has(> img) + p em, .prose p > em:only-child { color: var(--muted); font-size: 14.5px; }
+figure { margin: 14px 0 24px; }
+figcaption { font-size: 14px; color: var(--muted); margin-top: 6px; }
+figure.pipeline { overflow-x: auto; }
+figure.pipeline svg { width: 100%; min-width: 680px; height: auto; display: block; }
+.pl-node { cursor: pointer; }
+.pl-node rect { transition: filter .15s; }
+.pl-node:hover rect { filter: brightness(.94); }
+/* worked example */
+.worked { border: 1px solid var(--rule); background: var(--surface); border-radius: 10px; margin: 16px 0 28px; }
+.wk-nav { display: flex; overflow-x: auto; border-bottom: 1px solid var(--rule); }
+.wk-tab { display: flex; gap: 8px; align-items: center; background: none; border: 0; border-bottom: 3px solid transparent; padding: 10px 12px; cursor: pointer; color: var(--muted); font-family: var(--font-display); font-size: 13.5px; font-weight: 600; white-space: nowrap; }
+.wk-tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+.wk-n { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--tint); font-size: 12px; color: var(--ink); }
+.wk-tab[aria-selected="true"] .wk-n { background: var(--accent); color: #fff; }
+.wk-body { padding: 4px 20px 8px; }
+.wk-body > section > :is(p, ul, ol) { max-width: 68ch; }
+.wk-ctrl { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-top: 1px solid var(--rule); font-family: var(--font-display); font-size: 13.5px; color: var(--muted); }
+.wk-ctrl button { font-family: var(--font-display); font-weight: 600; font-size: 14px; background: var(--tint); color: var(--ink); border: 1px solid var(--rule); border-radius: 6px; padding: 6px 12px; cursor: pointer; }
+.wk-ctrl button:disabled { opacity: .4; cursor: default; }
+/* turning points */
+details.tp { max-width: 68ch; border: 1px solid var(--rule); border-radius: 10px; background: var(--surface); margin: 12px 0; }
+details.tp > summary { cursor: pointer; padding: 14px 18px; font-family: var(--font-display); font-weight: 700; font-size: 18px; list-style: none; display: flex; gap: 10px; align-items: baseline; }
+details.tp > summary::-webkit-details-marker { display: none; }
+details.tp > summary::before { content: "+"; color: var(--accent); font-weight: 800; width: 14px; flex: none; }
+details.tp[open] > summary::before { content: "–"; }
+.tp-body { padding: 0 18px 8px 42px; }
+.tp-body > :first-child { margin-top: 0; }
+.flash { animation: flash 1.4s ease-out; }
+@keyframes flash { from { background: var(--tint); } to { background: transparent; } }
+/* timeline chart */
+figure.timeline { overflow-x: auto; }
+figure.timeline svg { width: 100%; min-width: 700px; height: auto; display: block; font-family: var(--font-display); }
+.tl-ev { cursor: pointer; }
+.tl-ev:hover circle, .tl-ev:focus circle { stroke-width: 3; }
+.tl-tip { font-size: 12px; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-family: var(--font-display); font-size: 13px; color: var(--muted); margin-top: 6px; }
+.legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; background: var(--c); }
+@media (max-width: 640px) { body { font-size: 16px; } .tp-body { padding-left: 18px; } .wk-body { padding: 4px 12px 8px; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+</style>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <div class="eyebrow">DepMap co-essentiality · protein complexes · an AI-agent project</div>
+    <h1 class="title">Predicting protein complexes from shared genetic dependencies</h1>
+    <p class="lede">What a label-free co-essentiality score for protein complexes does, how a team of AI agents arrived at it, and what was learned along the way.</p>
+    <p class="disclaimer">Built by AI agents (Claude) with minimal human input; no result has yet been checked by a human. Every number comes from a committed result file or from running the code.</p>
+  </div>
+</header>
+<nav class="tabs" aria-label="Sections"><div class="wrap" role="tablist">{{TABS}}</div></nav>
+<main class="wrap">{{PANELS}}</main>
+
+<script>
+(() => {
+  const JOURNEY = {{JOURNEY_JSON}};
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  // wrap tables for horizontal scroll
+  $$(".prose table").forEach(t => { const w = document.createElement("div"); w.className = "tablewrap"; t.replaceWith(w); w.appendChild(t); });
+
+  // ---- tabs and in-page navigation
+  const tabs = $$(".tab"), panels = $$(".panel");
+  function showTab(key) {
+    tabs.forEach(t => t.setAttribute("aria-selected", String(t.dataset.tab === key)));
+    panels.forEach(p => p.hidden = p.dataset.tab !== key);
+    try { localStorage.setItem("explainer-tab", key); } catch (e) {}
+  }
+  function goTo(id, push) {
+    const el = document.getElementById(id);
+    if (!el) return false;
+    const panel = el.closest(".panel");
+    if (panel) showTab(panel.dataset.tab);
+    const det = el.closest("details"); if (det) det.open = true;
+    if (el.tagName === "DETAILS") el.open = true;
+    const pane = el.closest(".wk-pane"); if (pane) showStep(+pane.dataset.i);
+    requestAnimationFrame(() => {
+      el.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+      const target = el.tagName === "A" && !el.textContent ? (el.nextElementSibling || el.parentElement) : el;
+      target.classList.remove("flash"); void target.offsetWidth; target.classList.add("flash");
+    });
+    if (push && /^[A-Za-z0-9._~-]+$/.test(id)) history.replaceState(null, "", "#" + id);
+    return true;
+  }
+  tabs.forEach(t => t.addEventListener("click", () => { showTab(t.dataset.tab); window.scrollTo({ top: $("nav.tabs").offsetTop }); history.replaceState(null, "", "#" + t.dataset.tab); }));
+  document.addEventListener("click", e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const id = decodeURIComponent(a.getAttribute("href").slice(1));
+    if (["method", "journey", "insights"].includes(id)) { e.preventDefault(); showTab(id); return; }
+    if (id === "top") { e.preventDefault(); window.scrollTo({ top: 0 }); return; }
+    if (goTo(id, true)) e.preventDefault();
+  });
+
+  // ---- pipeline diagram
+  $$(".pl-node").forEach(n => {
+    const go = () => goTo(n.dataset.step, true);
+    n.setAttribute("role", "link");
+    n.addEventListener("click", go);
+    n.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+  });
+
+  // ---- worked example stepper
+  const wkTabs = $$(".wk-tab"), wkPanes = $$(".wk-pane");
+  function showStep(i) {
+    if (!wkPanes.length) return;
+    i = Math.max(0, Math.min(wkPanes.length - 1, i));
+    wkPanes.forEach(p => p.hidden = +p.dataset.i !== i);
+    wkTabs.forEach(t => t.setAttribute("aria-selected", String(+t.dataset.i === i)));
+    $("#wk-prev").disabled = i === 0; $("#wk-next").disabled = i === wkPanes.length - 1;
+    $("#wk-pos").textContent = `Step ${i} of ${wkPanes.length - 1}`;
+    showStep.cur = i;
+  }
+  if (wkPanes.length) {
+    wkTabs.forEach(t => t.addEventListener("click", () => showStep(+t.dataset.i)));
+    $("#wk-prev").addEventListener("click", () => showStep(showStep.cur - 1));
+    $("#wk-next").addEventListener("click", () => showStep(showStep.cur + 1));
+    showStep(0);
+  }
+
+  // ---- journey timeline (SVG drawn from JOURNEY; colours from CSS tokens)
+  const fig = $("#timeline");
+  if (fig) {
+    const W = 980, H = 380, L = 104, R = 20, T = 36, lanesTop = 262;
+    const hrs = t => { const [h, m] = t.split(":").map(Number); return h + m / 60; };
+    const x0 = hrs(JOURNEY.range[0]), x1 = hrs(JOURNEY.range[1]);
+    const X = t => L + (hrs(t) - x0) / (x1 - x0) * (W - L - R);
+    const yMin = 0.25, yMax = 0.5, Y = v => T + (yMax - v) / (yMax - yMin) * (lanesTop - 40 - T);
+    const ns = "http://www.w3.org/2000/svg";
+    const el = (tag, attrs, parent, text) => { const e = document.createElementNS(ns, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; parent && parent.appendChild(e); return e; };
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Timeline of the research phase: best development score over time, turning points and dead ends" });
+    // phases
+    JOURNEY.phases.forEach((p, i) => {
+      el("rect", { x: X(p.start), y: T - 22, width: X(p.end) - X(p.start), height: lanesTop + 60 - T, fill: i % 2 ? "transparent" : "var(--tint)" }, svg);
+      el("text", { x: X(p.start) + 6, y: T - 8, "font-size": 11.5, fill: "var(--muted)", "font-weight": 600 }, svg, p.label);
+    });
+    // grid
+    [0.3, 0.4, 0.5].forEach(v => {
+      el("line", { x1: L, x2: W - R, y1: Y(v), y2: Y(v), stroke: "var(--rule)", "stroke-width": 1 }, svg);
+      el("text", { x: L - 8, y: Y(v) + 4, "text-anchor": "end", "font-size": 11, fill: "var(--muted)" }, svg, v.toFixed(1));
+    });
+    el("text", { x: 40, y: (T + lanesTop - 40) / 2, transform: `rotate(-90 40 ${(T + lanesTop - 40) / 2})`, "text-anchor": "middle", "font-size": 11, fill: "var(--muted)" }, svg, "best dev HT-AP");
+    // hourly ticks
+    for (let h = Math.ceil(x0); h <= x1; h++) {
+      const x = L + (h - x0) / (x1 - x0) * (W - L - R);
+      el("text", { x, y: H - 6, "text-anchor": "middle", "font-size": 11, fill: "var(--muted)" }, svg, `${String(h).padStart(2, "0")}:00`);
+    }
+    // GLS reference
+    el("line", { x1: L, x2: W - R, y1: Y(JOURNEY.gls), y2: Y(JOURNEY.gls), stroke: "var(--base)", "stroke-dasharray": "4 4" }, svg);
+    el("text", { x: W - R - 4, y: Y(JOURNEY.gls) - 6, "text-anchor": "end", "font-size": 11, fill: "var(--muted)" }, svg, `GLS baseline ${JOURNEY.gls}`);
+    // best-score step line
+    let d = "";
+    JOURNEY.best.forEach((b, i) => { d += (i ? `H${X(b.t)}V${Y(b.v)}` : `M${X(b.t)},${Y(b.v)}`); });
+    d += `H${X(JOURNEY.range[1])}`;
+    el("path", { d, fill: "none", stroke: "var(--accent)", "stroke-width": 2.2 }, svg);
+    JOURNEY.best.forEach(b => {
+      el("circle", { cx: X(b.t), cy: Y(b.v), r: 3.5, fill: "var(--accent)" }, svg);
+      if (b.label) el("text", { x: X(b.t) + 6, y: Y(b.v) - 7, "font-size": 11.5, fill: "var(--ink)", "font-weight": 600 }, svg, `${b.label} ${b.v.toFixed(3)}`);
+    });
+    // lanes: turning points and dead ends
+    const lanes = [["tp", "Turning points", "var(--accent)"], ["dead", "Dead ends", "var(--warn)"]];
+    lanes.forEach(([kind, label, c], li) => {
+      const y = lanesTop + li * 34;
+      el("text", { x: L - 8, y: y + 4, "text-anchor": "end", "font-size": 11, fill: "var(--muted)" }, svg, label);
+      el("line", { x1: L, x2: W - R, y1: y, y2: y, stroke: "var(--rule)" }, svg);
+      JOURNEY.events.filter(e => e.kind === kind).forEach(e => {
+        const g = el("g", { class: "tl-ev", tabindex: 0, role: "link", "aria-label": `${e.t} ${e.label}` }, svg);
+        el("title", {}, g, `${e.t} — ${e.label}`);
+        el("circle", { cx: X(e.t), cy: y, r: 8, fill: kind === "tp" ? "var(--accent)" : "var(--surface)", stroke: c, "stroke-width": 2 }, g);
+        if (e.n) el("text", { x: X(e.t), y: y + 4, "text-anchor": "middle", "font-size": 10, "font-weight": 700, fill: kind === "tp" ? "#fff" : c }, g, e.n);
+        const go = () => e.target && goTo(e.target, true);
+        g.addEventListener("click", go);
+        g.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); go(); } });
+      });
+    });
+    fig.appendChild(svg);
+    const cap = document.createElement("figcaption");
+    cap.innerHTML = JOURNEY.caption;
+    fig.appendChild(cap);
+  }
+
+  // ---- initial view
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (["method", "journey", "insights"].includes(h)) showTab(h);
+  else if (!(h && goTo(h))) { let k = "method"; try { k = localStorage.getItem("explainer-tab") || k; } catch (e) {} showTab(k); }
+})();
+</script>

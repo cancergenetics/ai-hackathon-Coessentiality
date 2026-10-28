@@ -1,0 +1,34 @@
+{
+ "range": ["12:00", "18:00"],
+ "gls": 0.312,
+ "caption": "Research phase on 27 October 2026 (UTC). Blue line: best development score so far (5-seed mean HT-AP, plotted when each view was first found; the 5-seed means were computed at 16:18). Dashed: GLS. Filled circles: the eight turning points. Open circles: main dead ends. Click a marker to open its turning point. The single held-out test look at 17:35 gave 0.345 against 0.242 for GLS (different data, not on this scale). Sources: git commit times, RESEARCH_TREE.md, results/phaseB_v2/README.md.",
+ "phases": [
+  {"start": "12:16", "end": "13:29", "label": "Design & benchmark"},
+  {"start": "13:29", "end": "14:13", "label": "First screen"},
+  {"start": "14:13", "end": "15:42", "label": "Graphs & learning, in parallel"},
+  {"start": "15:42", "end": "16:41", "label": "Combine & verify"},
+  {"start": "16:41", "end": "17:53", "label": "Test & report"}
+ ],
+ "best": [
+  {"t": "13:28", "v": 0.312, "label": ""},
+  {"t": "14:05", "v": 0.448, "label": "B"},
+  {"t": "15:30", "v": 0.463, "label": "E"},
+  {"t": "16:18", "v": 0.470, "label": "Final"}
+ ],
+ "events": [
+  {"kind": "tp", "n": "1", "t": "12:31", "label": "Starting plan: whitening and shared partners", "target": "tp1"},
+  {"kind": "tp", "n": "2", "t": "12:50", "label": "Reviewers' early look at the labels sets priorities", "target": "tp2"},
+  {"kind": "tp", "n": "3", "t": "13:29", "label": "Evaluation frozen: complex-grouped splits, HT weights, power check", "target": "tp3"},
+  {"kind": "tp", "n": "4", "t": "14:05", "label": "Screen: standardise genes; shared partners (B)", "target": "tp4"},
+  {"kind": "tp", "n": "5", "t": "14:13", "label": "Ensemble is noise; B's gain sits in large complexes", "target": "tp5"},
+  {"kind": "tp", "n": "6", "t": "15:30", "label": "Graph embedding (E) helps small complexes", "target": "tp6"},
+  {"kind": "tp", "n": "7", "t": "15:42", "label": "Learning from labels fails; F returns", "target": "tp7"},
+  {"kind": "tp", "n": "8", "t": "17:35", "label": "Rule fixed in advance; one held-out test look", "target": "tp8"},
+  {"kind": "dead", "t": "13:59", "label": "Greedy ensemble (≈300 trials, nested gain 0)", "target": "tp5"},
+  {"kind": "dead", "t": "14:09", "label": "Supervised stacking v1 (+0.006, CI spans 0)", "target": "tp7"},
+  {"kind": "dead", "t": "15:25", "label": "Topological overlap, long random walks", "target": "tp6"},
+  {"kind": "dead", "t": "15:41", "label": "Metric learning (within ±0.003 of start)", "target": "tp7"},
+  {"kind": "dead", "t": "16:18", "label": "Supervised stacking v2 (0.462/0.466 vs 0.470)", "target": "tp7"},
+  {"kind": "dead", "t": "17:35", "label": "B alone fails per-complex check on the test", "target": "tp8"}
+ ]
+}

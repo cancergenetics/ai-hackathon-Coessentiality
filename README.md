@@ -16,6 +16,8 @@ The rest of this repository is entirely AI generated. It includes code for imple
 
 ## What is here
 
+**New readers:** start with [`docs/explainer/`](docs/explainer/README.md). It explains what the method does (with a worked example on real data), how the agents arrived at it, and what was learned. `docs/explainer/explainer.html` is the same content as one interactive page; download it and open it in a browser.
+
 | file / directory | contents |
 |---|---|
 | `PROMPT.md` | the project brief, verbatim |
@@ -26,7 +28,7 @@ The rest of this repository is entirely AI generated. It includes code for imple
 | `DATA.md` | data sources, versions, checksums and licences |
 | `LESSONS.md` | process lessons for running agentic research projects |
 | `manuscript/` | AI-written manuscript in PLOS Computational Biology format (DOCX + Markdown source), S1–S3 Texts, figures and figure source data |
-| `docs/` | agent set-up (`AGENTS.md`), cluster/split assignment format, data checksums |
+| `docs/` | plain-language explainer (`explainer/`), agent set-up (`AGENTS.md`), cluster/split assignment format, data checksums |
 | `reviews/` | design reviews (rounds 1–2), retrospectives, manuscript reviews (rounds 1–2) |
 | `src/` | research code: ID mapping, splits and clusters, metrics, baselines, label-free layers (incl. the final method), supervised models, evaluation harness, predictor |
 | `scripts/` | numbered pipeline scripts (`00_`–`64_`), the internal-test evaluation (`final_eval.py`), the pair scorer (`predict_pairs.py`), independent verification scripts (`verify/`) |
