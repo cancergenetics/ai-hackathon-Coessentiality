@@ -1,0 +1,102 @@
+{
+ "tool": "scripts/predict_pairs.py",
+ "created": "2026-10-27T21:47:47",
+ "label_free": "scores use only CRISPRGeneEffect + HGNC ID mapping; no pair label is read",
+ "method": {
+  "name": "gls",
+  "kind": "raw",
+  "components": [
+   "G"
+  ],
+  "component_names": {
+   "G": "gls_signed"
+  },
+  "score": "raw component value",
+  "spec": {}
+ },
+ "git": {
+  "commit": "3dd8b32079c5e7cb01955423822e7a448abdea6e",
+  "dirty_files": []
+ },
+ "inputs": {
+  "pairs": {
+   "path": "data_cache/revision/train_union_ids.tsv",
+   "sha256": "1ef379dd793470ea4c439ac182230a69ebd2e869ef1e8611770592cec6fe036b"
+  },
+  "matrix": {
+   "source": "datasets/DepMAP/CRISPRGeneEffect.csv",
+   "file_sha256": "1e0c492944a7297c0eda179081a1e81a1cfe41a97628facd7eddbdda1a7504ee",
+   "shape": [
+    1361,
+    18434
+   ],
+   "npy_sha256": "8a894d2449074934de71cf0e0b44e8d81ec2d70bc756b2d038367c34c9ad27f3",
+   "npy_sha256_matches_manifest": true,
+   "load_s": 2.91
+  },
+  "hgnc": {
+   "path": "datasets/HGNC/hgnc_complete_set.txt",
+   "sha256": "0f2d3f035e0e6583c055a1d9e008f275376a4b66f72af380dfc2ac730272c247"
+  }
+ },
+ "output": {
+  "path": "data_cache/revision/union_gls.tsv",
+  "sha256": "66e3814ae4d5127d6cb3a6ceda8535fb585367ed62600a65fa19c91297f8b98f",
+  "columns": [
+   "uniprot_a",
+   "uniprot_b",
+   "score",
+   "mapped"
+  ]
+ },
+ "null": {
+  "n": 200000,
+  "seed": "SEEDS[0]",
+  "sha256": "780b34d9c02fdddfbf1bb3b52d16a47e3d445f262f5edbb876677ea84111f830",
+  "moments": {},
+  "tolerance_in_null_sd": 0.0001
+ },
+ "unmapped_rule": "score = min(mapped scores in this file) - 1, mapped = 0 (DESIGN \u00a73.10)",
+ "counts": {
+  "n_pairs": 634779,
+  "n_mapped": 596597,
+  "n_unmapped": 38182,
+  "n_unique_canonical_mapped": 596597,
+  "unmapped_reasons": {
+   "protein_not_mapped": 38182,
+   "self_or_same_gene": 0,
+   "undefined_score": 0
+  },
+  "protein_status_counts": {
+   "mapped": 1114,
+   "not_in_depmap": 33,
+   "ambiguous": 2,
+   "not_in_hgnc": 2
+  },
+  "n_proteins": 1151,
+  "unmapped_floor": -8.010393661043995,
+  "pairs_with_protein_status": {
+   "not_in_hgnc": 1980,
+   "not_in_depmap": 34167,
+   "ambiguous": 2135
+  }
+ },
+ "runtime": {
+  "total_s": 16.67,
+  "matrix_load_s": 2.91,
+  "engine_init_s": 0.23,
+  "scoring": {
+   "map_s": 0.52,
+   "components_s": {
+    "G": 11.69
+   },
+   "total_s": 12.46
+  },
+  "peak_rss_gb": 2.55
+ },
+ "env": {
+  "python": "3.12.16",
+  "numpy": "2.5.4",
+  "machine": "arm64"
+ }
+}

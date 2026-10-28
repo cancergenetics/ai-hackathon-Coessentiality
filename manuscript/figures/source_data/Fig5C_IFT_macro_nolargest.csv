@@ -1,0 +1,11 @@
+method,metric,value
+zavg_BEF,macro_cluster_ap,0.364636
+zavg_BEF,ap_ht_no_largest_component,0.469511
+B,macro_cluster_ap,0.296467
+B,ap_ht_no_largest_component,0.441089
+GLS,macro_cluster_ap,0.368615
+GLS,ap_ht_no_largest_component,0.349606
+Spearman,macro_cluster_ap,0.234885
+Spearman,ap_ht_no_largest_component,0.220625
+Pearson,macro_cluster_ap,0.234293
+Pearson,ap_ht_no_largest_component,0.197571

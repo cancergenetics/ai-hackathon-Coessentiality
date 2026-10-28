@@ -1,0 +1,166 @@
+{
+ "CRISPRGeneEffect": {
+  "shape": [
+   1361,
+   18434
+  ],
+  "libraries": {
+   "Avana": 827,
+   "HumagneCD": 194,
+   "Avana+KY": 188,
+   "KY": 118,
+   "Avana+HumagneCD": 20,
+   "Avana+HumagneCD+KY": 5,
+   "Avana+KY+Brunello": 2,
+   "Avana+TKOv3": 2,
+   "Avana+HumagneCD+TKOv3": 1,
+   "KY+Brunello": 1,
+   "Avana+HumagneCD+KY+Brunello": 1,
+   "Avana+Brunello": 1,
+   "Avana+KY+TKOv3": 1
+  },
+  "n_multi_library_models": 222,
+  "models_missing_confounders": 0,
+  "lineage_missing": 0
+ },
+ "ScreenGeneEffect": {
+  "shape": [
+   1611,
+   18434
+  ],
+  "library_code_counts": {
+   "AV": 1051,
+   "KY": 322,
+   "CD": 221,
+   "BN": 13,
+   "TK": 4
+  },
+  "library_vs_confounders": {
+   "AV": {
+    "consistent": 1049,
+    "inconsistent": 0,
+    "model_not_in_confounders": 2
+   },
+   "BN": {
+    "consistent": 12,
+    "inconsistent": 1,
+    "model_not_in_confounders": 0
+   },
+   "CD": {
+    "consistent": 220,
+    "inconsistent": 0,
+    "model_not_in_confounders": 1
+   },
+   "KY": {
+    "consistent": 322,
+    "inconsistent": 0,
+    "model_not_in_confounders": 0
+   },
+   "TK": {
+    "consistent": 4,
+    "inconsistent": 0,
+    "model_not_in_confounders": 0
+   }
+  },
+  "n_models": 1363,
+  "lineage_missing": 3
+ },
+ "hgnc_gene_annotation": {
+  "genes": 18434,
+  "with_hgnc": 18434,
+  "with_chrom": 18434,
+  "chrom_counts_top": {
+   "1": 1896,
+   "19": 1346,
+   "11": 1207,
+   "2": 1178,
+   "17": 1092
+  },
+  "note": "HGNC 'location' is a cytoband (e.g. 19q13.43); HGNC has no base-pair coordinates, so genomic distance is only approximable at band resolution."
+ },
+ "mapping": {
+  "n_uniprot": 1151,
+  "status_counts": {
+   "mapped": 1114,
+   "not_in_depmap": 33,
+   "ambiguous": 2,
+   "not_in_hgnc": 2
+  },
+  "unmapped_ids": {
+   "not_in_hgnc": [
+    "P0CG05",
+    "P62158"
+   ],
+   "not_in_depmap": [
+    "A0M8Q6",
+    "B7Z8K6",
+    "K9M1U5",
+    "P00846",
+    "P01834",
+    "P01848",
+    "P01850",
+    "P01854",
+    "P01857",
+    "P01859",
+    "P01860",
+    "P01861",
+    "P01871",
+    "P01876",
+    "P01877",
+    "P01880",
+    "P03928",
+    "P03986",
+    "P0C0L4",
+    "P0CF74",
+    "P0CG04",
+    "P0DN86",
+    "P0DOY3",
+    "P21127",
+    "P69891",
+    "P69892",
+    "P69905",
+    "Q5VTU8",
+    "Q8N2Z9",
+    "Q9GZY0",
+    "Q9H1B4",
+    "Q9H3K6",
+    "Q9UQ88"
+   ],
+   "ambiguous": [
+    "P04908",
+    "P62805"
+   ]
+  },
+  "ambiguous_detail": {
+   "P04908": {
+    "hgnc_entrez": "3012;8335",
+    "depmap_entrez": "3012;8335"
+   },
+   "P62805": {
+    "hgnc_entrez": "121504;554313;8294;8359;8360;8361;8362;8363;8364;8365;8366;8367;8368;8370",
+    "depmap_entrez": "121504;8294;8359;8360;8361;8364;8365;8366;8367;8368"
+   }
+  },
+  "multi_entrez_in_hgnc": 8,
+  "multi_entrez_resolved_by_depmap": {
+   "P0C0L5": "C4B (721)",
+   "Q92843": "BCL2L2 (599)"
+  },
+  "shared_gene": {},
+  "n_mapped_genes": 1114,
+  "pos": {
+   "total": 3314,
+   "scorable": 3191,
+   "unmapped": 123,
+   "same_gene": 0
+  },
+  "neg": {
+   "total": 631465,
+   "scorable": 593406,
+   "unmapped": 38059,
+   "same_gene": 0
+  }
+ },
+ "mapping_rule": "(UniProt -> DepMap column), documented and deterministic\n-----------------------------------------------------------------------\n1. HGNC rows with status == \"Approved\"; ``uniprot_ids`` split on '|' (one row per UniProt accession).\n2. Each UniProt accession gets the set of candidate Entrez IDs of all HGNC genes listing it.\n3. Candidates are intersected with the Entrez IDs of DepMap columns (``SYMBOL (ENTREZ)``; matched on\n   Entrez, never on symbol, because DepMap symbols can lag HGNC renames).\n4. Exactly one candidate in DepMap -> mapped. Zero -> ``not_in_depmap`` (or ``not_in_hgnc`` if step 2 is\n   empty). Several -> ``ambiguous``: dropped and logged, because the protein is encoded by several\n   paralogous gene copies (e.g. replication-dependent histones) and choosing one copy's knockout profile\n   would be arbitrary.\n5. Two different UniProt accessions mapping to the same DepMap column are allowed but logged; any pair\n   whose two proteins land on the same column is flagged ``same_gene`` and is not scorable.",
+ "runtime_s": 5.2
+}

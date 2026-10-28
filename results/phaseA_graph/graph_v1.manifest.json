@@ -1,0 +1,2064 @@
+{
+ "tag": "graph_v1",
+ "created": "2026-10-27T14:40:19",
+ "script": "scripts/15_build_graph_layers.py",
+ "git": {
+  "commit": "47cd366892ccb7c2c8ece73b0f624a39fb85ed49",
+  "dirty_files": [
+   "scripts/15_build_graph_layers.py",
+   "scripts/15_graph_screen.py",
+   "scripts/30_phaseC_readme.py"
+  ]
+ },
+ "label_free": "layer scores use only CRISPRGeneEffect and gene indices; no label is read. Grid fixed before any graph layer was evaluated; base / q informed by earlier Phase-A dev screens (disclosed).",
+ "reproduction_max_abs_diff_vs_screen_v2": {
+  "cos_adj[knn_dir_lin_q0.25[spec_k20_t0.1_std]]": 1.7881393432617188e-07,
+  "rowz[cos_adj[knn_dir_lin_q0.25[spec_k20_t0.1_std]]]": 7.62939453125e-06
+ },
+ "input": {
+  "matrix": "CRISPRGeneEffect",
+  "shape": [
+   1361,
+   18434
+  ],
+  "sha256": "8a894d2449074934de71cf0e0b44e8d81ec2d70bc756b2d038367c34c9ad27f3",
+  "n_genes_listed": 18434
+ },
+ "preprocessing": {
+  "bg_max_nan": 0.1,
+  "n_background_genes": 17525,
+  "block": 1024,
+  "imputation": "per-gene observed mean (all genes); BG genes only for Sigma / row moments / ranks / neighbours / null",
+  "eig": {
+   "eig_gene_std": {
+    "dim": 1360,
+    "n_null": 2,
+    "lw_alpha": 0.024684529224167317,
+    "lw_tau_rel": 0.0253092768071561,
+    "top_frac": [
+     0.023157227650165715,
+     0.020918554518772694,
+     0.017024247141463774,
+     0.013821145191345465,
+     0.011466249495525365,
+     0.010132616387382465,
+     0.009760944909164215,
+     0.007837871515729929,
+     0.007446362955920297,
+     0.006969940142189156
+    ],
+    "mean_eig": 0.9986295628094317
+   }
+  },
+  "graph_timing": {
+   "soft_ref[soft_b6[spec_k20_t0.1_std]]": 0.1332256441216998
+  }
+ },
+ "pairs": {
+  "n": 596597,
+  "sha256_ia_ib": "cd274019d189ceeecb4118340c2310aa3363f201f6760d4d9e597d5341b2cc61",
+  "file": "data_cache/layers/graph_v1.pairs.npz",
+  "same_as": "screen_v1"
+ },
+ "null": {
+  "n": 200000,
+  "seed": 0,
+  "sampling": "uniform BG x BG, a != b, with replacement",
+  "sha256": "780b34d9c02fdddfbf1bb3b52d16a47e3d445f262f5edbb876677ea84111f830"
+ },
+ "output": {
+  "file": "data_cache/layers/graph_v1.scores.f32.npy",
+  "shape": [
+   596597,
+   62
+  ],
+  "dtype": "float32",
+  "sha256": "8c7f432cc8cd2d32935dcf4e6b6614f8cf682ddd2887aead2086180d92310785"
+ },
+ "runtime": {
+  "total_s": 1249.7,
+  "peak_rss_gb": 5.88
+ },
+ "columns": [
+  {
+   "col": 0,
+   "name": "cos_adj[knn_dir_lin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "dir",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "reproduction of the current best (socos_q0.25 / rowz) inside this cache",
+   "null_mean": 0.002527315088452306,
+   "null_sd": 0.010505299342515206,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 35.236,
+   "runtime_null_s": 0.01
+  },
+  {
+   "col": 1,
+   "name": "rowz[cos_adj[knn_dir_lin_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "dir",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "reproduction of the current best (socos_q0.25 / rowz) inside this cache + genome-wide row-z",
+   "null_mean": 0.0035405678769737155,
+   "null_sd": 0.9961739622529721,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.031,
+   "runtime_null_s": 0.012
+  },
+  {
+   "col": 2,
+   "name": "cos_adj[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "kNN symmetrisation: does reciprocity (union / mutual / avg) beat directed top-K neighbour sets?",
+   "null_mean": 0.002739881604597904,
+   "null_sd": 0.009975079620156296,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 26.785,
+   "runtime_null_s": 0.009
+  },
+  {
+   "col": 3,
+   "name": "rowz[cos_adj[knn_union_lin_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "kNN symmetrisation: does reciprocity (union / mutual / avg) beat directed top-K neighbour sets? + genome-wide row-z",
+   "null_mean": 0.00327351143582286,
+   "null_sd": 0.9943509436295773,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.03,
+   "runtime_null_s": 0.012
+  },
+  {
+   "col": 4,
+   "name": "cos_adj[knn_mutual_lin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "mutual",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "kNN symmetrisation: does reciprocity (union / mutual / avg) beat directed top-K neighbour sets?",
+   "null_mean": 0.0021326788553828373,
+   "null_sd": 0.010192219122537415,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 29.653,
+   "runtime_null_s": 0.012
+  },
+  {
+   "col": 5,
+   "name": "rowz[cos_adj[knn_mutual_lin_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "mutual",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "kNN symmetrisation: does reciprocity (union / mutual / avg) beat directed top-K neighbour sets? + genome-wide row-z",
+   "null_mean": 0.0042062590716011455,
+   "null_sd": 0.9979564662879499,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.038,
+   "runtime_null_s": 0.016
+  },
+  {
+   "col": 6,
+   "name": "cos_adj[knn_avg_lin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "avg",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "kNN symmetrisation: does reciprocity (union / mutual / avg) beat directed top-K neighbour sets?",
+   "null_mean": 0.00254758244724595,
+   "null_sd": 0.01023829196484595,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 24.753,
+   "runtime_null_s": 0.009
+  },
+  {
+   "col": 7,
+   "name": "rowz[cos_adj[knn_avg_lin_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "avg",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "kNN symmetrisation: does reciprocity (union / mutual / avg) beat directed top-K neighbour sets? + genome-wide row-z",
+   "null_mean": 0.003564756228900971,
+   "null_sd": 0.995987859969648,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.024,
+   "runtime_null_s": 0.01
+  },
+  {
+   "col": 8,
+   "name": "cos_adj[knn_dir_bin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "dir",
+     "weight": "bin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "edge weights: binary vs linear vs soft-threshold power of the balanced z (WGCNA-like within the kNN set)",
+   "null_mean": 0.0026215652633085848,
+   "null_sd": 0.009572772085601708,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 28.214,
+   "runtime_null_s": 0.01
+  },
+  {
+   "col": 9,
+   "name": "rowz[cos_adj[knn_dir_bin_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "dir",
+     "weight": "bin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "edge weights: binary vs linear vs soft-threshold power of the balanced z (WGCNA-like within the kNN set) + genome-wide row-z",
+   "null_mean": 0.005003702942176527,
+   "null_sd": 1.0104033576947733,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.031,
+   "runtime_null_s": 0.012
+  },
+  {
+   "col": 10,
+   "name": "cos_adj[knn_dir_p4_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "dir",
+     "weight": "p4"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "edge weights: binary vs linear vs soft-threshold power of the balanced z (WGCNA-like within the kNN set)",
+   "null_mean": 0.0015417597447853037,
+   "null_sd": 0.010208672705772038,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 27.846,
+   "runtime_null_s": 0.01
+  },
+  {
+   "col": 11,
+   "name": "rowz[cos_adj[knn_dir_p4_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "dir",
+     "weight": "p4"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "edge weights: binary vs linear vs soft-threshold power of the balanced z (WGCNA-like within the kNN set) + genome-wide row-z",
+   "null_mean": -0.0005656110182330319,
+   "null_sd": 0.9596835023043294,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.03,
+   "runtime_null_s": 0.012
+  },
+  {
+   "col": 12,
+   "name": "cos_adj[knn_dir_p8_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "dir",
+     "weight": "p8"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "edge weights: binary vs linear vs soft-threshold power of the balanced z (WGCNA-like within the kNN set)",
+   "null_mean": 0.0006915882919497719,
+   "null_sd": 0.009638218391233222,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 23.037,
+   "runtime_null_s": 0.008
+  },
+  {
+   "col": 13,
+   "name": "rowz[cos_adj[knn_dir_p8_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "dir",
+     "weight": "p8"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "edge weights: binary vs linear vs soft-threshold power of the balanced z (WGCNA-like within the kNN set) + genome-wide row-z",
+   "null_mean": -0.0029007612857448284,
+   "null_sd": 0.9292464213316403,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.023,
+   "runtime_null_s": 0.01
+  },
+  {
+   "col": 14,
+   "name": "cos_adj[knn_union_p4_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "p4"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "edge weights: binary vs linear vs soft-threshold power of the balanced z (WGCNA-like within the kNN set)",
+   "null_mean": 0.0016332223875274872,
+   "null_sd": 0.010169688710457486,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 22.803,
+   "runtime_null_s": 0.008
+  },
+  {
+   "col": 15,
+   "name": "rowz[cos_adj[knn_union_p4_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "p4"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "edge weights: binary vs linear vs soft-threshold power of the balanced z (WGCNA-like within the kNN set) + genome-wide row-z",
+   "null_mean": -0.00036284228640779206,
+   "null_sd": 0.9596754677523179,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.022,
+   "runtime_null_s": 0.01
+  },
+  {
+   "col": 16,
+   "name": "cos_adj[knn_union_lin_q0.5[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.5,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "neighbourhood size for symmetric graphs (mutual pruning shrinks the effective K)",
+   "null_mean": 0.005221975325576496,
+   "null_sd": 0.009698927832531396,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 21.583,
+   "runtime_null_s": 0.016
+  },
+  {
+   "col": 17,
+   "name": "rowz[cos_adj[knn_union_lin_q0.5[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.5,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "neighbourhood size for symmetric graphs (mutual pruning shrinks the effective K) + genome-wide row-z",
+   "null_mean": 0.005784907021399433,
+   "null_sd": 1.0015753733342696,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.049,
+   "runtime_null_s": 0.018
+  },
+  {
+   "col": 18,
+   "name": "cos_adj[knn_mutual_lin_q0.5[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.5,
+     "sym": "mutual",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "neighbourhood size for symmetric graphs (mutual pruning shrinks the effective K)",
+   "null_mean": 0.004485924800086068,
+   "null_sd": 0.009854414569433,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 29.198,
+   "runtime_null_s": 0.009
+  },
+  {
+   "col": 19,
+   "name": "rowz[cos_adj[knn_mutual_lin_q0.5[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.5,
+     "sym": "mutual",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "neighbourhood size for symmetric graphs (mutual pruning shrinks the effective K) + genome-wide row-z",
+   "null_mean": 0.005690441695438571,
+   "null_sd": 1.00323634067192,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.029,
+   "runtime_null_s": 0.01
+  },
+  {
+   "col": 20,
+   "name": "cos_adj[knn_mutual_lin_q1[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 1.0,
+     "sym": "mutual",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "neighbourhood size for symmetric graphs (mutual pruning shrinks the effective K)",
+   "null_mean": 0.009124413109157467,
+   "null_sd": 0.009392921568807224,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 32.8,
+   "runtime_null_s": 0.012
+  },
+  {
+   "col": 21,
+   "name": "rowz[cos_adj[knn_mutual_lin_q1[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 1.0,
+     "sym": "mutual",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "neighbourhood size for symmetric graphs (mutual pruning shrinks the effective K) + genome-wide row-z",
+   "null_mean": 0.0018801922676675068,
+   "null_sd": 0.999539886389416,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.034,
+   "runtime_null_s": 0.015
+  },
+  {
+   "col": 22,
+   "name": "tom_adj[knn_union_bin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "bin"
+    },
+    "op": "adj",
+    "score": "tom",
+    "rowz": false
+   },
+   "rationale": "topological overlap (WGCNA) on kNN / dense soft-threshold adjacency",
+   "null_mean": 0.003014969872725196,
+   "null_sd": 0.009488126583555773,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 23.821,
+   "runtime_null_s": 0.01
+  },
+  {
+   "col": 23,
+   "name": "rowz[tom_adj[knn_union_bin_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "bin"
+    },
+    "op": "adj",
+    "score": "tom",
+    "rowz": true
+   },
+   "rationale": "topological overlap (WGCNA) on kNN / dense soft-threshold adjacency + genome-wide row-z",
+   "null_mean": 0.0037933547746636077,
+   "null_sd": 1.0037407856313638,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.031,
+   "runtime_null_s": 0.012
+  },
+  {
+   "col": 24,
+   "name": "tom_adj[knn_mutual_bin_q0.5[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.5,
+     "sym": "mutual",
+     "weight": "bin"
+    },
+    "op": "adj",
+    "score": "tom",
+    "rowz": false
+   },
+   "rationale": "topological overlap (WGCNA) on kNN / dense soft-threshold adjacency",
+   "null_mean": 0.004836484323618933,
+   "null_sd": 0.009068749568704806,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 23.561,
+   "runtime_null_s": 0.009
+  },
+  {
+   "col": 25,
+   "name": "rowz[tom_adj[knn_mutual_bin_q0.5[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.5,
+     "sym": "mutual",
+     "weight": "bin"
+    },
+    "op": "adj",
+    "score": "tom",
+    "rowz": true
+   },
+   "rationale": "topological overlap (WGCNA) on kNN / dense soft-threshold adjacency + genome-wide row-z",
+   "null_mean": 0.006366647092534855,
+   "null_sd": 1.0127167703906603,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.027,
+   "runtime_null_s": 0.011
+  },
+  {
+   "col": 26,
+   "name": "tom_adj[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "tom",
+    "rowz": false
+   },
+   "rationale": "topological overlap (WGCNA) on kNN / dense soft-threshold adjacency",
+   "null_mean": 0.0014080033623822964,
+   "null_sd": 0.005795440525856382,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 21.955,
+   "runtime_null_s": 0.008
+  },
+  {
+   "col": 27,
+   "name": "rowz[tom_adj[knn_union_lin_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "tom",
+    "rowz": true
+   },
+   "rationale": "topological overlap (WGCNA) on kNN / dense soft-threshold adjacency + genome-wide row-z",
+   "null_mean": 0.0031764908866163226,
+   "null_sd": 0.9866375800135799,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.025,
+   "runtime_null_s": 0.011
+  },
+  {
+   "col": 28,
+   "name": "tom_adj[soft_b6[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "soft",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "beta": 6.0,
+     "ref_q": 0.9999
+    },
+    "op": "adj",
+    "score": "tom",
+    "rowz": false
+   },
+   "rationale": "topological overlap (WGCNA) on kNN / dense soft-threshold adjacency",
+   "null_mean": 0.0008190527514523456,
+   "null_sd": 0.0052491265955053506,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 25.244,
+   "runtime_null_s": 0.008
+  },
+  {
+   "col": 29,
+   "name": "rowz[tom_adj[soft_b6[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "soft",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "beta": 6.0,
+     "ref_q": 0.9999
+    },
+    "op": "adj",
+    "score": "tom",
+    "rowz": true
+   },
+   "rationale": "topological overlap (WGCNA) on kNN / dense soft-threshold adjacency + genome-wide row-z",
+   "null_mean": 0.002075515171551432,
+   "null_sd": 0.9015410629178946,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.024,
+   "runtime_null_s": 0.01
+  },
+  {
+   "col": 30,
+   "name": "cos_adj[soft_b6[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "soft",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "beta": 6.0,
+     "ref_q": 0.9999
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "topological overlap (WGCNA) on kNN / dense soft-threshold adjacency (cosine of dense soft-threshold rows)",
+   "null_mean": 0.006802509926287621,
+   "null_sd": 0.011900416930744907,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 33.07,
+   "runtime_null_s": 0.01
+  },
+  {
+   "col": 31,
+   "name": "rowz[cos_adj[soft_b6[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "soft",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "beta": 6.0,
+     "ref_q": 0.9999
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "topological overlap (WGCNA) on kNN / dense soft-threshold adjacency (cosine of dense soft-threshold rows) + genome-wide row-z",
+   "null_mean": 0.0016515413055390297,
+   "null_sd": 0.9575786931529526,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.028,
+   "runtime_null_s": 0.017
+  },
+  {
+   "col": 32,
+   "name": "cos_pow1[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "pow1",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "diffusion on the symmetric-normalised union kNN graph: multi-step / restart / heat kernels (1 step = degree-normalised second order)",
+   "null_mean": 0.0027001632469752803,
+   "null_sd": 0.009291628908138673,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 35.779,
+   "runtime_null_s": 0.009
+  },
+  {
+   "col": 33,
+   "name": "rowz[cos_pow1[knn_union_lin_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "pow1",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "diffusion on the symmetric-normalised union kNN graph: multi-step / restart / heat kernels (1 step = degree-normalised second order) + genome-wide row-z",
+   "null_mean": 0.003495153908278461,
+   "null_sd": 0.9960004049489837,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.029,
+   "runtime_null_s": 0.011
+  },
+  {
+   "col": 34,
+   "name": "kern_pow2[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "pow2",
+    "score": "kern",
+    "rowz": false
+   },
+   "rationale": "diffusion on the symmetric-normalised union kNN graph: multi-step / restart / heat kernels",
+   "null_mean": 5.624632989354723e-05,
+   "null_sd": 0.00020008552488673013,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 7.201,
+   "runtime_null_s": 0.016
+  },
+  {
+   "col": 35,
+   "name": "rowz[kern_pow2[knn_union_lin_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "pow2",
+    "score": "kern",
+    "rowz": true
+   },
+   "rationale": "diffusion on the symmetric-normalised union kNN graph: multi-step / restart / heat kernels + genome-wide row-z",
+   "null_mean": 0.0036438687280232187,
+   "null_sd": 0.9941789296832685,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.041,
+   "runtime_null_s": 0.015
+  },
+  {
+   "col": 36,
+   "name": "cos_pow2[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "pow2",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "diffusion on the symmetric-normalised union kNN graph: multi-step / restart / heat kernels",
+   "null_mean": 0.09132908674538484,
+   "null_sd": 0.029123666700193025,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 45.841,
+   "runtime_null_s": 0.012
+  },
+  {
+   "col": 37,
+   "name": "rowz[cos_pow2[knn_union_lin_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "pow2",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "diffusion on the symmetric-normalised union kNN graph: multi-step / restart / heat kernels + genome-wide row-z",
+   "null_mean": 0.0015976551902067552,
+   "null_sd": 0.8857301505235756,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.04,
+   "runtime_null_s": 0.016
+  },
+  {
+   "col": 38,
+   "name": "cos_pow3[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "pow3",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "diffusion on the symmetric-normalised union kNN graph: multi-step / restart / heat kernels",
+   "null_mean": 0.4411283150475938,
+   "null_sd": 0.11518611230482632,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 52.969,
+   "runtime_null_s": 0.014
+  },
+  {
+   "col": 39,
+   "name": "rowz[cos_pow3[knn_union_lin_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "pow3",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "diffusion on the symmetric-normalised union kNN graph: multi-step / restart / heat kernels + genome-wide row-z",
+   "null_mean": 0.00044049315704927856,
+   "null_sd": 0.7481512552609614,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.033,
+   "runtime_null_s": 0.016
+  },
+  {
+   "col": 40,
+   "name": "kern_ppr0.5[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "ppr0.5",
+    "score": "kern",
+    "rowz": false
+   },
+   "rationale": "diffusion on the symmetric-normalised union kNN graph: multi-step / restart / heat kernels",
+   "null_mean": 2.7415918355241615e-05,
+   "null_sd": 0.0002720765498824919,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 46.65,
+   "runtime_null_s": 0.01
+  },
+  {
+   "col": 41,
+   "name": "rowz[kern_ppr0.5[knn_union_lin_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "ppr0.5",
+    "score": "kern",
+    "rowz": true
+   },
+   "rationale": "diffusion on the symmetric-normalised union kNN graph: multi-step / restart / heat kernels + genome-wide row-z",
+   "null_mean": -0.0024417063766109383,
+   "null_sd": 0.9654572558594497,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.029,
+   "runtime_null_s": 0.01
+  },
+  {
+   "col": 42,
+   "name": "cos_ppr0.5[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "ppr0.5",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "diffusion on the symmetric-normalised union kNN graph: multi-step / restart / heat kernels",
+   "null_mean": 0.009901192046547077,
+   "null_sd": 0.010912376247153691,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 89.539,
+   "runtime_null_s": 0.021
+  },
+  {
+   "col": 43,
+   "name": "rowz[cos_ppr0.5[knn_union_lin_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "ppr0.5",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "diffusion on the symmetric-normalised union kNN graph: multi-step / restart / heat kernels + genome-wide row-z",
+   "null_mean": 0.002803898144349188,
+   "null_sd": 0.9900684615670817,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.058,
+   "runtime_null_s": 0.011
+  },
+  {
+   "col": 44,
+   "name": "cos_heat1[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "heat1",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "diffusion on the symmetric-normalised union kNN graph: multi-step / restart / heat kernels",
+   "null_mean": 0.00739613979966467,
+   "null_sd": 0.01073593602935439,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 65.122,
+   "runtime_null_s": 0.011
+  },
+  {
+   "col": 45,
+   "name": "rowz[cos_heat1[knn_union_lin_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "heat1",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "diffusion on the symmetric-normalised union kNN graph: multi-step / restart / heat kernels + genome-wide row-z",
+   "null_mean": 0.002819346056509486,
+   "null_sd": 0.9909434460414406,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.032,
+   "runtime_null_s": 0.012
+  },
+  {
+   "col": 46,
+   "name": "cos_heat3[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "heat3",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "diffusion on the symmetric-normalised union kNN graph: multi-step / restart / heat kernels",
+   "null_mean": 0.07355487659425008,
+   "null_sd": 0.01781836475995111,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 88.544,
+   "runtime_null_s": 0.025
+  },
+  {
+   "col": 47,
+   "name": "rowz[cos_heat3[knn_union_lin_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "heat3",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "diffusion on the symmetric-normalised union kNN graph: multi-step / restart / heat kernels + genome-wide row-z",
+   "null_mean": 0.0012019242774373377,
+   "null_sd": 0.9202570716983485,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.041,
+   "runtime_null_s": 0.019
+  },
+  {
+   "col": 48,
+   "name": "cos_pow2[knn_mutual_lin_q0.5[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.5,
+     "sym": "mutual",
+     "weight": "lin"
+    },
+    "op": "pow2",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "diffusion on the symmetric-normalised union kNN graph: multi-step / restart / heat kernels (mutual graph)",
+   "null_mean": 0.21216758005974348,
+   "null_sd": 0.05468280928766001,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 44.301,
+   "runtime_null_s": 0.009
+  },
+  {
+   "col": 49,
+   "name": "rowz[cos_pow2[knn_mutual_lin_q0.5[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.5,
+     "sym": "mutual",
+     "weight": "lin"
+    },
+    "op": "pow2",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "diffusion on the symmetric-normalised union kNN graph: multi-step / restart / heat kernels (mutual graph) + genome-wide row-z",
+   "null_mean": 0.0023549195519223893,
+   "null_sd": 0.80356910578964,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.026,
+   "runtime_null_s": 0.009
+  },
+  {
+   "col": 50,
+   "name": "emb_lap32[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "lap32",
+    "score": "emb",
+    "rowz": false
+   },
+   "rationale": "spectral embedding of the union kNN graph (Laplacian eigenmaps / diffusion map), cosine; dims sweep",
+   "null_mean": 0.08427738881750714,
+   "null_sd": 0.26494223804943073,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 114.215,
+   "runtime_null_s": 0.008
+  },
+  {
+   "col": 51,
+   "name": "emb_lap128[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "lap128",
+    "score": "emb",
+    "rowz": false
+   },
+   "rationale": "spectral embedding of the union kNN graph (Laplacian eigenmaps / diffusion map), cosine; dims sweep",
+   "null_mean": 0.011099481139043845,
+   "null_sd": 0.10223930477087077,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 2.213,
+   "runtime_null_s": 0.009
+  },
+  {
+   "col": 52,
+   "name": "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "lap512",
+    "score": "emb",
+    "rowz": false
+   },
+   "rationale": "spectral embedding of the union kNN graph (Laplacian eigenmaps / diffusion map), cosine; dims sweep",
+   "null_mean": 0.00025775943667355754,
+   "null_sd": 0.04665847923240877,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 2.695,
+   "runtime_null_s": 0.009
+  },
+  {
+   "col": 53,
+   "name": "emb_dmap512t4[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "dmap512t4",
+    "score": "emb",
+    "rowz": false
+   },
+   "rationale": "spectral embedding of the union kNN graph (Laplacian eigenmaps / diffusion map), cosine; dims sweep",
+   "null_mean": 0.05107940143686128,
+   "null_sd": 0.13425790504904053,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 2.792,
+   "runtime_null_s": 0.008
+  },
+  {
+   "col": 54,
+   "name": "cos_adj[knn_union_lin_q0.25[spec_k0_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 0,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "first-order base sensitivity (k = 0 / 5 PCs removed instead of 20)",
+   "null_mean": 0.002782857322624186,
+   "null_sd": 0.01063654819057325,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 39.073,
+   "runtime_null_s": 0.015
+  },
+  {
+   "col": 55,
+   "name": "rowz[cos_adj[knn_union_lin_q0.25[spec_k0_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 0,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "first-order base sensitivity (k = 0 / 5 PCs removed instead of 20) + genome-wide row-z",
+   "null_mean": 0.004020232522178638,
+   "null_sd": 0.9942499101621365,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.034,
+   "runtime_null_s": 0.012
+  },
+  {
+   "col": 56,
+   "name": "cos_adj[knn_union_lin_q0.25[spec_k5_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 5,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "first-order base sensitivity (k = 0 / 5 PCs removed instead of 20)",
+   "null_mean": 0.002776947628102498,
+   "null_sd": 0.0105975603619399,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 38.489,
+   "runtime_null_s": 0.01
+  },
+  {
+   "col": 57,
+   "name": "rowz[cos_adj[knn_union_lin_q0.25[spec_k5_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 5,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "adj",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "first-order base sensitivity (k = 0 / 5 PCs removed instead of 20) + genome-wide row-z",
+   "null_mean": 0.003925372402875906,
+   "null_sd": 0.9960064149757016,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.031,
+   "runtime_null_s": 0.011
+  },
+  {
+   "col": 58,
+   "name": "cos_ppr0.5[knn_union_lin_q0.25[spec_k0_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 0,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "ppr0.5",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "first-order base sensitivity (k = 0 / 5 PCs removed instead of 20)",
+   "null_mean": 0.009927081594613847,
+   "null_sd": 0.011886366642883523,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 65.593,
+   "runtime_null_s": 0.009
+  },
+  {
+   "col": 59,
+   "name": "rowz[cos_ppr0.5[knn_union_lin_q0.25[spec_k0_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 0,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "ppr0.5",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "first-order base sensitivity (k = 0 / 5 PCs removed instead of 20) + genome-wide row-z",
+   "null_mean": 0.0041173081814492125,
+   "null_sd": 0.991059065677763,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.026,
+   "runtime_null_s": 0.01
+  },
+  {
+   "col": 60,
+   "name": "cos_ppr0.5[knn_union_lin_q0.25[spec_k5_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 5,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "ppr0.5",
+    "score": "cos",
+    "rowz": false
+   },
+   "rationale": "first-order base sensitivity (k = 0 / 5 PCs removed instead of 20)",
+   "null_mean": 0.009915046678429353,
+   "null_sd": 0.011800809030143248,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 74.547,
+   "runtime_null_s": 0.01
+  },
+  {
+   "col": 61,
+   "name": "rowz[cos_ppr0.5[knn_union_lin_q0.25[spec_k5_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 5,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "ppr0.5",
+    "score": "cos",
+    "rowz": true
+   },
+   "rationale": "first-order base sensitivity (k = 0 / 5 PCs removed instead of 20) + genome-wide row-z",
+   "null_mean": 0.0037186123198711942,
+   "null_sd": 0.9923790240322876,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.031,
+   "runtime_null_s": 0.013
+  }
+ ]
+}

@@ -1,0 +1,303 @@
+{
+ "tag": "graph_v2",
+ "created": "2026-10-27T15:20:38",
+ "script": "scripts/15_build_graph_layers.py",
+ "git": {
+  "commit": "c79e37f05d57d6a484068af5163da567965eccd2",
+  "dirty_files": [
+   "scripts/15_build_graph_layers.py",
+   "scripts/15_graph_screen.py",
+   "scripts/30_phaseC_readme.py"
+  ]
+ },
+ "label_free": "layer scores use only CRISPRGeneEffect and gene indices; no label is read. Grid fixed before any graph layer was evaluated; base / q informed by earlier Phase-A dev screens (disclosed).",
+ "reproduction_max_abs_diff_vs_screen_v2": {},
+ "input": {
+  "matrix": "CRISPRGeneEffect",
+  "shape": [
+   1361,
+   18434
+  ],
+  "sha256": "8a894d2449074934de71cf0e0b44e8d81ec2d70bc756b2d038367c34c9ad27f3",
+  "n_genes_listed": 18434
+ },
+ "preprocessing": {
+  "bg_max_nan": 0.1,
+  "n_background_genes": 17525,
+  "block": 1024,
+  "imputation": "per-gene observed mean (all genes); BG genes only for Sigma / row moments / ranks / neighbours / null",
+  "eig": {
+   "eig_gene_std": {
+    "dim": 1360,
+    "n_null": 2,
+    "lw_alpha": 0.024684529224167317,
+    "lw_tau_rel": 0.0253092768071561,
+    "top_frac": [
+     0.023157227650165715,
+     0.020918554518772694,
+     0.017024247141463774,
+     0.013821145191345465,
+     0.011466249495525365,
+     0.010132616387382465,
+     0.009760944909164215,
+     0.007837871515729929,
+     0.007446362955920297,
+     0.006969940142189156
+    ],
+    "mean_eig": 0.9986295628094317
+   }
+  },
+  "graph_timing": {}
+ },
+ "pairs": {
+  "n": 596597,
+  "sha256_ia_ib": "cd274019d189ceeecb4118340c2310aa3363f201f6760d4d9e597d5341b2cc61",
+  "file": "data_cache/layers/graph_v2.pairs.npz",
+  "same_as": "screen_v1"
+ },
+ "null": {
+  "n": 200000,
+  "seed": 0,
+  "sampling": "uniform BG x BG, a != b, with replacement",
+  "sha256": "780b34d9c02fdddfbf1bb3b52d16a47e3d445f262f5edbb876677ea84111f830"
+ },
+ "output": {
+  "file": "data_cache/layers/graph_v2.scores.f32.npy",
+  "shape": [
+   596597,
+   7
+  ],
+  "dtype": "float32",
+  "sha256": "8b1c9e7305b33cea4633834432c9c8a325ab9b08de14acb4275b33e9a74dfae6"
+ },
+ "runtime": {
+  "total_s": 589.9,
+  "peak_rss_gb": 3.73
+ },
+ "columns": [
+  {
+   "col": 0,
+   "name": "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "lap512",
+    "score": "emb",
+    "rowz": true
+   },
+   "rationale": "round 2 (after the graph_v1 SEEDS[0] screen: emb_lap512 best, AP still rising with d 32 -> 128 -> 512): d = 1024, row-z of embeddings, denser graph, k = 0 base",
+   "null_mean": 0.002882919721532178,
+   "null_sd": 0.9984101426333547,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 96.084,
+   "runtime_null_s": 0.009
+  },
+  {
+   "col": 1,
+   "name": "emb_lap1024[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "lap1024",
+    "score": "emb",
+    "rowz": false
+   },
+   "rationale": "round 2 (after the graph_v1 SEEDS[0] screen: emb_lap512 best, AP still rising with d 32 -> 128 -> 512): d = 1024, row-z of embeddings, denser graph, k = 0 base",
+   "null_mean": -2.472783657246538e-06,
+   "null_sd": 0.030751842274456008,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 314.147,
+   "runtime_null_s": 0.008
+  },
+  {
+   "col": 2,
+   "name": "rowz[emb_lap1024[knn_union_lin_q0.25[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "lap1024",
+    "score": "emb",
+    "rowz": true
+   },
+   "rationale": "round 2 (after the graph_v1 SEEDS[0] screen: emb_lap512 best, AP still rising with d 32 -> 128 -> 512): d = 1024, row-z of embeddings, denser graph, k = 0 base + genome-wide row-z",
+   "null_mean": 0.0009244401433502914,
+   "null_sd": 0.994289097792884,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.023,
+   "runtime_null_s": 0.011
+  },
+  {
+   "col": 3,
+   "name": "emb_lap512[knn_union_lin_q0.5[spec_k20_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.5,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "lap512",
+    "score": "emb",
+    "rowz": false
+   },
+   "rationale": "round 2 (after the graph_v1 SEEDS[0] screen: emb_lap512 best, AP still rising with d 32 -> 128 -> 512): d = 1024, row-z of embeddings, denser graph, k = 0 base",
+   "null_mean": 0.0002962137071282388,
+   "null_sd": 0.045911526947009354,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 85.284,
+   "runtime_null_s": 0.008
+  },
+  {
+   "col": 4,
+   "name": "rowz[emb_lap512[knn_union_lin_q0.5[spec_k20_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 20,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.5,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "lap512",
+    "score": "emb",
+    "rowz": true
+   },
+   "rationale": "round 2 (after the graph_v1 SEEDS[0] screen: emb_lap512 best, AP still rising with d 32 -> 128 -> 512): d = 1024, row-z of embeddings, denser graph, k = 0 base + genome-wide row-z",
+   "null_mean": 0.005200869101318012,
+   "null_sd": 1.0020073375180656,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.023,
+   "runtime_null_s": 0.01
+  },
+  {
+   "col": 5,
+   "name": "emb_lap512[knn_union_lin_q0.25[spec_k0_t0.1_std]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 0,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "lap512",
+    "score": "emb",
+    "rowz": false
+   },
+   "rationale": "round 2 (after the graph_v1 SEEDS[0] screen: emb_lap512 best, AP still rising with d 32 -> 128 -> 512): d = 1024, row-z of embeddings, denser graph, k = 0 base",
+   "null_mean": 0.00029569079006500635,
+   "null_sd": 0.04681890064815408,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 92.353,
+   "runtime_null_s": 0.008
+  },
+  {
+   "col": 6,
+   "name": "rowz[emb_lap512[knn_union_lin_q0.25[spec_k0_t0.1_std]]]",
+   "config": {
+    "kind": "graph",
+    "graph": {
+     "kind": "knn",
+     "base": {
+      "kind": "spectral",
+      "k": 0,
+      "tau": "0.1",
+      "shrink": "ridge",
+      "center": "gene",
+      "standardize": true,
+      "matrix": "CRISPRGeneEffect"
+     },
+     "q": 0.25,
+     "sym": "union",
+     "weight": "lin"
+    },
+    "op": "lap512",
+    "score": "emb",
+    "rowz": true
+   },
+   "rationale": "round 2 (after the graph_v1 SEEDS[0] screen: emb_lap512 best, AP still rising with d 32 -> 128 -> 512): d = 1024, row-z of embeddings, denser graph, k = 0 base + genome-wide row-z",
+   "null_mean": 0.003190327203127862,
+   "null_sd": 1.0015159137329508,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_pairs_incl_prep_s": 0.023,
+   "runtime_null_s": 0.01
+  }
+ ]
+}

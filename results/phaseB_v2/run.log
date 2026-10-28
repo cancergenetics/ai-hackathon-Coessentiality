@@ -1,0 +1,103 @@
+ref_E_cluster_seed0                        HT-AP 0.460 ± 0.138  pooled-OOF 0.439  no-top10 0.351  2.5s
+ref_H_cluster_seed0                        HT-AP 0.442 ± 0.137  pooled-OOF 0.418  no-top10 0.344  2.3s
+ref_F_cluster_seed0                        HT-AP 0.365 ± 0.111  pooled-OOF 0.344  no-top10 0.343  2.3s
+ref_F0_cluster_seed0                       HT-AP 0.361 ± 0.107  pooled-OOF 0.342  no-top10 0.343  2.3s
+ref_SO_cluster_seed0                       HT-AP 0.401 ± 0.135  pooled-OOF 0.366  no-top10 0.324  2.1s
+ref_G_cluster_seed0                        HT-AP 0.288 ± 0.098  pooled-OOF 0.256  no-top10 0.299  7.2s
+ref_SP_cluster_seed0                       HT-AP 0.260 ± 0.095  pooled-OOF 0.242  no-top10 0.227  2.9s
+ref_PE_cluster_seed0                       HT-AP 0.238 ± 0.095  pooled-OOF 0.220  no-top10 0.220  2.7s
+zavg_BE_cluster_seed0                      HT-AP 0.456 ± 0.143  pooled-OOF 0.434  no-top10 0.352  2.4s
+zavg_BF_cluster_seed0                      HT-AP 0.439 ± 0.138  pooled-OOF 0.413  no-top10 0.357  2.4s
+zavg_BEF_cluster_seed0                     HT-AP 0.456 ± 0.142  pooled-OOF 0.431  no-top10 0.363  2.4s
+lr_L7-genebin_cluster_seed0                HT-AP 0.433 ± 0.150  pooled-OOF 0.395  no-top10 0.336  11.8s
+lgbm_L7_cluster_seed0                      HT-AP 0.450 ± 0.138  pooled-OOF 0.375  no-top10 0.346  20.1s
+lgbm_L7-genebin_cluster_seed0              HT-AP 0.450 ± 0.141  pooled-OOF 0.396  no-top10 0.359  22.0s
+ref_B_cluster_seed1                        HT-AP 0.430 ± 0.145  pooled-OOF 0.427  no-top10 0.343  2.5s
+ref_E_cluster_seed1                        HT-AP 0.457 ± 0.136  pooled-OOF 0.456  no-top10 0.367  2.5s
+ref_H_cluster_seed1                        HT-AP 0.440 ± 0.141  pooled-OOF 0.435  no-top10 0.354  2.4s
+ref_F_cluster_seed1                        HT-AP 0.377 ± 0.130  pooled-OOF 0.353  no-top10 0.349  2.4s
+ref_F0_cluster_seed1                       HT-AP 0.374 ± 0.128  pooled-OOF 0.351  no-top10 0.350  2.5s
+ref_SO_cluster_seed1                       HT-AP 0.398 ± 0.154  pooled-OOF 0.378  no-top10 0.325  2.2s
+ref_G_cluster_seed1                        HT-AP 0.304 ± 0.104  pooled-OOF 0.264  no-top10 0.303  7.1s
+ref_SP_cluster_seed1                       HT-AP 0.252 ± 0.097  pooled-OOF 0.243  no-top10 0.225  3.0s
+ref_PE_cluster_seed1                       HT-AP 0.225 ± 0.096  pooled-OOF 0.220  no-top10 0.214  2.6s
+zavg_BE_cluster_seed1                      HT-AP 0.453 ± 0.144  pooled-OOF 0.451  no-top10 0.361  2.4s
+zavg_BF_cluster_seed1                      HT-AP 0.440 ± 0.145  pooled-OOF 0.428  no-top10 0.363  2.4s
+zavg_BEF_cluster_seed1                     HT-AP 0.456 ± 0.146  pooled-OOF 0.448  no-top10 0.373  2.5s
+Traceback (most recent call last):
+  File "scripts/21_phaseB_v2.py", line 435, in <module>
+    
+  File "scripts/21_phaseB_v2.py", line 417, in main
+    OUT.mkdir(parents=True, exist_ok=True)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "scripts/21_phaseB_v2.py", line 226, in stage_run
+    for seed in seeds:
+            ^^^^^^^^^^^
+  File "scripts/21_phaseB_v2.py", line 204, in run_one
+    rec = Recorder(factory(name, seed))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "src/evaluate.py", line 159, in run_dev_cv
+    check_clean(allow_dirty)
+  File "src/evaluate.py", line 97, in check_clean
+    raise RuntimeError("src/ has uncommitted changes; commit first or pass allow_dirty=True (--allow-dirty)")
+RuntimeError: src/ has uncommitted changes; commit first or pass allow_dirty=True (--allow-dirty)
+zavg_BEHF_cluster_seed1                    HT-AP 0.453 ± 0.145  pooled-OOF 0.446  no-top10 0.368  2.5s
+lr_L7_cluster_seed1                        HT-AP 0.457 ± 0.146  pooled-OOF 0.425  no-top10 0.366  9.8s
+lr_L7-genebin_cluster_seed1                HT-AP 0.447 ± 0.150  pooled-OOF 0.416  no-top10 0.362  12.9s
+lgbm_L7_cluster_seed1                      HT-AP 0.448 ± 0.151  pooled-OOF 0.442  no-top10 0.375  22.2s
+lgbm_L7-genebin_cluster_seed1              HT-AP 0.448 ± 0.152  pooled-OOF 0.453  no-top10 0.373  24.0s
+ref_B_cluster_seed2                        HT-AP 0.462 ± 0.141  pooled-OOF 0.489  no-top10 0.367  2.4s
+ref_E_cluster_seed2                        HT-AP 0.471 ± 0.131  pooled-OOF 0.490  no-top10 0.387  2.3s
+ref_H_cluster_seed2                        HT-AP 0.477 ± 0.146  pooled-OOF 0.506  no-top10 0.379  2.4s
+ref_F_cluster_seed2                        HT-AP 0.406 ± 0.092  pooled-OOF 0.413  no-top10 0.361  2.3s
+ref_F0_cluster_seed2                       HT-AP 0.405 ± 0.093  pooled-OOF 0.413  no-top10 0.360  2.3s
+ref_SO_cluster_seed2                       HT-AP 0.443 ± 0.132  pooled-OOF 0.473  no-top10 0.343  2.1s
+ref_G_cluster_seed2                        HT-AP 0.320 ± 0.071  pooled-OOF 0.311  no-top10 0.313  7.1s
+ref_SP_cluster_seed2                       HT-AP 0.274 ± 0.097  pooled-OOF 0.272  no-top10 0.217  3.0s
+ref_PE_cluster_seed2                       HT-AP 0.259 ± 0.093  pooled-OOF 0.254  no-top10 0.214  2.6s
+zavg_BE_cluster_seed2                      HT-AP 0.477 ± 0.137  pooled-OOF 0.501  no-top10 0.386  2.3s
+zavg_BF_cluster_seed2                      HT-AP 0.471 ± 0.127  pooled-OOF 0.496  no-top10 0.386  2.5s
+zavg_BEF_cluster_seed2                     HT-AP 0.481 ± 0.128  pooled-OOF 0.504  no-top10 0.397  2.3s
+zavg_BEHF_cluster_seed2                    HT-AP 0.482 ± 0.135  pooled-OOF 0.507  no-top10 0.392  2.4s
+lr_L7_cluster_seed2                        HT-AP 0.471 ± 0.134  pooled-OOF 0.489  no-top10 0.392  9.8s
+lr_L7-genebin_cluster_seed2                HT-AP 0.456 ± 0.135  pooled-OOF 0.472  no-top10 0.382  10.7s
+lgbm_L7_cluster_seed2                      HT-AP 0.476 ± 0.116  pooled-OOF 0.475  no-top10 0.405  23.3s
+lgbm_L7-genebin_cluster_seed2              HT-AP 0.474 ± 0.111  pooled-OOF 0.476  no-top10 0.398  46.3s
+ref_B_cluster_seed3                        HT-AP 0.449 ± 0.108  pooled-OOF 0.433  no-top10 0.283  3.5s
+ref_E_cluster_seed3                        HT-AP 0.455 ± 0.095  pooled-OOF 0.437  no-top10 0.306  3.7s
+ref_H_cluster_seed3                        HT-AP 0.461 ± 0.114  pooled-OOF 0.444  no-top10 0.293  3.4s
+ref_F_cluster_seed3                        HT-AP 0.405 ± 0.099  pooled-OOF 0.387  no-top10 0.308  3.6s
+ref_F0_cluster_seed3                       HT-AP 0.407 ± 0.103  pooled-OOF 0.391  no-top10 0.312  3.6s
+ref_SO_cluster_seed3                       HT-AP 0.444 ± 0.122  pooled-OOF 0.445  no-top10 0.281  3.2s
+ref_G_cluster_seed3                        HT-AP 0.311 ± 0.076  pooled-OOF 0.277  no-top10 0.259  22.4s
+ref_SP_cluster_seed3                       HT-AP 0.311 ± 0.110  pooled-OOF 0.288  no-top10 0.210  5.1s
+ref_PE_cluster_seed3                       HT-AP 0.286 ± 0.091  pooled-OOF 0.263  no-top10 0.207  3.0s
+zavg_BE_cluster_seed3                      HT-AP 0.463 ± 0.105  pooled-OOF 0.445  no-top10 0.300  3.1s
+zavg_BF_cluster_seed3                      HT-AP 0.462 ± 0.113  pooled-OOF 0.447  no-top10 0.307  2.7s
+zavg_BEF_cluster_seed3                     HT-AP 0.469 ± 0.108  pooled-OOF 0.453  no-top10 0.314  2.6s
+zavg_BEHF_cluster_seed3                    HT-AP 0.468 ± 0.111  pooled-OOF 0.451  no-top10 0.308  2.6s
+lr_L7_cluster_seed3                        HT-AP 0.460 ± 0.102  pooled-OOF 0.437  no-top10 0.326  12.0s
+lr_L7-genebin_cluster_seed3                HT-AP 0.448 ± 0.102  pooled-OOF 0.423  no-top10 0.319  13.8s
+lgbm_L7_cluster_seed3                      HT-AP 0.464 ± 0.115  pooled-OOF 0.442  no-top10 0.309  25.2s
+lgbm_L7-genebin_cluster_seed3              HT-AP 0.460 ± 0.115  pooled-OOF 0.433  no-top10 0.297  28.0s
+ref_B_cluster_seed4                        HT-AP 0.467 ± 0.148  pooled-OOF 0.468  no-top10 0.327  2.8s
+ref_E_cluster_seed4                        HT-AP 0.471 ± 0.135  pooled-OOF 0.463  no-top10 0.350  2.7s
+ref_H_cluster_seed4                        HT-AP 0.478 ± 0.151  pooled-OOF 0.479  no-top10 0.335  2.7s
+ref_F_cluster_seed4                        HT-AP 0.424 ± 0.128  pooled-OOF 0.406  no-top10 0.336  2.7s
+ref_F0_cluster_seed4                       HT-AP 0.426 ± 0.132  pooled-OOF 0.409  no-top10 0.335  2.6s
+ref_SO_cluster_seed4                       HT-AP 0.465 ± 0.154  pooled-OOF 0.477  no-top10 0.309  2.4s
+ref_G_cluster_seed4                        HT-AP 0.337 ± 0.062  pooled-OOF 0.298  no-top10 0.307  7.9s
+ref_SP_cluster_seed4                       HT-AP 0.315 ± 0.149  pooled-OOF 0.277  no-top10 0.203  3.2s
+ref_PE_cluster_seed4                       HT-AP 0.293 ± 0.135  pooled-OOF 0.255  no-top10 0.201  2.6s
+zavg_BE_cluster_seed4                      HT-AP 0.480 ± 0.146  pooled-OOF 0.477  no-top10 0.342  2.4s
+zavg_BF_cluster_seed4                      HT-AP 0.481 ± 0.147  pooled-OOF 0.480  no-top10 0.347  2.4s
+zavg_BEF_cluster_seed4                     HT-AP 0.486 ± 0.144  pooled-OOF 0.483  no-top10 0.354  2.5s
+zavg_BEHF_cluster_seed4                    HT-AP 0.486 ± 0.148  pooled-OOF 0.484  no-top10 0.350  2.4s
+lr_L7_cluster_seed4                        HT-AP 0.477 ± 0.138  pooled-OOF 0.445  no-top10 0.355  9.8s
+lr_L7-genebin_cluster_seed4                HT-AP 0.462 ± 0.131  pooled-OOF 0.431  no-top10 0.350  11.7s
+lgbm_L7_cluster_seed4                      HT-AP 0.490 ± 0.145  pooled-OOF 0.483  no-top10 0.365  23.9s
+lgbm_L7-genebin_cluster_seed4              HT-AP 0.485 ± 0.142  pooled-OOF 0.469  no-top10 0.348  26.2s
+control_shuffle_held_lr_L7_cluster_seed0           AP 0.0419 vs HT prevalence 0.0412
+control_shuffle_held_lr_L7-genebin_cluster_seed0   AP 0.0419 vs HT prevalence 0.0412
+control_shuffle_held_lgbm_L7_cluster_seed0         AP 0.0425 vs HT prevalence 0.0412
+control_shuffle_held_lgbm_L7-genebin_cluster_seed0 AP 0.0428 vs HT prevalence 0.0412

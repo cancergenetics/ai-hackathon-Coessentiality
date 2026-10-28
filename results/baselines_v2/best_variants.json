@@ -1,0 +1,13 @@
+{
+ "best_variants": {
+  "pearson": "pearson_signed",
+  "spearman": "spearman_signed",
+  "gls": "gls_signed"
+ },
+ "criterion": "max mean fold HT-weighted AP, cluster-grouped dev CV, SEEDS[0]",
+ "n_variants_tried": {
+  "pearson": 2,
+  "spearman": 2,
+  "gls": 8
+ }
+}

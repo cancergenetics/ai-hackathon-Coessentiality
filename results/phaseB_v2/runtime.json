@@ -1,0 +1,153 @@
+{
+ "ref_B": {
+  "which": "ref_B",
+  "n_pairs": 596597,
+  "load_matrix_s": 0.04,
+  "members": [
+   {
+    "key": "B",
+    "s": 22.37
+   }
+  ],
+  "engine_init_s": 0.2,
+  "max_abs_diff_vs_cache": 1.9034782283711138e-06,
+  "total_s": 22.6,
+  "peak_rss_gb": 2.7
+ },
+ "zavg_BE": {
+  "which": "zavg_BE",
+  "n_pairs": 596597,
+  "load_matrix_s": 0.01,
+  "members": [
+   {
+    "key": "B",
+    "s": 15.72
+   },
+   {
+    "key": "E",
+    "s": 96.9
+   }
+  ],
+  "engine_init_s": 0.18,
+  "combine_s": 0.003,
+  "finite": true,
+  "max_abs_diff_vs_cache": 1.9034782283711138e-06,
+  "total_s": 112.82,
+  "peak_rss_gb": 2.74
+ },
+ "zavg_BF": {
+  "which": "zavg_BF",
+  "n_pairs": 596597,
+  "load_matrix_s": 0.04,
+  "members": [
+   {
+    "key": "B",
+    "s": 18.47
+   },
+   {
+    "key": "F",
+    "s": 2.63
+   }
+  ],
+  "engine_init_s": 0.21,
+  "combine_s": 0.002,
+  "finite": true,
+  "max_abs_diff_vs_cache": 1.9034782283711138e-06,
+  "total_s": 21.34,
+  "peak_rss_gb": 2.82
+ },
+ "zavg_BEF": {
+  "which": "zavg_BEF",
+  "n_pairs": 596597,
+  "load_matrix_s": 0.02,
+  "members": [
+   {
+    "key": "B",
+    "s": 20.33
+   },
+   {
+    "key": "E",
+    "s": 101.31
+   },
+   {
+    "key": "F",
+    "s": 2.8
+   }
+  ],
+  "engine_init_s": 0.21,
+  "combine_s": 0.004,
+  "finite": true,
+  "max_abs_diff_vs_cache": 1.9034782283711138e-06,
+  "total_s": 124.67,
+  "peak_rss_gb": 4.44
+ },
+ "zavg_BEHF": {
+  "which": "zavg_BEHF",
+  "n_pairs": 596597,
+  "load_matrix_s": 0.03,
+  "members": [
+   {
+    "key": "B",
+    "s": 41.58
+   },
+   {
+    "key": "E",
+    "s": 146.3
+   },
+   {
+    "key": "H",
+    "s": 42.14
+   },
+   {
+    "key": "F",
+    "s": 2.62
+   }
+  ],
+  "engine_init_s": 0.31,
+  "combine_s": 0.005,
+  "finite": true,
+  "max_abs_diff_vs_cache": 1.9068543508637958e-06,
+  "total_s": 232.99,
+  "peak_rss_gb": 5.67
+ },
+ "feat7": {
+  "which": "feat7",
+  "n_pairs": 596597,
+  "load_matrix_s": 0.04,
+  "members": [
+   {
+    "key": "B",
+    "s": 22.06
+   },
+   {
+    "key": "E",
+    "s": 88.61
+   },
+   {
+    "key": "H",
+    "s": 31.31
+   },
+   {
+    "key": "F",
+    "s": 2.1
+   },
+   {
+    "key": "F0",
+    "s": 2.4
+   },
+   {
+    "key": "G",
+    "s": 5.56
+   },
+   {
+    "key": "SO",
+    "s": 0.5
+   }
+  ],
+  "engine_init_s": 0.2,
+  "max_abs_diff_vs_cache": 1.9068543508637958e-06,
+  "total_s": 152.78,
+  "peak_rss_gb": 6.12
+ },
+ "gene_features_s": 1.0
+}

@@ -1,0 +1,9 @@
+step,layer,ap_ht,sd_over_folds,source,delta_vs_previous
+"GLS-like whitening (k = 0 PCs removed, τ = 0)",spec_k0_t0,0.279139,0.099398,results/phaseA/screen/spec_k0_t0_cluster_seed0.json,
++ ridge regularisation (τ = 0.1),spec_k0_t0.1,0.300469,0.101150,results/phaseA/screen/spec_k0_t0.1_cluster_seed0.json,0.021330
++ gene standardisation before Σ,spec_k0_t0.1_std,0.361190,0.106829,results/phaseA/screen/spec_k0_t0.1_std_cluster_seed0.json,0.060721
++ remove top-20 PCs  = F,spec_k20_t0.1_std,0.364835,0.111373,results/phaseA/screen/spec_k20_t0.1_std_cluster_seed0.json,0.003645
+second order: neighbour cosine (q = 0.25%),socos_q0.25[spec_k20_t0.1_std],0.400818,0.135107,results/phaseA/screen/socos_q0.25_spec_k20_t0.1_std_cluster_seed0.json,0.035983
++ genome-wide row-z  = B,rowz[socos_q0.25[spec_k20_t0.1_std]],0.434759,0.141789,results/phaseA/screen/rowz_socos_q0.25_spec_k20_t0.1_std_cluster_seed0.json,0.033942
++ z-average with E and F  = zavg_BEF,zavg_BEF,0.455844,0.142375,results/phaseB_v2/runs/zavg_BEF_cluster_seed0.json,0.021085
+reference: GLS signed baseline,gls_signed,0.287930,0.097994,results/baselines_v2/gls_signed_cluster_seed0.json,

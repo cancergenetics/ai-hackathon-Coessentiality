@@ -1,0 +1,147 @@
+{
+ "pos": {
+  "rows": 3314,
+  "unique_pairs": 3314,
+  "self_pairs": 0,
+  "unique_ids": 1144,
+  "id_examples": [
+   "P48201",
+   "Q96IX5",
+   "Q13330",
+   "Q9BTC8",
+   "Q06609"
+  ],
+  "pairs_both_in_depmap": 3195
+ },
+ "neg": {
+  "rows": 631465,
+  "unique_pairs": 631465,
+  "self_pairs": 0,
+  "unique_ids": 1151,
+  "id_examples": [
+   "Q8NFJ9",
+   "Q9NUT2",
+   "Q06055",
+   "Q9H6D7",
+   "Q96ES7"
+  ],
+  "pairs_both_in_depmap": 595480
+ },
+ "pos_neg_pair_overlap": 0,
+ "ids_pos_only": 0,
+ "ids_neg_only": 7,
+ "ids_both": 1144,
+ "ids_with_dash": 0,
+ "ids_mapped_hgnc": 1149,
+ "ids_multi_entrez": 8,
+ "depmap_genes": 18434,
+ "ids_in_depmap": 1116,
+ "pos_degree": {
+  "max": 41,
+  "median": 3.0,
+  "n_deg1": 302
+ },
+ "neg_degree": {
+  "max": 1149,
+  "median": 1143.0
+ },
+ "pos_components": {
+  "n": 232,
+  "largest": 144,
+  "sizes_top10": [
+   144,
+   30,
+   26,
+   24,
+   21,
+   17,
+   16,
+   15,
+   14,
+   12
+  ]
+ },
+ "gene_effect": {
+  "shape": [
+   1361,
+   18434
+  ],
+  "nan_frac": 0.032470627981375184,
+  "genes_any_nan": 1352,
+  "index_example": [
+   "ACH-002730",
+   "ACH-002731",
+   "ACH-002736"
+  ]
+ },
+ "screen_effect": {
+  "shape": [
+   1611,
+   18434
+  ],
+  "nan_frac": 0.037176028937972345,
+  "suffixes": {
+   "AV01": 1024,
+   "KY01": 316,
+   "CD01": 202,
+   "AV02": 26,
+   "CD02": 19,
+   "KY02": 6,
+   "BN02": 4,
+   "BN01": 4,
+   "TK02": 2,
+   "BN03": 2,
+   "TK01": 2,
+   "AV03": 1,
+   "BN07": 1,
+   "BN06": 1,
+   "BN04": 1
+  }
+ },
+ "confounders": {
+  "shape": [
+   2554,
+   22
+  ],
+  "in_ge": 1361,
+  "lib_counts": {
+   "LibraryAvana": 1048,
+   "LibraryHumagneCD": 221,
+   "LibraryKY": 316,
+   "LibraryTKOv3": 4,
+   "LibraryBrunello": 5
+  }
+ },
+ "lineages_in_ge": {
+  "CNS/Brain": 133,
+  "Lung": 126,
+  "Lymphoid": 97,
+  "Esophagus/Stomach": 96,
+  "Bowel": 85,
+  "Head and Neck": 77,
+  "Skin": 75,
+  "Pancreas": 71,
+  "Breast": 67,
+  "Ovary/Fallopian Tube": 62,
+  "Bone": 59,
+  "Soft Tissue": 50,
+  "Peripheral Nervous System": 47,
+  "Myeloid": 45,
+  "Uterus": 38,
+  "Biliary Tract": 36,
+  "Kidney": 35,
+  "Bladder/Urinary Tract": 34,
+  "Liver": 25,
+  "Pleura": 21,
+  "Prostate": 19,
+  "Cervix": 18,
+  "Eye": 15,
+  "Thyroid": 11,
+  "Ampulla of Vater": 9,
+  "Testis": 5,
+  "Vulva/Vagina": 2,
+  "Fibroblast": 1,
+  "Adrenal Gland": 1,
+  "Other": 1
+ }
+}

@@ -1,0 +1,158 @@
+{
+ "tool": "scripts/predict_pairs.py",
+ "created": "2026-10-27T16:00:52",
+ "label_free": "scores use only CRISPRGeneEffect + HGNC ID mapping; no pair label is read",
+ "method": {
+  "name": "zavg:B,E,F",
+  "kind": "zavg",
+  "components": [
+   "B",
+   "E",
+   "F"
+  ],
+  "component_names": {
+   "B": "rowz[socos_q0.25[spec_k20_t0.1_std]]",
+   "E": "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+   "F": "spec_k20_t0.1_std"
+  },
+  "score": "model.predict(component z)",
+  "spec": {
+   "kind": "zavg",
+   "components": [
+    "B",
+    "E",
+    "F"
+   ]
+  }
+ },
+ "git": {
+  "commit": "b8fdf0fcc98533c3f212a94a3c0958c2e00ade84",
+  "dirty_files": []
+ },
+ "inputs": {
+  "pairs": {
+   "path": "<tmp>",
+   "sha256": "9c6839044d2ba4441b485fa56d6c074adfd19997a4c43bcb95827feef28e05a5"
+  },
+  "matrix": {
+   "source": "datasets/DepMAP/CRISPRGeneEffect.csv",
+   "file_sha256": "1e0c492944a7297c0eda179081a1e81a1cfe41a97628facd7eddbdda1a7504ee",
+   "shape": [
+    1361,
+    18434
+   ],
+   "npy_sha256": "8a894d2449074934de71cf0e0b44e8d81ec2d70bc756b2d038367c34c9ad27f3",
+   "npy_sha256_matches_manifest": true,
+   "load_s": 3.84
+  },
+  "hgnc": {
+   "path": "datasets/HGNC/hgnc_complete_set.txt",
+   "sha256": "0f2d3f035e0e6583c055a1d9e008f275376a4b66f72af380dfc2ac730272c247"
+  }
+ },
+ "output": {
+  "path": "<tmp>",
+  "sha256": "4fc1353410c005cc756f47b1ead3146654caa132f1ebe780d9f917581839f58d",
+  "columns": [
+   "uniprot_a",
+   "uniprot_b",
+   "score",
+   "mapped",
+   "z_B",
+   "z_E",
+   "z_F"
+  ]
+ },
+ "null": {
+  "n": 200000,
+  "seed": "SEEDS[0]",
+  "sha256": "780b34d9c02fdddfbf1bb3b52d16a47e3d445f262f5edbb876677ea84111f830",
+  "moments": {
+   "F": {
+    "name": "spec_k20_t0.1_std",
+    "null_mean": 0.0003131672446658825,
+    "null_sd": 0.026499871218646533,
+    "null_n": 200000,
+    "runtime_s": 0.83,
+    "manifest": "results/layers/manifest.json",
+    "manifest_col": 62,
+    "manifest_null_mean": 0.0003131672446658825,
+    "manifest_null_sd": 0.026499871218646533,
+    "rel_diff_mean": 0.0,
+    "rel_diff_sd": 0.0
+   },
+   "B": {
+    "name": "rowz[socos_q0.25[spec_k20_t0.1_std]]",
+    "null_mean": 0.003540567936314927,
+    "null_sd": 0.9961739653154259,
+    "null_n": 200000,
+    "runtime_s": 0.24,
+    "manifest": "results/layers/screen_v2.manifest.json",
+    "manifest_col": 17,
+    "manifest_null_mean": 0.003540567936314927,
+    "manifest_null_sd": 0.9961739653154259,
+    "rel_diff_mean": 0.0,
+    "rel_diff_sd": 0.0
+   },
+   "E": {
+    "name": "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+    "null_mean": 0.00025775943667355754,
+    "null_sd": 0.04665847923240877,
+    "null_n": 200000,
+    "runtime_s": 0.01,
+    "manifest": "results/phaseA_graph/graph_v1.manifest.json",
+    "manifest_col": 52,
+    "manifest_null_mean": 0.00025775943667355754,
+    "manifest_null_sd": 0.04665847923240877,
+    "rel_diff_mean": 0.0,
+    "rel_diff_sd": 0.0
+   }
+  },
+  "tolerance_in_null_sd": 0.0001
+ },
+ "unmapped_rule": "score = min(mapped scores in this file) - 1, mapped = 0 (DESIGN \u00a73.10)",
+ "counts": {
+  "n_pairs": 634779,
+  "n_mapped": 596597,
+  "n_unmapped": 38182,
+  "n_unique_canonical_mapped": 596597,
+  "unmapped_reasons": {
+   "protein_not_mapped": 38182,
+   "self_or_same_gene": 0,
+   "undefined_score": 0
+  },
+  "protein_status_counts": {
+   "mapped": 1114,
+   "not_in_depmap": 33,
+   "ambiguous": 2,
+   "not_in_hgnc": 2
+  },
+  "n_proteins": 1151,
+  "unmapped_floor": -5.28744549659972,
+  "pairs_with_protein_status": {
+   "not_in_hgnc": 1980,
+   "not_in_depmap": 34167,
+   "ambiguous": 2135
+  }
+ },
+ "runtime": {
+  "total_s": 136.85,
+  "matrix_load_s": 3.84,
+  "engine_init_s": 0.27,
+  "scoring": {
+   "map_s": 0.62,
+   "components_s": {
+    "F": 6.05,
+    "B": 20.27,
+    "E": 103.19
+   },
+   "total_s": 130.41
+  },
+  "peak_rss_gb": 4.06
+ },
+ "env": {
+  "python": "3.12.16",
+  "numpy": "2.5.4",
+  "machine": "arm64"
+ }
+}

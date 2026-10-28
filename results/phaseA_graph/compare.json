@@ -1,0 +1,632 @@
+{
+ "0": {
+  "ap": {
+   "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]": {
+    "ap": 0.4390411868850252,
+    "ci_low": 0.33643657507993185,
+    "ci_high": 0.5579890242867005,
+    "boot_sd": 0.05883390189995001
+   },
+   "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]": {
+    "ap": 0.43989726562759185,
+    "ci_low": 0.3316728060740005,
+    "ci_high": 0.5667034679001355,
+    "boot_sd": 0.06200883290486766
+   },
+   "emb_lap512[knn_union_lin_q0.5[spec_k20_t0.1_std]]": {
+    "ap": 0.4328975791071886,
+    "ci_low": 0.3250875711487309,
+    "ci_high": 0.5601926559837026,
+    "boot_sd": 0.06168966570362787
+   },
+   "rowz[cos_heat1[knn_union_lin_q0.25[spec_k20_t0.1_std]]]": {
+    "ap": 0.4176747042874891,
+    "ci_low": 0.3121983495448824,
+    "ci_high": 0.5633338054748988,
+    "boot_sd": 0.0660602635373228
+   },
+   "rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "ap": 0.4109597745248806,
+    "ci_low": 0.3036204476151118,
+    "ci_high": 0.5507296674348909,
+    "boot_sd": 0.06590583999374496
+   },
+   "BASE_gls_signed": {
+    "ap": 0.2563737046301208,
+    "ci_low": 0.18613664077218695,
+    "ci_high": 0.3535443581330761,
+    "boot_sd": 0.043325327759915856
+   }
+  },
+  "diff": {
+   "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": 0.02808141236014461,
+    "ci_low": -0.016720171050335655,
+    "ci_high": 0.06654852198945524,
+    "rel_gain": 0.06833129201662169,
+    "rel_ci_low": -0.03276677013941126,
+    "rel_ci_high": 0.1925791946564601,
+    "p_two_sided": 0.224
+   },
+   "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": 0.028937491102711266,
+    "ci_low": -8.294117671320622e-05,
+    "ci_high": 0.050543438597079285,
+    "rel_gain": 0.07041441254479586,
+    "rel_ci_low": -0.00017869568719197808,
+    "rel_ci_high": 0.13856292850325352,
+    "p_two_sided": 0.052
+   },
+   "emb_lap512[knn_union_lin_q0.5[spec_k20_t0.1_std]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": 0.02193780458230804,
+    "ci_low": -0.016434031575881042,
+    "ci_high": 0.050909738131559135,
+    "rel_gain": 0.05338187808690242,
+    "rel_ci_low": -0.03036926569659709,
+    "rel_ci_high": 0.14083990621379802,
+    "p_two_sided": 0.266
+   },
+   "rowz[cos_heat1[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": 0.0067149297626085125,
+    "ci_low": -0.0030668111093041157,
+    "ci_high": 0.017827081116612742,
+    "rel_gain": 0.016339627814843327,
+    "rel_ci_low": -0.006495875881678548,
+    "rel_ci_high": 0.043272243136512525,
+    "p_two_sided": 0.156
+   },
+   "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]-BASE_gls_signed": {
+    "diff": 0.18266748225490437,
+    "ci_low": 0.08232329022444414,
+    "ci_high": 0.26351364815283096,
+    "rel_gain": 0.7125047497302621,
+    "rel_ci_low": 0.255178320805109,
+    "rel_ci_high": 1.153086156435684,
+    "p_two_sided": 0.0
+   },
+   "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-BASE_gls_signed": {
+    "diff": 0.18352356099747102,
+    "ci_low": 0.0864331004072509,
+    "ci_high": 0.2600184558922727,
+    "rel_gain": 0.7158439328333099,
+    "rel_ci_low": 0.279009210819425,
+    "rel_ci_high": 1.0863989779015932,
+    "p_two_sided": 0.0
+   },
+   "emb_lap512[knn_union_lin_q0.5[spec_k20_t0.1_std]]-BASE_gls_signed": {
+    "diff": 0.1765238744770678,
+    "ci_low": 0.07655137653327532,
+    "ci_high": 0.2567725585315537,
+    "rel_gain": 0.6885412633551669,
+    "rel_ci_low": 0.24500559664315633,
+    "rel_ci_high": 1.0895930427984115,
+    "p_two_sided": 0.0
+   },
+   "rowz[cos_heat1[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-BASE_gls_signed": {
+    "diff": 0.16130099965736827,
+    "ci_low": 0.07244313716459776,
+    "ci_high": 0.26012500195115085,
+    "rel_gain": 0.6291635871552537,
+    "rel_ci_low": 0.23892825575956014,
+    "rel_ci_high": 1.0130351421526023,
+    "p_two_sided": 0.0
+   },
+   "rowz[socos_q0.25[spec_k20_t0.1_std]]-BASE_gls_signed": {
+    "diff": 0.15458606989475976,
+    "ci_low": 0.06527932130232528,
+    "ci_high": 0.2459395233542745,
+    "rel_gain": 0.6029716273663339,
+    "rel_ci_low": 0.20724654441992926,
+    "rel_ci_high": 0.9545540566628244,
+    "p_two_sided": 0.0
+   }
+  },
+  "n_clusters": 190,
+  "n_oof_pairs": 65943,
+  "split_fingerprint": "912b53116c50c41534f5777b08295f5b051919041fdaac6770a1f4027cd38b8c"
+ },
+ "1": {
+  "ap": {
+   "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]": {
+    "ap": 0.45641162665976553,
+    "ci_low": 0.34768833709059516,
+    "ci_high": 0.5700902925101856,
+    "boot_sd": 0.055929301352402865
+   },
+   "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]": {
+    "ap": 0.45320151211302356,
+    "ci_low": 0.33756500328493005,
+    "ci_high": 0.5745272937195959,
+    "boot_sd": 0.06004876313220958
+   },
+   "emb_lap512[knn_union_lin_q0.5[spec_k20_t0.1_std]]": {
+    "ap": 0.44982933969797656,
+    "ci_low": 0.3383152711667995,
+    "ci_high": 0.568353884693823,
+    "boot_sd": 0.059607605754043426
+   },
+   "rowz[cos_heat1[knn_union_lin_q0.25[spec_k20_t0.1_std]]]": {
+    "ap": 0.4348289792955947,
+    "ci_low": 0.32262426847163334,
+    "ci_high": 0.5915260079964103,
+    "boot_sd": 0.0660778933256967
+   },
+   "rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "ap": 0.4268838397588313,
+    "ci_low": 0.31073892272911163,
+    "ci_high": 0.5758130847031767,
+    "boot_sd": 0.06559190116953105
+   },
+   "BASE_gls_signed": {
+    "ap": 0.26382637820418847,
+    "ci_low": 0.18882225795072863,
+    "ci_high": 0.3626359578709783,
+    "boot_sd": 0.04388141552329106
+   }
+  },
+  "diff": {
+   "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": 0.029527786900934216,
+    "ci_low": -0.01975582583689551,
+    "ci_high": 0.06364555884678712,
+    "rel_gain": 0.0691705427818865,
+    "rel_ci_low": -0.03828609176692745,
+    "rel_ci_high": 0.18424254494517664,
+    "p_two_sided": 0.246
+   },
+   "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": 0.026317672354192245,
+    "ci_low": -0.009637886768198834,
+    "ci_high": 0.045837742515214816,
+    "rel_gain": 0.061650664426792234,
+    "rel_ci_low": -0.0181323976481139,
+    "rel_ci_high": 0.1215025357349091,
+    "p_two_sided": 0.134
+   },
+   "emb_lap512[knn_union_lin_q0.5[spec_k20_t0.1_std]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": 0.022945499939145242,
+    "ci_low": -0.02063702270598103,
+    "ci_high": 0.04804811569284904,
+    "rel_gain": 0.05375115617426118,
+    "rel_ci_low": -0.03892510148654053,
+    "rel_ci_high": 0.13004388455523666,
+    "p_two_sided": 0.3
+   },
+   "rowz[cos_heat1[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": 0.007945139536763401,
+    "ci_low": -0.0010782402190533224,
+    "ci_high": 0.01916615625099341,
+    "rel_gain": 0.018611947318624145,
+    "rel_ci_low": -0.0024032069942529987,
+    "rel_ci_high": 0.04361941761030119,
+    "p_two_sided": 0.086
+   },
+   "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]-BASE_gls_signed": {
+    "diff": 0.19258524845557706,
+    "ci_low": 0.10117025639244893,
+    "ci_high": 0.2701260567638858,
+    "rel_gain": 0.7299696480938145,
+    "rel_ci_low": 0.3140824488568166,
+    "rel_ci_high": 1.1761041732069664,
+    "p_two_sided": 0.0
+   },
+   "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-BASE_gls_signed": {
+    "diff": 0.1893751339088351,
+    "ci_low": 0.09868384136714002,
+    "ci_high": 0.2636292674206864,
+    "rel_gain": 0.7178021212202981,
+    "rel_ci_low": 0.32221595550464527,
+    "rel_ci_high": 1.0824344819714582,
+    "p_two_sided": 0.0
+   },
+   "emb_lap512[knn_union_lin_q0.5[spec_k20_t0.1_std]]-BASE_gls_signed": {
+    "diff": 0.1860029614937881,
+    "ci_low": 0.09287305265818668,
+    "ci_high": 0.26216961882525713,
+    "rel_gain": 0.705020334812128,
+    "rel_ci_low": 0.3011487956849035,
+    "rel_ci_high": 1.0865958854112963,
+    "p_two_sided": 0.0
+   },
+   "rowz[cos_heat1[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-BASE_gls_signed": {
+    "diff": 0.17100260109140625,
+    "ci_low": 0.08654842859830654,
+    "ci_high": 0.2765271607563535,
+    "rel_gain": 0.6481633953942951,
+    "rel_ci_low": 0.289988550160736,
+    "rel_ci_high": 1.0337512976522016,
+    "p_two_sided": 0.0
+   },
+   "rowz[socos_q0.25[spec_k20_t0.1_std]]-BASE_gls_signed": {
+    "diff": 0.16305746155464285,
+    "ci_low": 0.0758902836270707,
+    "ci_high": 0.2626772795810119,
+    "rel_gain": 0.6180483644756876,
+    "rel_ci_low": 0.26182688494463313,
+    "rel_ci_high": 0.9763245202051726,
+    "p_two_sided": 0.0
+   }
+  },
+  "n_clusters": 190,
+  "n_oof_pairs": 66971,
+  "split_fingerprint": "c8c2d6a801d99c2bf297a96bf8b1fef0ae39bddf063673cc520bbdecac971ec9"
+ },
+ "2": {
+  "ap": {
+   "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]": {
+    "ap": 0.4903703577153221,
+    "ci_low": 0.4017831901708432,
+    "ci_high": 0.5749768773097714,
+    "boot_sd": 0.0460075274429284
+   },
+   "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]": {
+    "ap": 0.49742334750052486,
+    "ci_low": 0.4091319278201595,
+    "ci_high": 0.5872537136031784,
+    "boot_sd": 0.0465072752372659
+   },
+   "emb_lap512[knn_union_lin_q0.5[spec_k20_t0.1_std]]": {
+    "ap": 0.488538271613221,
+    "ci_low": 0.3995402710995944,
+    "ci_high": 0.5793041896648281,
+    "boot_sd": 0.047767028919797935
+   },
+   "rowz[cos_heat1[knn_union_lin_q0.25[spec_k20_t0.1_std]]]": {
+    "ap": 0.5062367305000353,
+    "ci_low": 0.4008244383109383,
+    "ci_high": 0.6223808203364709,
+    "boot_sd": 0.05863882617432442
+   },
+   "rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "ap": 0.4894768338672344,
+    "ci_low": 0.38549169370649977,
+    "ci_high": 0.6020801191892082,
+    "boot_sd": 0.05643375869629978
+   },
+   "BASE_gls_signed": {
+    "ap": 0.31050183753017324,
+    "ci_low": 0.2494696589511493,
+    "ci_high": 0.377331234214812,
+    "boot_sd": 0.03378749917546342
+   }
+  },
+  "diff": {
+   "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": 0.0008935238480877183,
+    "ci_low": -0.03349963593310349,
+    "ci_high": 0.0310391393932273,
+    "rel_gain": 0.0018254670829427333,
+    "rel_ci_low": -0.05769019084636238,
+    "rel_ci_high": 0.07514317526929022,
+    "p_two_sided": 0.818
+   },
+   "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": 0.007946513633290464,
+    "ci_low": -0.018286408210028554,
+    "ci_high": 0.03667601533949957,
+    "rel_gain": 0.016234708332378167,
+    "rel_ci_low": -0.031638377868543066,
+    "rel_ci_high": 0.08982929141178456,
+    "p_two_sided": 0.442
+   },
+   "emb_lap512[knn_union_lin_q0.5[spec_k20_t0.1_std]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": -0.0009385622540133975,
+    "ci_low": -0.029214646827529812,
+    "ci_high": 0.02572429888146733,
+    "rel_gain": -0.0019174804384469724,
+    "rel_ci_low": -0.05079116919525863,
+    "rel_ci_high": 0.061432939199802736,
+    "p_two_sided": 0.91
+   },
+   "rowz[cos_heat1[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": 0.016759896632800864,
+    "ci_low": 0.006816646294631484,
+    "ci_high": 0.027270719558766914,
+    "rel_gain": 0.03424042870504218,
+    "rel_ci_low": 0.014698577700179133,
+    "rel_ci_high": 0.056184857731584,
+    "p_two_sided": 0.0
+   },
+   "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]-BASE_gls_signed": {
+    "diff": 0.17986852018514887,
+    "ci_low": 0.09257040760079231,
+    "ci_high": 0.25607680646714515,
+    "rel_gain": 0.5792832712871467,
+    "rel_ci_low": 0.26472283273727,
+    "rel_ci_high": 0.921089816402877,
+    "p_two_sided": 0.0
+   },
+   "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-BASE_gls_signed": {
+    "diff": 0.18692150997035162,
+    "ci_low": 0.10291829282641966,
+    "ci_high": 0.26335690311046733,
+    "rel_gain": 0.6019980798090685,
+    "rel_ci_low": 0.2894266094908747,
+    "rel_ci_high": 0.9059007469093816,
+    "p_two_sided": 0.0
+   },
+   "emb_lap512[knn_union_lin_q0.5[spec_k20_t0.1_std]]-BASE_gls_signed": {
+    "diff": 0.17803643408304776,
+    "ci_low": 0.09188918057881489,
+    "ci_high": 0.258086479988483,
+    "rel_gain": 0.5733828678735176,
+    "rel_ci_low": 0.264257708437545,
+    "rel_ci_high": 0.8881873003056491,
+    "p_two_sided": 0.0
+   },
+   "rowz[cos_heat1[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-BASE_gls_signed": {
+    "diff": 0.19573489296986202,
+    "ci_low": 0.09079446900859665,
+    "ci_high": 0.2941598710388744,
+    "rel_gain": 0.630382398142302,
+    "rel_ci_low": 0.2601192436052271,
+    "rel_ci_high": 1.008048560040364,
+    "p_two_sided": 0.0
+   },
+   "rowz[socos_q0.25[spec_k20_t0.1_std]]-BASE_gls_signed": {
+    "diff": 0.17897499633706115,
+    "ci_low": 0.07947753109532582,
+    "ci_high": 0.271273039489566,
+    "rel_gain": 0.576405594764537,
+    "rel_ci_low": 0.23302630882331687,
+    "rel_ci_high": 0.921591442116885,
+    "p_two_sided": 0.0
+   }
+  },
+  "n_clusters": 190,
+  "n_oof_pairs": 66177,
+  "split_fingerprint": "dcc88ee3db3aace874cf5bc46c91522a538db676b125eb28e4badbca834d5782"
+ },
+ "3": {
+  "ap": {
+   "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]": {
+    "ap": 0.43699492101356113,
+    "ci_low": 0.297527055250821,
+    "ci_high": 0.57429534347761,
+    "boot_sd": 0.0730149967618311
+   },
+   "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]": {
+    "ap": 0.4385129888586004,
+    "ci_low": 0.2931542299431924,
+    "ci_high": 0.5874023767429499,
+    "boot_sd": 0.0775014984525186
+   },
+   "emb_lap512[knn_union_lin_q0.5[spec_k20_t0.1_std]]": {
+    "ap": 0.44191384708919473,
+    "ci_low": 0.29981187804403875,
+    "ci_high": 0.580154380463464,
+    "boot_sd": 0.07400278043790583
+   },
+   "rowz[cos_heat1[knn_union_lin_q0.25[spec_k20_t0.1_std]]]": {
+    "ap": 0.44410932792804075,
+    "ci_low": 0.2866644795462477,
+    "ci_high": 0.6137927462087409,
+    "boot_sd": 0.08725991507330673
+   },
+   "rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "ap": 0.43291844040908295,
+    "ci_low": 0.27856661635414076,
+    "ci_high": 0.5957360874795254,
+    "boot_sd": 0.0849826204055977
+   },
+   "BASE_gls_signed": {
+    "ap": 0.27674431453013554,
+    "ci_low": 0.1879855957357918,
+    "ci_high": 0.3700985534825364,
+    "boot_sd": 0.04668246265015119
+   }
+  },
+  "diff": {
+   "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": 0.004076480604478183,
+    "ci_low": -0.03304414809890212,
+    "ci_high": 0.03309155977291121,
+    "rel_gain": 0.009416278504159159,
+    "rel_ci_low": -0.056871516303508084,
+    "rel_ci_high": 0.10237202031790321,
+    "p_two_sided": 0.778
+   },
+   "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": 0.005594548449517456,
+    "ci_low": -0.02003578577913454,
+    "ci_high": 0.03157740027260614,
+    "rel_gain": 0.012922869361330358,
+    "rel_ci_low": -0.036970769562080716,
+    "rel_ci_high": 0.09138987383734834,
+    "p_two_sided": 0.526
+   },
+   "emb_lap512[knn_union_lin_q0.5[spec_k20_t0.1_std]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": 0.008995406680111784,
+    "ci_low": -0.02550762478710437,
+    "ci_high": 0.03376784498453713,
+    "rel_gain": 0.020778525099581335,
+    "rel_ci_low": -0.044458807898184384,
+    "rel_ci_high": 0.10685401564834641,
+    "p_two_sided": 0.65
+   },
+   "rowz[cos_heat1[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": 0.011190887518957804,
+    "ci_low": 0.003783762556169165,
+    "ci_high": 0.02025345140327569,
+    "rel_gain": 0.025849874882629242,
+    "rel_ci_low": 0.009674106908084247,
+    "rel_ci_high": 0.04287906622949377,
+    "p_two_sided": 0.002
+   },
+   "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]-BASE_gls_signed": {
+    "diff": 0.1602506064834256,
+    "ci_low": 0.07212955267766803,
+    "ci_high": 0.2504165012629206,
+    "rel_gain": 0.5790565445057243,
+    "rel_ci_low": 0.22855956975537478,
+    "rel_ci_high": 0.8741663280477615,
+    "p_two_sided": 0.0
+   },
+   "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-BASE_gls_signed": {
+    "diff": 0.16176867432846487,
+    "ci_low": 0.06497654142030529,
+    "ci_high": 0.2623028928199977,
+    "rel_gain": 0.5845419971973782,
+    "rel_ci_low": 0.22185008823030375,
+    "rel_ci_high": 0.898894144611448,
+    "p_two_sided": 0.0
+   },
+   "emb_lap512[knn_union_lin_q0.5[spec_k20_t0.1_std]]-BASE_gls_signed": {
+    "diff": 0.1651695325590592,
+    "ci_low": 0.07604097297934617,
+    "ci_high": 0.25956027048259034,
+    "rel_gain": 0.5968308069471591,
+    "rel_ci_low": 0.23977519870513822,
+    "rel_ci_high": 0.8893135091223762,
+    "p_two_sided": 0.0
+   },
+   "rowz[cos_heat1[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-BASE_gls_signed": {
+    "diff": 0.16736501339790522,
+    "ci_low": 0.05803807357060933,
+    "ci_high": 0.29297873186030593,
+    "rel_gain": 0.60476405335395,
+    "rel_ci_low": 0.19085361904727358,
+    "rel_ci_high": 1.0048338925680262,
+    "p_two_sided": 0.0
+   },
+   "rowz[socos_q0.25[spec_k20_t0.1_std]]-BASE_gls_signed": {
+    "diff": 0.1561741258789474,
+    "ci_low": 0.05142043007558708,
+    "ci_high": 0.27577980583272477,
+    "rel_gain": 0.564326411345087,
+    "rel_ci_low": 0.17596785461471973,
+    "rel_ci_high": 0.9402584806945266,
+    "p_two_sided": 0.0
+   }
+  },
+  "n_clusters": 190,
+  "n_oof_pairs": 66798,
+  "split_fingerprint": "10d47ea7fa03951d38f433482420edafe51a10d01b6c9f570461fb81d013bdfd"
+ },
+ "4": {
+  "ap": {
+   "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]": {
+    "ap": 0.4634587850259106,
+    "ci_low": 0.3426987835721537,
+    "ci_high": 0.595220103861311,
+    "boot_sd": 0.06389975813969383
+   },
+   "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]": {
+    "ap": 0.4700240206327544,
+    "ci_low": 0.3421137594592049,
+    "ci_high": 0.6054630035224561,
+    "boot_sd": 0.06674364129487223
+   },
+   "emb_lap512[knn_union_lin_q0.5[spec_k20_t0.1_std]]": {
+    "ap": 0.46270534679191627,
+    "ci_low": 0.3417910644320065,
+    "ci_high": 0.5955292244075137,
+    "boot_sd": 0.06595252957515542
+   },
+   "rowz[cos_heat1[knn_union_lin_q0.25[spec_k20_t0.1_std]]]": {
+    "ap": 0.47938107181154965,
+    "ci_low": 0.33939666221589515,
+    "ci_high": 0.6499845871563025,
+    "boot_sd": 0.07856667339283575
+   },
+   "rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "ap": 0.4678797530584676,
+    "ci_low": 0.32909959630571284,
+    "ci_high": 0.6303124176772724,
+    "boot_sd": 0.07639367567292447
+   },
+   "BASE_gls_signed": {
+    "ap": 0.2982846337076507,
+    "ci_low": 0.22927811800966263,
+    "ci_high": 0.3832020575120331,
+    "boot_sd": 0.03952855441038315
+   }
+  },
+  "diff": {
+   "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": -0.004420968032556982,
+    "ci_low": -0.04032083541905666,
+    "ci_high": 0.025294283855668998,
+    "rel_gain": -0.009448940681142326,
+    "rel_ci_low": -0.06638326527171391,
+    "rel_ci_high": 0.06613110306400531,
+    "p_two_sided": 0.838
+   },
+   "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": 0.002144267574286818,
+    "ci_low": -0.027496797085780986,
+    "ci_high": 0.026838460807070596,
+    "rel_gain": 0.004582945853651488,
+    "rel_ci_low": -0.046383044687040915,
+    "rel_ci_high": 0.06786452646671559,
+    "p_two_sided": 0.82
+   },
+   "emb_lap512[knn_union_lin_q0.5[spec_k20_t0.1_std]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": -0.005174406266551301,
+    "ci_low": -0.03655947653443742,
+    "ci_high": 0.020981610510361973,
+    "rel_gain": -0.011059265190953238,
+    "rel_ci_low": -0.06510943324915738,
+    "rel_ci_high": 0.05521349383009937,
+    "p_two_sided": 0.796
+   },
+   "rowz[cos_heat1[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-rowz[socos_q0.25[spec_k20_t0.1_std]]": {
+    "diff": 0.01150131875308208,
+    "ci_low": 0.0035128334692651935,
+    "ci_high": 0.01993231635468217,
+    "rel_gain": 0.024581783413151648,
+    "rel_ci_low": 0.00821034803608643,
+    "rel_ci_high": 0.039640953146958265,
+    "p_two_sided": 0.006
+   },
+   "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]-BASE_gls_signed": {
+    "diff": 0.1651741513182599,
+    "ci_low": 0.07323660635518252,
+    "ci_high": 0.25185827954714124,
+    "rel_gain": 0.5537467661849031,
+    "rel_ci_low": 0.22513325286920569,
+    "rel_ci_high": 0.8322753469250692,
+    "p_two_sided": 0.002
+   },
+   "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-BASE_gls_signed": {
+    "diff": 0.1717393869251037,
+    "ci_low": 0.07584544959747999,
+    "ci_high": 0.26504543692379234,
+    "rel_gain": 0.5757567354053705,
+    "rel_ci_low": 0.2319524776542919,
+    "rel_ci_high": 0.8601435199186788,
+    "p_two_sided": 0.002
+   },
+   "emb_lap512[knn_union_lin_q0.5[spec_k20_t0.1_std]]-BASE_gls_signed": {
+    "diff": 0.1644207130842656,
+    "ci_low": 0.0702600852009703,
+    "ci_high": 0.2566910695933905,
+    "rel_gain": 0.5512208625718704,
+    "rel_ci_low": 0.2159220785099449,
+    "rel_ci_high": 0.8445345364822521,
+    "p_two_sided": 0.002
+   },
+   "rowz[cos_heat1[knn_union_lin_q0.25[spec_k20_t0.1_std]]]-BASE_gls_signed": {
+    "diff": 0.18109643810389897,
+    "ci_low": 0.07049953399041854,
+    "ci_high": 0.30522152212867293,
+    "rel_gain": 0.6071262734955094,
+    "rel_ci_low": 0.21957304006389694,
+    "rel_ci_high": 0.9736776371673345,
+    "p_two_sided": 0.002
+   },
+   "rowz[socos_q0.25[spec_k20_t0.1_std]]-BASE_gls_signed": {
+    "diff": 0.1695951193508169,
+    "ci_low": 0.06393859864953282,
+    "ci_high": 0.2906368075361845,
+    "rel_gain": 0.568568072859688,
+    "rel_ci_low": 0.19258528532436578,
+    "rel_ci_high": 0.91950882720753,
+    "p_two_sided": 0.002
+   }
+  },
+  "n_clusters": 190,
+  "n_oof_pairs": 68271,
+  "split_fingerprint": "dd2c07c79577a1cb0a697ccc801174d4097eea59cb6ab4932f9a13aca661159c"
+ }
+}

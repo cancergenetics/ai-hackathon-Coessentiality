@@ -1,0 +1,22 @@
+subset,method,ap_ht,n_pos,n_pairs
+all pairs,Pearson,0.220077,2264,65943
+all pairs,Spearman,0.241679,2264,65943
+all pairs,GLS,0.256374,2264,65943
+all pairs,F,0.344252,2264,65943
+all pairs,B,0.410960,2264,65943
+all pairs,E,0.439041,2264,65943
+all pairs,zavg_BEF,0.431159,2264,65943
+top-10 clusters only,Pearson,0.228157,1456,25701
+top-10 clusters only,Spearman,0.257019,1456,25701
+top-10 clusters only,GLS,0.253540,1456,25701
+top-10 clusters only,F,0.353645,1456,25701
+top-10 clusters only,B,0.453717,1456,25701
+top-10 clusters only,E,0.502286,1456,25701
+top-10 clusters only,zavg_BEF,0.474624,1456,25701
+without top-10 clusters,Pearson,0.220422,808,40242
+without top-10 clusters,Spearman,0.227129,808,40242
+without top-10 clusters,GLS,0.299337,808,40242
+without top-10 clusters,F,0.343046,808,40242
+without top-10 clusters,B,0.338713,808,40242
+without top-10 clusters,E,0.351123,808,40242
+without top-10 clusters,zavg_BEF,0.362816,808,40242

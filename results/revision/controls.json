@@ -1,0 +1,191 @@
+{
+ "what": "M9: OR and chromosome-proximity controls for zavg_BEF (final method), B and GLS signed; functions or_control / chrom_control of scripts/14_phaseA_compare.py unchanged",
+ "or_control": {
+  "n_or_genes": 329,
+  "n_or_in_background": 290,
+  "or_nan_frac_median": 0.0867009551800147,
+  "n_or_genes_labelled": 0,
+  "n_or_pairs": 53956,
+  "n_or_pairs_same_chrom": 12857,
+  "by_scorer": {
+   "zavg_BEF": {
+    "or_percentile_quantiles": {
+     "0.01": 0.009861999999999998,
+     "0.05": 0.056216249999999995,
+     "0.25": 0.33702875,
+     "0.5": 0.6732499999999999,
+     "0.75": 0.901345,
+     "0.95": 0.99730125,
+     "0.99": 0.999815
+    },
+    "mean_percentile": 0.6083194144302766,
+    "frac_above_null_p99": 0.08419823559937727,
+    "frac_above_null_p999": 0.03360145303580695,
+    "frac_above_null_p99_same_chrom": 0.2260247336081512,
+    "frac_above_null_p99_diff_chrom": 0.03983065281393708,
+    "n_null_nonfinite": 0
+   },
+   "B": {
+    "or_percentile_quantiles": {
+     "0.01": 0.009579749999999998,
+     "0.05": 0.0461375,
+     "0.25": 0.2294175,
+     "0.5": 0.492535,
+     "0.75": 0.77394,
+     "0.95": 0.995705,
+     "0.99": 0.999785
+    },
+    "mean_percentile": 0.5124606371858551,
+    "frac_above_null_p99": 0.07205871450811772,
+    "frac_above_null_p999": 0.03030246867818222,
+    "frac_above_null_p99_same_chrom": 0.20012444582717587,
+    "frac_above_null_p99_diff_chrom": 0.03199591230930193,
+    "n_null_nonfinite": 0
+   },
+   "BASE_gls_signed": {
+    "or_percentile_quantiles": {
+     "0.01": 0.007558249999999999,
+     "0.05": 0.0513525,
+     "0.25": 0.317815,
+     "0.5": 0.63956,
+     "0.75": 0.885665,
+     "0.95": 0.9940825,
+     "0.99": 0.999795
+    },
+    "mean_percentile": 0.5905119950515234,
+    "frac_above_null_p99": 0.06603528801245459,
+    "frac_above_null_p999": 0.022351545703906888,
+    "frac_above_null_p99_same_chrom": 0.16076845298281092,
+    "frac_above_null_p99_diff_chrom": 0.0363999124066279,
+    "n_null_nonfinite": 0
+   }
+  },
+  "null_moment_checks": {
+   "B": {
+    "rel_diff_mean": 0.0,
+    "rel_diff_sd": 0.0
+   },
+   "E": {
+    "rel_diff_mean": 0.0,
+    "rel_diff_sd": 0.0
+   },
+   "F": {
+    "rel_diff_mean": 0.0,
+    "rel_diff_sd": 0.0
+   }
+  }
+ },
+ "chrom_control": {
+  "frac_same_chrom_pos": 0.06350587211831231,
+  "frac_same_chrom_neg": 0.05263108587916772,
+  "frac_same_arm_pos": 0.03610265332753371,
+  "frac_same_arm_neg": 0.03046569798487957,
+  "n_unknown_chrom": 0,
+  "by_scorer": {
+   "zavg_BEF": {
+    "pooled_ap_ht_all": 0.4451294096037291,
+    "fold_mean_ap_ht_all": 0.45584394453621807,
+    "pooled_ap_ht_excl_same_chrom": 0.45508129590618956,
+    "fold_mean_ap_ht_excl_same_chrom": 0.46756227063986733,
+    "pooled_ap_ht_excl_same_arm": 0.4552814781382481,
+    "fold_mean_ap_ht_excl_same_arm": 0.4676729843731725,
+    "pooled_ap_ht_only_same_chrom": 0.3163534954100052,
+    "fold_mean_ap_ht_only_same_chrom": 0.3131352235854035
+   },
+   "B": {
+    "pooled_ap_ht_all": 0.4260044138396774,
+    "fold_mean_ap_ht_all": 0.43475926039425217,
+    "pooled_ap_ht_excl_same_chrom": 0.43487395220277497,
+    "fold_mean_ap_ht_excl_same_chrom": 0.4447799271377019,
+    "pooled_ap_ht_excl_same_arm": 0.4355304080918054,
+    "fold_mean_ap_ht_excl_same_arm": 0.4453783616657043,
+    "pooled_ap_ht_only_same_chrom": 0.3097339418781106,
+    "fold_mean_ap_ht_only_same_chrom": 0.31101493207501
+   },
+   "BASE_gls_signed": {
+    "pooled_ap_ht_all": 0.271981146261229,
+    "fold_mean_ap_ht_all": 0.28793038780125924,
+    "pooled_ap_ht_excl_same_chrom": 0.2775438845647505,
+    "fold_mean_ap_ht_excl_same_chrom": 0.29343005792587046,
+    "pooled_ap_ht_excl_same_arm": 0.27759015514406193,
+    "fold_mean_ap_ht_excl_same_arm": 0.29386856247214654,
+    "pooled_ap_ht_only_same_chrom": 0.20251095111831224,
+    "fold_mean_ap_ht_only_same_chrom": 0.24907047725114428
+   }
+  }
+ },
+ "reproduces_phaseA": "[this run, results/phaseA/compare.json]",
+ "phaseA_reproduction": {
+  "or_B": {
+   "frac_above_null_p99": [
+    0.07205871450811772,
+    0.07205871450811772
+   ],
+   "frac_above_null_p99_same_chrom": [
+    0.20012444582717587,
+    0.20012444582717587
+   ],
+   "frac_above_null_p99_diff_chrom": [
+    0.03199591230930193,
+    0.03199591230930193
+   ]
+  },
+  "chrom_B": {
+   "pooled_ap_ht_all": [
+    0.4260044138396774,
+    0.4260044138396774
+   ],
+   "pooled_ap_ht_excl_same_chrom": [
+    0.43487395220277497,
+    0.43487395220277497
+   ]
+  },
+  "or_BASE_gls_signed": {
+   "frac_above_null_p99": [
+    0.06603528801245459,
+    0.06603528801245459
+   ],
+   "frac_above_null_p99_same_chrom": [
+    0.16076845298281092,
+    0.16076845298281092
+   ],
+   "frac_above_null_p99_diff_chrom": [
+    0.0363999124066279,
+    0.0363999124066279
+   ]
+  },
+  "chrom_BASE_gls_signed": {
+   "pooled_ap_ht_all": [
+    0.271981146261229,
+    0.271981146261229
+   ],
+   "pooled_ap_ht_excl_same_chrom": [
+    0.2775438845647505,
+    0.2775438845647505
+   ]
+  }
+ },
+ "runtime_s": 147.3,
+ "run_record": {
+  "git_commit": "3dd8b32079c5e7cb01955423822e7a448abdea6e",
+  "git_dirty": true,
+  "git_dirty_src": false,
+  "git_dirty_src_paths": [],
+  "allow_dirty": false,
+  "cache_sha256": {
+   "pairs.pkl": "72c2215525eb0a29e549690de2186f4a811637f8afa8c0bbb77ee2551d921030",
+   "CRISPRGeneEffect.f32.npy": "8a894d2449074934de71cf0e0b44e8d81ec2d70bc756b2d038367c34c9ad27f3",
+   "splits/protein_assignment.csv": "de301c9ec7e4bca3965b3b4e588a16357e597460215c98138b2a28cdac303b23"
+  },
+  "seed": 0,
+  "counts": null,
+  "runtime_s": null,
+  "timestamp": "2026-10-27T21:51:58",
+  "machine": {
+   "cpu_count": 8,
+   "platform": "macOS-26.5.2-arm64-arm-64bit",
+   "python": "3.12.16"
+  },
+  "universe": "dev"
+ }
+}

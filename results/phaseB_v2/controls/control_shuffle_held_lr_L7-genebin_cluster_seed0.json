@@ -1,0 +1,58 @@
+{
+ "mode": "held",
+ "folds": [
+  {
+   "fold": 0,
+   "ap_ht": 0.026282356957674342,
+   "ht_prevalence": 0.025701470475802134
+  },
+  {
+   "fold": 1,
+   "ap_ht": 0.049196399617051974,
+   "ht_prevalence": 0.04763264723281859
+  },
+  {
+   "fold": 2,
+   "ap_ht": 0.02094360552937918,
+   "ht_prevalence": 0.020276753407396274
+  },
+  {
+   "fold": 3,
+   "ap_ht": 0.08334082240477775,
+   "ht_prevalence": 0.08326893353941267
+  },
+  {
+   "fold": 4,
+   "ap_ht": 0.02967940966683805,
+   "ht_prevalence": 0.029099990499070267
+  }
+ ],
+ "mean_ap_ht": 0.04188851883514426,
+ "mean_prevalence": 0.041195959030899995,
+ "tag": "control_shuffle_held_lr_L7-genebin_cluster_seed0",
+ "trial_id": "84702251edf1",
+ "model": "lr_L7+genebin",
+ "runtime_s": 38.9,
+ "run_record": {
+  "git_commit": "b8fdf0fcc98533c3f212a94a3c0958c2e00ade84",
+  "git_dirty": true,
+  "git_dirty_src": false,
+  "git_dirty_src_paths": [],
+  "allow_dirty": true,
+  "cache_sha256": {
+   "pairs.pkl": "72c2215525eb0a29e549690de2186f4a811637f8afa8c0bbb77ee2551d921030",
+   "CRISPRGeneEffect.f32.npy": "8a894d2449074934de71cf0e0b44e8d81ec2d70bc756b2d038367c34c9ad27f3",
+   "splits/protein_assignment.csv": "de301c9ec7e4bca3965b3b4e588a16357e597460215c98138b2a28cdac303b23"
+  },
+  "seed": 0,
+  "counts": null,
+  "runtime_s": null,
+  "timestamp": "2026-10-27T15:59:00",
+  "machine": {
+   "cpu_count": 8,
+   "platform": "macOS-26.5.2-arm64-arm-64bit",
+   "python": "3.12.16"
+  },
+  "universe": "dev"
+ }
+}

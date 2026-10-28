@@ -1,0 +1,91 @@
+{
+ "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]": {
+  "name": "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+  "n_pairs": 596597,
+  "load_matrix_s": 0.02,
+  "layer_s": 93.79,
+  "total_s": 93.81,
+  "max_abs_diff_vs_cache": 0.0,
+  "peak_rss_gb": 3.46
+ },
+ "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]": {
+  "name": "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]",
+  "n_pairs": 596597,
+  "load_matrix_s": 0.02,
+  "layer_s": 92.33,
+  "total_s": 92.35,
+  "max_abs_diff_vs_cache": 1.9039539367327052e-06,
+  "peak_rss_gb": 3.47
+ },
+ "emb_lap512[knn_union_lin_q0.5[spec_k20_t0.1_std]]": {
+  "name": "emb_lap512[knn_union_lin_q0.5[spec_k20_t0.1_std]]",
+  "n_pairs": 596597,
+  "load_matrix_s": 0.02,
+  "layer_s": 93.51,
+  "total_s": 93.53,
+  "max_abs_diff_vs_cache": 0.0,
+  "peak_rss_gb": 3.48
+ },
+ "reference": {
+  "best_layer": {
+   "which": "best_layer",
+   "n_pairs": 596597,
+   "load_matrix_s": 0.02,
+   "engine_init_s": 0.28,
+   "members": [
+    {
+     "name": "rowz[socos_q0.25[spec_k20_t0.1_std]]",
+     "s": 22.44
+    }
+   ],
+   "max_abs_diff_vs_cache": 1.9034782283711138e-06,
+   "total_s": 22.84,
+   "finite": true
+  },
+  "A6_ensemble": {
+   "which": "A6_ensemble",
+   "n_pairs": 596597,
+   "load_matrix_s": 0.02,
+   "engine_init_s": 0.25,
+   "members": [
+    {
+     "name": "rowz[socos_q0.25[spec_k20_t0.1_std]]",
+     "s": 21.78
+    },
+    {
+     "name": "spec_k40_t0.01",
+     "s": 5.32
+    }
+   ],
+   "max_abs_diff_vs_cache": 1.211249170296469e-06,
+   "total_s": 27.91,
+   "finite": true
+  },
+  "gls_signed": {
+   "which": "gls_signed",
+   "n_pairs": 596597,
+   "load_matrix_s": 0.03,
+   "sigma_s": 0.31,
+   "score_s": 7.52,
+   "total_s": 7.54,
+   "finite": true
+  },
+  "pearson_signed": {
+   "which": "pearson_signed",
+   "n_pairs": 596597,
+   "load_matrix_s": 0.02,
+   "score_s": 0.38,
+   "total_s": 0.4,
+   "finite": true
+  }
+ },
+ "rowz[cos_heat1[knn_union_lin_q0.25[spec_k20_t0.1_std]]]": {
+  "name": "rowz[cos_heat1[knn_union_lin_q0.25[spec_k20_t0.1_std]]]",
+  "n_pairs": 596597,
+  "load_matrix_s": 0.02,
+  "layer_s": 59.0,
+  "total_s": 59.02,
+  "max_abs_diff_vs_cache": 1.9068543508637958e-06,
+  "peak_rss_gb": 5.11
+ }
+}

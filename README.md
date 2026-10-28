@@ -1,4 +1,4 @@
-# ai-hackathon-Coessentiality
+# ai-hackathon-Coessentiality — predicting protein co-complex membership from DepMap co-essentiality (AI hackathon project)
 
 ## Disclaimer
 
@@ -14,148 +14,65 @@ The rest of this repository is entirely AI generated. It includes code for imple
 
 (Human-written text ends)
 
----
+## What is here
 
-The original task prompt is in [PROMPT.md](PROMPT.md); the agent and sub-agent set-up is described in [AGENTS.md](AGENTS.md).
+| file / directory | contents |
+|---|---|
+| `PROMPT.md` | the project brief, verbatim |
+| `REPORT.md` | final report: approach, results, limitations, follow-ups |
+| `RESEARCH_TREE.md` | research log: status summaries, decision notes D0–D4, tree of what was tried |
+| `DESIGN.md` | design (v3.1, after two review rounds) with the revision log |
+| `LITERATURE.md` | literature review (with errata from the prior-work review) |
+| `DATA.md` | data sources, versions, checksums and licences |
+| `LESSONS.md` | process lessons for running agentic research projects |
+| `manuscript/` | AI-written manuscript in PLOS Computational Biology format (DOCX + Markdown source), S1–S3 Texts, figures and figure source data |
+| `docs/` | agent set-up (`AGENTS.md`), cluster/split assignment format, data checksums |
+| `reviews/` | design reviews (rounds 1–2), retrospectives, manuscript reviews (rounds 1–2) |
+| `src/` | research code: ID mapping, splits and clusters, metrics, baselines, label-free layers (incl. the final method), supervised models, evaluation harness, predictor |
+| `scripts/` | numbered pipeline scripts (`00_`–`64_`), the internal-test evaluation (`final_eval.py`), the pair scorer (`predict_pairs.py`), independent verification scripts (`verify/`) |
+| `tests/` | unit, toy-data (known-answer) and process tests for the research code |
+| `results/` | committed metrics and logs: baselines, every method phase, verification, the single internal-test evaluation (`results/ift/`), trial and test-access logs, split assignment, genome-wide predictions |
+| `mvp/` | minimal standalone implementation of the final method (`coessential` package) with its own tests; easiest way to score new pairs |
+| `datasets/` | placeholders only: where to put the DepMap, HGNC and hu.MAP files (git-ignored) |
 
-## What the method does
+## Results in brief
 
-The task was to predict whether two proteins belong to the same protein complex, using only gene co-essentiality: how similarly the two genes behave when knocked out across 1,361 cancer cell models (DepMap CRISPR screens, release 26Q3). Labelled complex pairs came from hu.MAP 3.0.
+Task: predict whether two proteins are in the same complex (hu.MAP 3.0 train pairs) from DepMap CRISPR co-essentiality, beating Pearson, Spearman and GLS. Evaluation keeps complexes disjoint between training and test; the metric is AUPRC with Horvitz–Thompson weights (HT-AP) at the natural prevalence (~0.5%).
 
-The final score, **`zavg_BEF`**, needs no labels. Each gene's knockout profile is first cleaned of dominant shared effects: the profiles are standardised, the 20 strongest cell-line components are removed, and the rest is whitened with a ridge-regularised covariance (a regularised version of GLS, Wainberg et al. 2021). Three similarity views are then computed on these cleaned profiles:
-
-- **F (direct):** the correlation of the two genes' cleaned profiles.
-- **B (shared partners):** whether the two genes have the same strongest co-essential partners elsewhere in the genome. Each gene keeps its top 0.25% neighbours (about 44 genes); the score compares the two neighbour lists, leaving out the pair's own link.
-- **E (network position):** closeness of the two genes in a 512-dimensional spectral embedding (Laplacian eigenmap) of the genome-wide neighbour graph.
-
-Each view is converted to a z-score against 200,000 random gene pairs. `zavg_BEF` is the mean of the three z-scores. The method is deterministic, and a pair's score does not depend on which other pairs are scored. The full specification is in [`src/coessential/method.py`](src/coessential/method.py).
-
-## Prior work this method builds on
-
-The final method combines published ideas; the agents' contribution was to combine and tune them on a complex-disjoint benchmark.
-
-- Co-essentiality predicts co-complex membership: Pan et al. 2018 (Cell Syst); Boyle et al. 2018 (Mol Syst Biol); Kim et al. 2019 (Life Sci Alliance).
-- Whitening the cell-line covariance (GLS): Wainberg et al. 2021 (Nat Genet); whitening as the dominant normalisation step: Gheorghe & Hart 2022 (BMC Bioinformatics).
-- Removing dominant principal components and combining normalised similarity layers ("onion"): Boyle et al. 2018; Hassan et al. 2023 (Mol Syst Biol).
-- Per-gene balancing of similarity distributions (row-z): the logic of mutual rank (Obayashi & Kinoshita 2009, DNA Res) and BaCoN (Rohde et al. 2025, Mol Syst Biol).
-- Second-order / shared-neighbour similarity: topological overlap (Ravasz et al. 2002, Science; Zhang & Horvath 2005, Stat Appl Genet Mol Biol) and shared-nearest-neighbour similarity (Jarvis & Patrick 1973, IEEE Trans Comput).
-- Spectral embedding of the neighbour graph: Laplacian eigenmaps (Belkin & Niyogi 2003, Neural Comput).
-- Evaluation: pair-input leakage (Park & Marcotte 2012, Nat Methods); large complexes dominating pooled precision–recall (Rahman et al. 2021, Mol Syst Biol); Horvitz–Thompson weighting (1952); Louvain communities (Blondel et al. 2008).
-
-Full references with DOIs are in the manuscript (`paper/`).
-
-## Headline results
-
-Evaluation used hu.MAP 3.0 *train* pairs only, with splits that keep complexes disjoint. The primary metric is HT-AP: average precision with Horvitz–Thompson weights, which restore the natural share of between-complex negatives (prevalence ~0.5%). Full tables are in [results/summary.md](results/summary.md).
-
-| method | dev HT-AP (cluster-grouped 5-fold CV, 5 seeds) | internal final test HT-AP (one pre-specified look) |
+| method | dev HT-AP (cluster-grouped 5-fold CV, 5 seeds) | internal test HT-AP (one pre-specified evaluation) |
 |---|---|---|
-| **zavg_BEF** | **0.470** | **0.345** |
+| **zavg_BEF (final, label-free)** | **0.470** | **0.345** |
 | GLS (Wainberg et al. 2021) | 0.312 | 0.242 |
 | Spearman | 0.282 | 0.146 |
 | Pearson | 0.260 | 0.134 |
 
-- **Internal final test.** It held 847 positive and 40,786 negative pairs from held-out complexes. zavg_BEF − GLS = +0.103 HT-AP, 95% cluster-bootstrap CI [+0.035, +0.209]. The pre-specified "clearly beats" criterion was met against all three baselines.
-- **Withheld test set.** The hu.MAP 3.0 test set was withheld from the agents and never accessed. Its evaluation is pending and will be done independently with `scripts/predict_pairs.py` (below).
-- **Runtime.** About 2 min (118–137 s in two runs; run-to-run variation about ±20%) from the raw CSV to scores for 635k pairs on a 13-inch MacBook Pro with an Apple M2 chip and 24 GB memory. GLS: about 19–24 s; Pearson and Spearman: about 11 s.
-- **Post-hoc reference.** Pearson correlation after removing the top 20 principal components (Boyle et al. 2018; Hassan et al. 2023) was added after the internal test, at a reviewer's request. It scored 0.363 on dev and 0.267 on the internal test, 0.078 below zavg_BEF (95% CI 0.028–0.151).
+zavg_BEF averages three z-scored similarities of standardised, PC-filtered, whitened gene-effect profiles: direct correlation (F), overlap of genome-wide co-dependency neighbourhoods (B) and proximity in a Laplacian eigenmap of the neighbour graph (E). On the internal test, zavg_BEF − GLS = +0.103 (95% cluster-bootstrap CI +0.035 to +0.209). Dev numbers are optimistic (method selected on dev); the internal test is small (≈8 effective clusters) and was partly exposed early on; gains are concentrated in large complexes. The withheld hu.MAP test set was never accessed. Details: `REPORT.md` and `manuscript/`.
 
-## Install
+The final method builds on published ideas: covariance whitening / GLS (Wainberg et al. 2021; Gheorghe & Hart 2022), principal-component removal and multi-layer similarity (Boyle et al. 2018; Hassan et al. 2023), per-gene balancing (mutual rank, Obayashi & Kinoshita 2009; BaCoN, Rohde et al. 2025), topological overlap and shared-nearest-neighbour similarity (Ravasz et al. 2002; Zhang & Horvath 2005; Jarvis & Patrick 1973) and Laplacian eigenmaps (Belkin & Niyogi 2003). Full references: `manuscript/references_verified.md`.
 
-```bash
-git clone https://github.com/cancergenetics/ai-hackathon-Coessentiality.git
-cd ai-hackathon-Coessentiality
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt     # or: pip install -e .
-python -m pytest                    # toy-data tests (~5 s)
-```
+## Data
 
-Python ≥ 3.10. The published numbers were produced with Python 3.12 on arm64 macOS.
+No data files are included in this repository. To reproduce, download the files listed in `DATA.md` and place them under `datasets/` as described in [`datasets/README.md`](datasets/README.md):
 
-## Data (not included; download yourself)
+- `datasets/DepMAP/` — DepMap Public 26Q3 `CRISPRGeneEffect.csv` (plus `Model.csv`, `ModelCondition.csv`, `CRISPRConfounders.csv`, `ScreenGeneEffect.csv` for the full research pipeline), <https://depmap.org/portal/data_page/>;
+- `datasets/HGNC/` — `hgnc_complete_set.txt`, <https://www.genenames.org/download/archive/>;
+- `datasets/HuMAP/` — hu.MAP 3.0 `Train_positive_pairs.txt`, `Train_negative_pairs.txt` (evaluation only), <https://humap3.proteincomplexes.org/>.
 
-No DepMap, hu.MAP or HGNC files are distributed with this repository. Download them and place them in the git-ignored [`datasets/`](datasets/README.md) folder:
+All data, caches (`data_cache/`) and derived score matrices are git-ignored. `scripts/check_data.sh` verifies the checksums.
 
-| path | source | needed for |
-|---|---|---|
-| `datasets/DepMAP/CRISPRGeneEffect.csv` (DepMap **26Q3**, as stated by the project's human investigators; the file carries no version stamp) | DepMap portal, <https://depmap.org/portal/data_page/> (Downloads → DepMap Public 26Q3 → CRISPRGeneEffect.csv) | everything |
-| `datasets/HGNC/hgnc_complete_set.txt` | HGNC, <https://www.genenames.org/download/archive/> (complete HGNC dataset, TSV) | UniProt → gene mapping, gene symbols |
-| `datasets/HuMAP/Train_positive_pairs.txt`, `Train_negative_pairs.txt` | hu.MAP 3.0, <https://humap3.proteincomplexes.org/> | evaluation only |
+## Quick start
 
-Each sub-folder's README gives the SHA-256 checksum of the file used in this project. Other DepMap releases or HGNC versions will give somewhat different scores.
-
-## Usage
-
-Score a pair file (two tab-separated UniProt accessions per line, no header):
+Score your own protein pairs with the standalone implementation (two tab-separated UniProt accessions per line, no header):
 
 ```bash
-python scripts/predict_pairs.py --pairs pairs.txt --method zavg_BEF --out scores.tsv
-# defaults: --depmap datasets/DepMAP/CRISPRGeneEffect.csv --hgnc datasets/HGNC/hgnc_complete_set.txt
+pip install -r mvp/requirements.txt
+python mvp/scripts/predict_pairs.py --pairs pairs.txt --method zavg_BEF --out scores.tsv          # run from the repository root
+python mvp/scripts/predict_genome_wide.py --top 200000 --out top_pairs.tsv.gz                   # genome-wide ranking
+(cd mvp && python -m pytest)                                                                    # toy-data tests
 ```
 
-- **Output columns:** `uniprot_a, uniprot_b, score, mapped`, in input order.
-- **Methods:** `zavg_BEF` (default), `B`, `E`, `F` (raw component values), and the baselines `gls` (t), `pearson` (r) and `spearman` (ρ).
-- **Extra columns:** `--components` adds `z_B, z_E, z_F`; `--add-gls` adds `gls_t`.
-- **Unscorable pairs** get `mapped = 0` and score = (minimum mapped score − 1). Pass `--unmapped na` to leave them empty instead. Unscorable means a protein without a unique DepMap gene, or both proteins on the same gene.
-
-Rank all gene pairs genome-wide (genes with < 10% missing values; about 2–3 min, ~2.5 GB RAM):
-
-```bash
-python scripts/predict_genome_wide.py --top 200000 --out top_pairs.tsv.gz
-```
-
-Evaluate a score file on labelled pairs:
-
-```bash
-python scripts/evaluate.py --scores scores.tsv --pos Test_positive_pairs.txt --neg Test_negative_pairs.txt
-# internal final test of this project (needs your copy of the hu.MAP train files + the committed cluster assignment):
-cat datasets/HuMAP/Train_positive_pairs.txt datasets/HuMAP/Train_negative_pairs.txt > train_pairs.txt
-python scripts/predict_pairs.py --pairs train_pairs.txt --method zavg_BEF --out train_scores.tsv
-python scripts/evaluate.py --scores train_scores.tsv \
-    --pos datasets/HuMAP/Train_positive_pairs.txt --neg datasets/HuMAP/Train_negative_pairs.txt \
-    --assignment data/protein_assignment.csv --side ift     # -> ap_ht 0.345
-```
-
-- **Default output:** AP and AUROC on mapped pairs, plus AP with unmapped pairs placed at the minimum score.
-- **With `--assignment`:** adds HT-weighted AP and macro per-cluster AP.
-
-The hyper-parameters are frozen at the published values. The `--k/--tau/--q/--dim` options exist for experiments, and changing them changes the method.
-
-## Precomputed predictions
-
-[`predictions/`](predictions/README.md) holds `genome_wide_top_pairs.tsv.gz`: the 200,000 top-scoring gene pairs genome-wide by zavg_BEF, with symbols, Entrez and UniProt IDs and the B/E/F z-scores. It was generated from the raw DepMap 26Q3 CSV with this code and matches the research code to within 3×10⁻⁵ in z. Scores for the hu.MAP pairs are not distributed; generate them from your own copy of the files with `scripts/predict_pairs.py` (see Usage).
-
-`data/protein_assignment.csv` is the protein → cluster / split assignment used for evaluation (see [data/README.md](data/README.md)).
-
-## Limitations
-
-- **Gains are concentrated in large, dense complexes.** On dev, smaller complexes also improved (macro AP 0.395 vs 0.349 for GLS); on the internal test, macro AP only equals GLS (0.365 vs 0.369).
-- **Dev estimates are optimistic.** About 300 label-free variants were screened on dev, and the members of the final average were chosen after seeing dev results.
-- **The internal test is small** (effective number of clusters ≈ 8), so its CIs are wide. It was also partly exposed: before it was split off, two design-review agents computed AP of label-free scores on all pairs (no selection was made from those numbers).
-- **About 3.7% of positive train pairs involve a protein without a unique DepMap gene** (immunoglobulin segments, mtDNA-encoded genes, haemoglobins, two multi-copy histones). These pairs get the minimum score.
-- **CRISPR proximity artefacts are slightly amplified.** Of olfactory-receptor gene pairs, 8.4% score above the null 99th percentile under zavg_BEF (expected 1%; GLS 6.6%), mostly pairs on the same chromosome.
-- **Results depend on the DepMap release and on hu.MAP 3.0's complex composition** (complexes ≤ 30 subunits).
-
-## How to cite
-
-Repository: <https://github.com/cancergenetics/ai-hackathon-Coessentiality> (see [CITATION.cff](CITATION.cff)). An AI-written manuscript describing the method is in [paper/](paper/README.md).
-
-If you use the predictions, please also cite the data sources:
-
-- DepMap: cite the 26Q3 release as described on the DepMap portal, and Dempster et al. 2021, *Genome Biol* 22:343 (Chronos).
-- hu.MAP 3.0: Fischer et al. 2025, *Mol Syst Biol* 21:911–943.
-- HGNC.
-- For the GLS baseline: Wainberg et al. 2021, *Nat Genet* 53:638–649.
+The research pipeline (Python 3.12; `pip install -r requirements.txt`) reproduces every number: `scripts/01_build_cache.py` → `scripts/03_make_splits.py` (run with `PYTHONHASHSEED=0`) → baseline and layer scripts → `scripts/21_phaseB_v2.py`; see `REPORT.md` and `RESEARCH_TREE.md` for the order and outputs. `scripts/predict_pairs.py --method zavg:B,E,F` is the research version of the scorer. The precomputed genome-wide top 200,000 pairs are in `results/predictions/`. Research tests: `python -m pytest tests --ignore=tests/test_supervised.py --ignore=tests/test_metric_learning.py`, then run those two files separately (PyTorch and LightGBM can deadlock on OpenMP in one process); tests that need the raw data or `data_cache/` are skipped when those are absent.
 
 ## Data sources and attribution
 
-- The predictions are derived from DepMap data (Broad Institute; released under CC BY 4.0), so credit DepMap when reusing them: cite the 26Q3 release as described on the DepMap portal and Dempster et al. 2021, *Genome Biol* 22:343.
-- Gene symbols and UniProt IDs come from HGNC.
-- `data/protein_assignment.csv` is derived from the hu.MAP 3.0 train positive pairs (Fischer et al. 2025, *Mol Syst Biol*); it lists proteins and their evaluation clusters, not pairs or labels.
-- No raw DepMap, HGNC or hu.MAP file, and no pair label, is included in this repository.
-
-## Process records
-
-- [PROMPT.md](PROMPT.md): the original task prompt, verbatim.
-- [AGENTS.md](AGENTS.md): how the agent team was organised and checked.
-- [paper/](paper/README.md): the AI-written manuscript (PLOS Computational Biology format) with supporting texts and figures.
+The predictions are derived from DepMap data (Broad Institute; CC BY 4.0): credit DepMap when reusing them (the 26Q3 release, and Dempster et al. 2021, *Genome Biol* 22:343). Gene symbols and UniProt IDs come from HGNC. `results/splits/protein_assignment.csv` is derived from the hu.MAP 3.0 train positive pairs (Fischer et al. 2025, *Mol Syst Biol*); it lists proteins and their evaluation clusters, not pairs or labels.

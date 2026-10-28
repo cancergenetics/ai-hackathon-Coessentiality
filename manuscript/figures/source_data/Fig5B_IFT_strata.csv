@@ -1,0 +1,16 @@
+method,stratum,ap_ht,n_pos,n_neg
+zavg_BEF,both_nonessential,0.275929,286,15865
+zavg_BEF,mixed,0.387751,195,19422
+zavg_BEF,both_essential,0.394173,366,5499
+B,both_nonessential,0.252378,286,15865
+B,mixed,0.367875,195,19422
+B,both_essential,0.360023,366,5499
+GLS,both_nonessential,0.213747,286,15865
+GLS,mixed,0.348964,195,19422
+GLS,both_essential,0.262781,366,5499
+Spearman,both_nonessential,0.102096,286,15865
+Spearman,mixed,0.203551,195,19422
+Spearman,both_essential,0.180697,366,5499
+Pearson,both_nonessential,0.088449,286,15865
+Pearson,mixed,0.198727,195,19422
+Pearson,both_essential,0.153311,366,5499

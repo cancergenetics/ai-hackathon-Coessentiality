@@ -1,0 +1,196 @@
+{
+ "what": "raw CRISPRGeneEffect.csv -> scores for the union of both train pair ID files, scripts/predict_pairs.py, one fresh process per method, sequential, same machine state",
+ "input": {
+  "pairs": "data_cache/revision/train_union_ids.tsv (not committed: HuMAP-derived)",
+  "pairs_sha256": "1ef379dd793470ea4c439ac182230a69ebd2e869ef1e8611770592cec6fe036b",
+  "n_pairs": 634779,
+  "n_mapped": 596597,
+  "raw_csv": "datasets/DepMAP/CRISPRGeneEffect.csv",
+  "raw_csv_warmup_read_s": 0.15
+ },
+ "columns": {
+  "wall_s_process": "wall clock of the whole process incl. interpreter start + imports (Python perf_counter around subprocess)",
+  "time_real_s": "/usr/bin/time -l real",
+  "peak_rss_gb_time_l": "/usr/bin/time -l maximum resident set size (bytes / 1e9)",
+  "tool_total_s": "predict.run() total (matrix load + hash, scoring, writing TSV), as in results/predict/*.run.json"
+ },
+ "machine": {
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "cpu_count": 8,
+  "python": "3.12.16",
+  "numpy": "2.5.4",
+  "note": "8-core arm64 laptop; desktop apps (browser, IDE) running, load average recorded per run"
+ },
+ "runs": {
+  "pearson": {
+   "method": "pearson",
+   "wall_s_process": 10.94,
+   "time_real_s": 10.92,
+   "peak_rss_gb_time_l": 2.294,
+   "tool_total_s": 8.75,
+   "matrix_load_s": 3.39,
+   "engine_init_s": 0.3,
+   "components_s": {
+    "P": 2.99
+   },
+   "map_s": 0.59,
+   "tool_peak_rss_gb": 2.29,
+   "n_pairs": 634779,
+   "n_mapped": 596597,
+   "null_moment_checks": {},
+   "record": "results/revision/runtime/union_pearson.run.json",
+   "output_sha256": "cbd8b04b1d4cc3098ecad18f90de85c33c8d357ca0409fa627096e8a58a82961",
+   "loadavg_before": [
+    2.99,
+    4.49,
+    4.84
+   ]
+  },
+  "spearman": {
+   "method": "spearman",
+   "wall_s_process": 10.7,
+   "time_real_s": 10.68,
+   "peak_rss_gb_time_l": 2.337,
+   "tool_total_s": 8.58,
+   "matrix_load_s": 3.36,
+   "engine_init_s": 0.27,
+   "components_s": {
+    "S": 2.95
+   },
+   "map_s": 0.61,
+   "tool_peak_rss_gb": 2.34,
+   "n_pairs": 634779,
+   "n_mapped": 596597,
+   "null_moment_checks": {},
+   "record": "results/revision/runtime/union_spearman.run.json",
+   "output_sha256": "cac470bf76950fa14b55696a14bce8123b5e6351af27798e2d59736d98b1b8fe",
+   "loadavg_before": [
+    3.88,
+    4.63,
+    4.88
+   ]
+  },
+  "E": {
+   "method": "E",
+   "wall_s_process": 124.53,
+   "time_real_s": 124.52,
+   "peak_rss_gb_time_l": 2.785,
+   "tool_total_s": 122.47,
+   "matrix_load_s": 3.38,
+   "engine_init_s": 0.27,
+   "components_s": {
+    "E": 116.69
+   },
+   "map_s": 0.61,
+   "tool_peak_rss_gb": 2.78,
+   "n_pairs": 634779,
+   "n_mapped": 596597,
+   "null_moment_checks": {
+    "E": {
+     "rel_diff_mean": 0.0,
+     "rel_diff_sd": 0.0
+    }
+   },
+   "record": "results/revision/runtime/union_E.run.json",
+   "output_sha256": "c8a874d66f053dbfac1528bd69a679ce703a1d702b2a0a6eddd8a3a2cb7a9122",
+   "loadavg_before": [
+    4.05,
+    4.64,
+    4.88
+   ]
+  },
+  "F": {
+   "method": "F",
+   "wall_s_process": 14.65,
+   "time_real_s": 14.64,
+   "peak_rss_gb_time_l": 2.699,
+   "tool_total_s": 12.26,
+   "matrix_load_s": 3.71,
+   "engine_init_s": 0.28,
+   "components_s": {
+    "F": 5.89
+   },
+   "map_s": 0.67,
+   "tool_peak_rss_gb": 2.7,
+   "n_pairs": 634779,
+   "n_mapped": 596597,
+   "null_moment_checks": {
+    "F": {
+     "rel_diff_mean": 0.0,
+     "rel_diff_sd": 0.0
+    }
+   },
+   "record": "results/revision/runtime/union_F.run.json",
+   "output_sha256": "6318bbe886d076d82a50cca64cfff9debb25752ce14b6fd89d463310cd8d9501",
+   "loadavg_before": [
+    5.38,
+    5.21,
+    5.09
+   ]
+  },
+  "zavg:B,E,F": {
+   "method": "zavg:B,E,F",
+   "wall_s_process": 118.0,
+   "time_real_s": 117.96,
+   "peak_rss_gb_time_l": 2.991,
+   "tool_total_s": 115.97,
+   "matrix_load_s": 4.05,
+   "engine_init_s": 0.26,
+   "components_s": {
+    "F": 5.29,
+    "B": 18.59,
+    "E": 85.78
+   },
+   "map_s": 0.57,
+   "tool_peak_rss_gb": 2.99,
+   "n_pairs": 634779,
+   "n_mapped": 596597,
+   "null_moment_checks": {
+    "F": {
+     "rel_diff_mean": 0.0,
+     "rel_diff_sd": 0.0
+    },
+    "B": {
+     "rel_diff_mean": 0.0,
+     "rel_diff_sd": 0.0
+    },
+    "E": {
+     "rel_diff_mean": 0.0,
+     "rel_diff_sd": 0.0
+    }
+   },
+   "record": "results/revision/runtime/union_zavg_B_E_F.run.json",
+   "output_sha256": "a458ed2311a6c6eb4adcc34c66e47e1865ed5cef303e925428f1a0b46ead2e2d",
+   "loadavg_before": [
+    5.01,
+    5.13,
+    5.07
+   ]
+  },
+  "gls": {
+   "method": "gls",
+   "wall_s_process": 18.62,
+   "time_real_s": 18.61,
+   "peak_rss_gb_time_l": 2.551,
+   "tool_total_s": 16.67,
+   "matrix_load_s": 2.91,
+   "engine_init_s": 0.23,
+   "components_s": {
+    "G": 11.69
+   },
+   "map_s": 0.52,
+   "tool_peak_rss_gb": 2.55,
+   "n_pairs": 634779,
+   "n_mapped": 596597,
+   "null_moment_checks": {},
+   "record": "results/revision/runtime/union_gls.run.json",
+   "output_sha256": "66e3814ae4d5127d6cb3a6ceda8535fb585367ed62600a65fa19c91297f8b98f",
+   "loadavg_before": [
+    4.21,
+    4.77,
+    4.93
+   ]
+  }
+ }
+}

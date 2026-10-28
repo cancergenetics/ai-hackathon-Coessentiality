@@ -1,0 +1,3054 @@
+{
+ "tag": "screen_v1",
+ "created": "2026-10-27T13:33:20",
+ "script": "scripts/10_build_layers.py",
+ "args": {
+  "limit": 0
+ },
+ "git": {
+  "commit": "d94db6ff0780d96068ea6682a4589d6f7457805d",
+  "dirty_files": [],
+  "layer_code_dirty": false
+ },
+ "env": {
+  "python": "3.12.16",
+  "numpy": "2.5.4",
+  "machine": "arm64"
+ },
+ "label_free": "layer scores use only CRISPRGeneEffect and gene indices; the pair table is read for (a, b, ia, ib, scorable) to choose rows; no label is read",
+ "input": {
+  "matrix": "CRISPRGeneEffect",
+  "shape": [
+   1361,
+   18434
+  ],
+  "sha256": "8a894d2449074934de71cf0e0b44e8d81ec2d70bc756b2d038367c34c9ad27f3",
+  "n_genes_listed": 18434
+ },
+ "preprocessing": {
+  "bg_max_nan": 0.1,
+  "n_background_genes": 17525,
+  "block": 1024,
+  "imputation": "per-gene observed mean (all genes); BG genes only for Sigma / row moments / ranks / neighbours / null",
+  "eig": {
+   "eig_gene": {
+    "dim": 1360,
+    "n_null": 2,
+    "lw_alpha": 0.05245719606125671,
+    "lw_tau_rel": 0.05536129433224841,
+    "top_frac": [
+     0.030453868603328403,
+     0.018886521708331928,
+     0.017906516960545307,
+     0.013990761992162114,
+     0.011207793371563269,
+     0.011053785740903816,
+     0.010276846740737594,
+     0.00865294805626761,
+     0.008117058429170074,
+     0.007858886847141512
+    ],
+    "mean_eig": 0.03454449719752062
+   },
+   "eig_line": {
+    "dim": 1361,
+    "n_null": 2,
+    "lw_alpha": 0.0011064876170901888,
+    "lw_tau_rel": 0.0011077132881267874,
+    "top_frac": [
+     0.8161076386206512,
+     0.005594794481581049,
+     0.0034782518243565846,
+     0.003303304579031802,
+     0.0025594765664143583,
+     0.0020420286631544077,
+     0.002035613523531744,
+     0.0018928047590004052,
+     0.0015823178307007837,
+     0.0014773200039591668
+    ],
+    "mean_eig": 0.18710818814008814
+   },
+   "eig_gene_std": {
+    "dim": 1360,
+    "n_null": 2,
+    "lw_alpha": 0.024684529224167317,
+    "lw_tau_rel": 0.0253092768071561,
+    "top_frac": [
+     0.023157227650165715,
+     0.020918554518772694,
+     0.017024247141463774,
+     0.013821145191345465,
+     0.011466249495525365,
+     0.010132616387382465,
+     0.009760944909164215,
+     0.007837871515729929,
+     0.007446362955920297,
+     0.006969940142189156
+    ],
+    "mean_eig": 0.9986295628094317
+   }
+  }
+ },
+ "pairs": {
+  "n": 596597,
+  "n_genes": 1114,
+  "sha256_ia_ib": "cd274019d189ceeecb4118340c2310aa3363f201f6760d4d9e597d5341b2cc61",
+  "file": "data_cache/layers/screen_v1.pairs.npz"
+ },
+ "null": {
+  "n": 200000,
+  "seed": 0,
+  "sampling": "uniform BG x BG, a != b, with replacement",
+  "sha256": "780b34d9c02fdddfbf1bb3b52d16a47e3d445f262f5edbb876677ea84111f830"
+ },
+ "output": {
+  "file": "data_cache/layers/screen_v1.scores.f32.npy",
+  "shape": [
+   596597,
+   128
+  ],
+  "dtype": "float32",
+  "sha256": "53d0320607ca8c5c138c2c0256eea39356c82dac396eb89a3a9e590a0425789a"
+ },
+ "runtime": {
+  "engine_init_s": 0.217,
+  "base_prep": {
+   "spec_k0_tinf": {
+    "spectral_s": 0.462,
+    "row_stats_s": 3.096,
+    "neighbours_raw_s": 6.686,
+    "neighbours_balanced_s": 7.724
+   },
+   "spec_k0_t0.1": {
+    "spectral_s": 1.007,
+    "row_stats_s": 6.987,
+    "neighbours_raw_s": 7.618,
+    "neighbours_balanced_s": 15.409
+   },
+   "spec_k0_tlw": {
+    "spectral_s": 0.302,
+    "row_stats_s": 2.111,
+    "neighbours_raw_s": 6.335,
+    "neighbours_balanced_s": 8.389
+   },
+   "spec_k5_t0.1": {
+    "spectral_s": 0.32,
+    "row_stats_s": 2.171,
+    "neighbours_raw_s": 6.181,
+    "neighbours_balanced_s": 7.445
+   },
+   "spec_k5_tinf": {
+    "spectral_s": 0.31,
+    "row_stats_s": 2.052,
+    "neighbours_raw_s": 6.073,
+    "neighbours_balanced_s": 7.277
+   },
+   "spec_k20_t0.1": {
+    "spectral_s": 0.308,
+    "row_stats_s": 2.177,
+    "neighbours_raw_s": 6.215,
+    "neighbours_balanced_s": 7.46
+   },
+   "spec_k20_tinf": {
+    "spectral_s": 0.314,
+    "row_stats_s": 2.189,
+    "neighbours_raw_s": 6.269,
+    "neighbours_balanced_s": 7.515
+   }
+  },
+  "total_s": 814.2,
+  "peak_rss_gb": 3.23
+ },
+ "columns": [
+  {
+   "col": 0,
+   "name": "spec_k0_t0",
+   "config": {
+    "kind": "spectral",
+    "k": 0,
+    "tau": "0",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0005803757889724454,
+   "null_sd": 0.027374337584323363,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 1.768,
+   "runtime_pairs_s": 2.252,
+   "runtime_null_s": 0.79
+  },
+  {
+   "col": 1,
+   "name": "spec_k0_t0.01",
+   "config": {
+    "kind": "spectral",
+    "k": 0,
+    "tau": "0.01",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.000584487014327535,
+   "null_sd": 0.027378976518722502,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.315,
+   "runtime_pairs_s": 2.394,
+   "runtime_null_s": 0.817
+  },
+  {
+   "col": 2,
+   "name": "spec_k0_t0.1",
+   "config": {
+    "kind": "spectral",
+    "k": 0,
+    "tau": "0.1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0006427531743608787,
+   "null_sd": 0.027474242792818467,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.325,
+   "runtime_pairs_s": 2.313,
+   "runtime_null_s": 0.801
+  },
+  {
+   "col": 3,
+   "name": "spec_k0_t1",
+   "config": {
+    "kind": "spectral",
+    "k": 0,
+    "tau": "1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0009626902437012626,
+   "null_sd": 0.029610566114023185,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.309,
+   "runtime_pairs_s": 2.399,
+   "runtime_null_s": 0.861
+  },
+  {
+   "col": 4,
+   "name": "spec_k0_t10",
+   "config": {
+    "kind": "spectral",
+    "k": 0,
+    "tau": "10",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0016672590959492283,
+   "null_sd": 0.037744335712315016,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.341,
+   "runtime_pairs_s": 2.647,
+   "runtime_null_s": 0.917
+  },
+  {
+   "col": 5,
+   "name": "spec_k0_tinf",
+   "config": {
+    "kind": "spectral",
+    "k": 0,
+    "tau": "inf",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0020874280500226537,
+   "null_sd": 0.054484002503042056,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.344,
+   "runtime_pairs_s": 2.677,
+   "runtime_null_s": 0.96
+  },
+  {
+   "col": 6,
+   "name": "spec_k1_t0",
+   "config": {
+    "kind": "spectral",
+    "k": 1,
+    "tau": "0",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.000579849740432209,
+   "null_sd": 0.02738135504733323,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.376,
+   "runtime_pairs_s": 2.583,
+   "runtime_null_s": 0.863
+  },
+  {
+   "col": 7,
+   "name": "spec_k1_t0.01",
+   "config": {
+    "kind": "spectral",
+    "k": 1,
+    "tau": "0.01",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0005839567593641929,
+   "null_sd": 0.027386023822856282,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.382,
+   "runtime_pairs_s": 2.876,
+   "runtime_null_s": 0.951
+  },
+  {
+   "col": 8,
+   "name": "spec_k1_t0.1",
+   "config": {
+    "kind": "spectral",
+    "k": 1,
+    "tau": "0.1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0006421439783794911,
+   "null_sd": 0.027481436952505208,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.38,
+   "runtime_pairs_s": 2.779,
+   "runtime_null_s": 0.951
+  },
+  {
+   "col": 9,
+   "name": "spec_k1_t1",
+   "config": {
+    "kind": "spectral",
+    "k": 1,
+    "tau": "1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0009614530178016661,
+   "null_sd": 0.02961274258687762,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.384,
+   "runtime_pairs_s": 2.485,
+   "runtime_null_s": 0.907
+  },
+  {
+   "col": 10,
+   "name": "spec_k1_t10",
+   "config": {
+    "kind": "spectral",
+    "k": 1,
+    "tau": "10",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.00166236117182844,
+   "null_sd": 0.03753745073646637,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.385,
+   "runtime_pairs_s": 2.773,
+   "runtime_null_s": 0.949
+  },
+  {
+   "col": 11,
+   "name": "spec_k1_tinf",
+   "config": {
+    "kind": "spectral",
+    "k": 1,
+    "tau": "inf",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.002060675689280317,
+   "null_sd": 0.05168287123024284,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.375,
+   "runtime_pairs_s": 2.688,
+   "runtime_null_s": 0.93
+  },
+  {
+   "col": 12,
+   "name": "spec_k2_t0",
+   "config": {
+    "kind": "spectral",
+    "k": 2,
+    "tau": "0",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.000579997483752739,
+   "null_sd": 0.027387697197618063,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.361,
+   "runtime_pairs_s": 2.523,
+   "runtime_null_s": 0.855
+  },
+  {
+   "col": 13,
+   "name": "spec_k2_t0.01",
+   "config": {
+    "kind": "spectral",
+    "k": 2,
+    "tau": "0.01",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0005841221910320729,
+   "null_sd": 0.027392232166683884,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.358,
+   "runtime_pairs_s": 2.671,
+   "runtime_null_s": 0.934
+  },
+  {
+   "col": 14,
+   "name": "spec_k2_t0.1",
+   "config": {
+    "kind": "spectral",
+    "k": 2,
+    "tau": "0.1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0006424094069120792,
+   "null_sd": 0.027485877955599442,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.36,
+   "runtime_pairs_s": 2.704,
+   "runtime_null_s": 0.95
+  },
+  {
+   "col": 15,
+   "name": "spec_k2_t1",
+   "config": {
+    "kind": "spectral",
+    "k": 2,
+    "tau": "1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0009627112659467495,
+   "null_sd": 0.029589990767632548,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.372,
+   "runtime_pairs_s": 2.724,
+   "runtime_null_s": 0.991
+  },
+  {
+   "col": 16,
+   "name": "spec_k2_t10",
+   "config": {
+    "kind": "spectral",
+    "k": 2,
+    "tau": "10",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0016725687684188454,
+   "null_sd": 0.036968681050673385,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.489,
+   "runtime_pairs_s": 2.837,
+   "runtime_null_s": 0.9
+  },
+  {
+   "col": 17,
+   "name": "spec_k2_tinf",
+   "config": {
+    "kind": "spectral",
+    "k": 2,
+    "tau": "inf",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.002096759393399779,
+   "null_sd": 0.04792740185040171,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.339,
+   "runtime_pairs_s": 2.704,
+   "runtime_null_s": 0.952
+  },
+  {
+   "col": 18,
+   "name": "spec_k3_t0",
+   "config": {
+    "kind": "spectral",
+    "k": 3,
+    "tau": "0",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0005817590547998017,
+   "null_sd": 0.027395001732935013,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.383,
+   "runtime_pairs_s": 2.748,
+   "runtime_null_s": 0.952
+  },
+  {
+   "col": 19,
+   "name": "spec_k3_t0.01",
+   "config": {
+    "kind": "spectral",
+    "k": 3,
+    "tau": "0.01",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0005859255694547945,
+   "null_sd": 0.02739952201147848,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.38,
+   "runtime_pairs_s": 2.604,
+   "runtime_null_s": 0.969
+  },
+  {
+   "col": 20,
+   "name": "spec_k3_t0.1",
+   "config": {
+    "kind": "spectral",
+    "k": 3,
+    "tau": "0.1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0006445712909535897,
+   "null_sd": 0.027493208645347,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.476,
+   "runtime_pairs_s": 2.822,
+   "runtime_null_s": 0.999
+  },
+  {
+   "col": 21,
+   "name": "spec_k3_t1",
+   "config": {
+    "kind": "spectral",
+    "k": 3,
+    "tau": "1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0009676661259015802,
+   "null_sd": 0.029593716227074424,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.412,
+   "runtime_pairs_s": 2.566,
+   "runtime_null_s": 0.936
+  },
+  {
+   "col": 22,
+   "name": "spec_k3_t10",
+   "config": {
+    "kind": "spectral",
+    "k": 3,
+    "tau": "10",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0016952353362077218,
+   "null_sd": 0.03682642782788827,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.381,
+   "runtime_pairs_s": 2.748,
+   "runtime_null_s": 0.996
+  },
+  {
+   "col": 23,
+   "name": "spec_k3_tinf",
+   "config": {
+    "kind": "spectral",
+    "k": 3,
+    "tau": "inf",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0021667517386348275,
+   "null_sd": 0.046802016318515174,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.375,
+   "runtime_pairs_s": 2.713,
+   "runtime_null_s": 1.04
+  },
+  {
+   "col": 24,
+   "name": "spec_k5_t0",
+   "config": {
+    "kind": "spectral",
+    "k": 5,
+    "tau": "0",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0005708400420665129,
+   "null_sd": 0.027412000184277426,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.342,
+   "runtime_pairs_s": 2.713,
+   "runtime_null_s": 0.87
+  },
+  {
+   "col": 25,
+   "name": "spec_k5_t0.01",
+   "config": {
+    "kind": "spectral",
+    "k": 5,
+    "tau": "0.01",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.000574803976028408,
+   "null_sd": 0.027416352346100993,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.347,
+   "runtime_pairs_s": 2.683,
+   "runtime_null_s": 0.946
+  },
+  {
+   "col": 26,
+   "name": "spec_k5_t0.1",
+   "config": {
+    "kind": "spectral",
+    "k": 5,
+    "tau": "0.1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.000631727692743671,
+   "null_sd": 0.02750829890291634,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.366,
+   "runtime_pairs_s": 2.658,
+   "runtime_null_s": 0.931
+  },
+  {
+   "col": 27,
+   "name": "spec_k5_t1",
+   "config": {
+    "kind": "spectral",
+    "k": 5,
+    "tau": "1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0009430240484272065,
+   "null_sd": 0.029570874589038173,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.375,
+   "runtime_pairs_s": 2.599,
+   "runtime_null_s": 0.964
+  },
+  {
+   "col": 28,
+   "name": "spec_k5_t10",
+   "config": {
+    "kind": "spectral",
+    "k": 5,
+    "tau": "10",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0016187778746932196,
+   "null_sd": 0.03605320794555033,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.468,
+   "runtime_pairs_s": 2.631,
+   "runtime_null_s": 0.937
+  },
+  {
+   "col": 29,
+   "name": "spec_k5_tinf",
+   "config": {
+    "kind": "spectral",
+    "k": 5,
+    "tau": "inf",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0020036930863132833,
+   "null_sd": 0.043158933951142134,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.376,
+   "runtime_pairs_s": 2.826,
+   "runtime_null_s": 0.94
+  },
+  {
+   "col": 30,
+   "name": "spec_k10_t0",
+   "config": {
+    "kind": "spectral",
+    "k": 10,
+    "tau": "0",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0005545649004986033,
+   "null_sd": 0.027453270437320983,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.373,
+   "runtime_pairs_s": 2.724,
+   "runtime_null_s": 0.935
+  },
+  {
+   "col": 31,
+   "name": "spec_k10_t0.01",
+   "config": {
+    "kind": "spectral",
+    "k": 10,
+    "tau": "0.01",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0005581238807347293,
+   "null_sd": 0.02745752150061616,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.353,
+   "runtime_pairs_s": 2.444,
+   "runtime_null_s": 0.799
+  },
+  {
+   "col": 32,
+   "name": "spec_k10_t0.1",
+   "config": {
+    "kind": "spectral",
+    "k": 10,
+    "tau": "0.1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0006124039764469876,
+   "null_sd": 0.027546835777176853,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.34,
+   "runtime_pairs_s": 2.65,
+   "runtime_null_s": 0.937
+  },
+  {
+   "col": 33,
+   "name": "spec_k10_t1",
+   "config": {
+    "kind": "spectral",
+    "k": 10,
+    "tau": "1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0009064910288793413,
+   "null_sd": 0.029539728706323078,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.389,
+   "runtime_pairs_s": 2.742,
+   "runtime_null_s": 0.931
+  },
+  {
+   "col": 34,
+   "name": "spec_k10_t10",
+   "config": {
+    "kind": "spectral",
+    "k": 10,
+    "tau": "10",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0015223835385536617,
+   "null_sd": 0.03477022822849106,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.36,
+   "runtime_pairs_s": 2.522,
+   "runtime_null_s": 0.916
+  },
+  {
+   "col": 35,
+   "name": "spec_k10_tinf",
+   "config": {
+    "kind": "spectral",
+    "k": 10,
+    "tau": "inf",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0018456910514893705,
+   "null_sd": 0.0384005687193132,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.324,
+   "runtime_pairs_s": 2.572,
+   "runtime_null_s": 0.888
+  },
+  {
+   "col": 36,
+   "name": "spec_k20_t0",
+   "config": {
+    "kind": "spectral",
+    "k": 20,
+    "tau": "0",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0005291186945058491,
+   "null_sd": 0.027523151488087854,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.351,
+   "runtime_pairs_s": 2.56,
+   "runtime_null_s": 0.901
+  },
+  {
+   "col": 37,
+   "name": "spec_k20_t0.01",
+   "config": {
+    "kind": "spectral",
+    "k": 20,
+    "tau": "0.01",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0005321781138627599,
+   "null_sd": 0.027527514712997487,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.358,
+   "runtime_pairs_s": 2.634,
+   "runtime_null_s": 0.93
+  },
+  {
+   "col": 38,
+   "name": "spec_k20_t0.1",
+   "config": {
+    "kind": "spectral",
+    "k": 20,
+    "tau": "0.1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0005824990834365182,
+   "null_sd": 0.027615192188845922,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.43,
+   "runtime_pairs_s": 2.494,
+   "runtime_null_s": 0.908
+  },
+  {
+   "col": 39,
+   "name": "spec_k20_t1",
+   "config": {
+    "kind": "spectral",
+    "k": 20,
+    "tau": "1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0008518206373096798,
+   "null_sd": 0.029540984203831094,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.354,
+   "runtime_pairs_s": 2.792,
+   "runtime_null_s": 0.923
+  },
+  {
+   "col": 40,
+   "name": "spec_k20_t10",
+   "config": {
+    "kind": "spectral",
+    "k": 20,
+    "tau": "10",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.001397142633906323,
+   "null_sd": 0.03381880524911379,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.37,
+   "runtime_pairs_s": 2.652,
+   "runtime_null_s": 0.935
+  },
+  {
+   "col": 41,
+   "name": "spec_k20_tinf",
+   "config": {
+    "kind": "spectral",
+    "k": 20,
+    "tau": "inf",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0016672410832867985,
+   "null_sd": 0.03581743700236249,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.371,
+   "runtime_pairs_s": 2.534,
+   "runtime_null_s": 0.844
+  },
+  {
+   "col": 42,
+   "name": "spec_k40_t0",
+   "config": {
+    "kind": "spectral",
+    "k": 40,
+    "tau": "0",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.00036209945243615224,
+   "null_sd": 0.027679002756674516,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.348,
+   "runtime_pairs_s": 2.66,
+   "runtime_null_s": 0.926
+  },
+  {
+   "col": 43,
+   "name": "spec_k40_t0.01",
+   "config": {
+    "kind": "spectral",
+    "k": 40,
+    "tau": "0.01",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0003615458287251501,
+   "null_sd": 0.027683561590458795,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.356,
+   "runtime_pairs_s": 2.689,
+   "runtime_null_s": 0.938
+  },
+  {
+   "col": 44,
+   "name": "spec_k40_t0.1",
+   "config": {
+    "kind": "spectral",
+    "k": 40,
+    "tau": "0.1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0003850641029645489,
+   "null_sd": 0.027769259720195883,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.351,
+   "runtime_pairs_s": 2.493,
+   "runtime_null_s": 0.831
+  },
+  {
+   "col": 45,
+   "name": "spec_k40_t1",
+   "config": {
+    "kind": "spectral",
+    "k": 40,
+    "tau": "1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0004912773922466439,
+   "null_sd": 0.02961557833214604,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.321,
+   "runtime_pairs_s": 2.389,
+   "runtime_null_s": 0.83
+  },
+  {
+   "col": 46,
+   "name": "spec_k40_t10",
+   "config": {
+    "kind": "spectral",
+    "k": 40,
+    "tau": "10",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0006453913024746372,
+   "null_sd": 0.03319644233822819,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.323,
+   "runtime_pairs_s": 2.359,
+   "runtime_null_s": 0.83
+  },
+  {
+   "col": 47,
+   "name": "spec_k40_tinf",
+   "config": {
+    "kind": "spectral",
+    "k": 40,
+    "tau": "inf",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0007021624084417093,
+   "null_sd": 0.034543410563987534,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.326,
+   "runtime_pairs_s": 2.357,
+   "runtime_null_s": 0.832
+  },
+  {
+   "col": 48,
+   "name": "spec_k0_tlw",
+   "config": {
+    "kind": "spectral",
+    "k": 0,
+    "tau": null,
+    "shrink": "lw",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0006155935697374805,
+   "null_sd": 0.02740015991526865,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.332,
+   "runtime_pairs_s": 2.453,
+   "runtime_null_s": 0.871
+  },
+  {
+   "col": 49,
+   "name": "spec_k1_tlw",
+   "config": {
+    "kind": "spectral",
+    "k": 1,
+    "tau": null,
+    "shrink": "lw",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0006150253887160915,
+   "null_sd": 0.027407306711334074,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.343,
+   "runtime_pairs_s": 2.44,
+   "runtime_null_s": 0.86
+  },
+  {
+   "col": 50,
+   "name": "spec_k2_tlw",
+   "config": {
+    "kind": "spectral",
+    "k": 2,
+    "tau": null,
+    "shrink": "lw",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0006152431706546485,
+   "null_sd": 0.027412640992589086,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.335,
+   "runtime_pairs_s": 2.449,
+   "runtime_null_s": 0.857
+  },
+  {
+   "col": 51,
+   "name": "spec_k3_tlw",
+   "config": {
+    "kind": "spectral",
+    "k": 3,
+    "tau": null,
+    "shrink": "lw",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0006172327632675397,
+   "null_sd": 0.02741995571548807,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.345,
+   "runtime_pairs_s": 2.453,
+   "runtime_null_s": 0.84
+  },
+  {
+   "col": 52,
+   "name": "spec_k5_tlw",
+   "config": {
+    "kind": "spectral",
+    "k": 5,
+    "tau": null,
+    "shrink": "lw",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0006052092842181029,
+   "null_sd": 0.027435966474461233,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.347,
+   "runtime_pairs_s": 2.429,
+   "runtime_null_s": 0.867
+  },
+  {
+   "col": 53,
+   "name": "spec_k10_tlw",
+   "config": {
+    "kind": "spectral",
+    "k": 10,
+    "tau": null,
+    "shrink": "lw",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0005871350176237344,
+   "null_sd": 0.02747594665973801,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.336,
+   "runtime_pairs_s": 2.445,
+   "runtime_null_s": 0.857
+  },
+  {
+   "col": 54,
+   "name": "spec_k20_tlw",
+   "config": {
+    "kind": "spectral",
+    "k": 20,
+    "tau": null,
+    "shrink": "lw",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0005591015583695496,
+   "null_sd": 0.02754529545823836,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.333,
+   "runtime_pairs_s": 2.723,
+   "runtime_null_s": 0.972
+  },
+  {
+   "col": 55,
+   "name": "spec_k40_tlw",
+   "config": {
+    "kind": "spectral",
+    "k": 40,
+    "tau": null,
+    "shrink": "lw",
+    "center": "gene",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.000374321179327314,
+   "null_sd": 0.027700526099303055,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.376,
+   "runtime_pairs_s": 2.656,
+   "runtime_null_s": 0.838
+  },
+  {
+   "col": 56,
+   "name": "spec_k0_t0_line",
+   "config": {
+    "kind": "spectral",
+    "k": 0,
+    "tau": "0",
+    "shrink": "ridge",
+    "center": "line",
+    "standardize": false,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.001238444341912488,
+   "null_sd": 0.02738516889324328,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 2.064,
+   "runtime_pairs_s": 2.934,
+   "runtime_null_s": 0.987
+  },
+  {
+   "col": 57,
+   "name": "spec_k0_t0.1_std",
+   "config": {
+    "kind": "spectral",
+    "k": 0,
+    "tau": "0.1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": true,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0005827660465103635,
+   "null_sd": 0.026304197233835213,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 1.919,
+   "runtime_pairs_s": 2.772,
+   "runtime_null_s": 1.011
+  },
+  {
+   "col": 58,
+   "name": "spec_k0_t1_std",
+   "config": {
+    "kind": "spectral",
+    "k": 0,
+    "tau": "1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": true,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0008881872676742617,
+   "null_sd": 0.02865051735053762,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.415,
+   "runtime_pairs_s": 2.743,
+   "runtime_null_s": 0.877
+  },
+  {
+   "col": 59,
+   "name": "spec_k5_t0.1_std",
+   "config": {
+    "kind": "spectral",
+    "k": 5,
+    "tau": "0.1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": true,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0005758451553354969,
+   "null_sd": 0.026360742066735842,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.339,
+   "runtime_pairs_s": 2.757,
+   "runtime_null_s": 0.968
+  },
+  {
+   "col": 60,
+   "name": "spec_k5_t1_std",
+   "config": {
+    "kind": "spectral",
+    "k": 5,
+    "tau": "1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": true,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0008777476544563703,
+   "null_sd": 0.028653026344374877,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.49,
+   "runtime_pairs_s": 2.778,
+   "runtime_null_s": 0.855
+  },
+  {
+   "col": 61,
+   "name": "spec_k5_tinf_std",
+   "config": {
+    "kind": "spectral",
+    "k": 5,
+    "tau": "inf",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": true,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0021006382731873652,
+   "null_sd": 0.041120788305329586,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.358,
+   "runtime_pairs_s": 2.815,
+   "runtime_null_s": 0.972
+  },
+  {
+   "col": 62,
+   "name": "spec_k20_t0.1_std",
+   "config": {
+    "kind": "spectral",
+    "k": 20,
+    "tau": "0.1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": true,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0003131672446658825,
+   "null_sd": 0.026499871218646533,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.462,
+   "runtime_pairs_s": 2.547,
+   "runtime_null_s": 0.861
+  },
+  {
+   "col": 63,
+   "name": "spec_k20_t1_std",
+   "config": {
+    "kind": "spectral",
+    "k": 20,
+    "tau": "1",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": true,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0004069562656028273,
+   "null_sd": 0.02866164996051109,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.532,
+   "runtime_pairs_s": 2.835,
+   "runtime_null_s": 0.972
+  },
+  {
+   "col": 64,
+   "name": "spec_k20_tinf_std",
+   "config": {
+    "kind": "spectral",
+    "k": 20,
+    "tau": "inf",
+    "shrink": "ridge",
+    "center": "gene",
+    "standardize": true,
+    "matrix": "CRISPRGeneEffect"
+   },
+   "null_mean": 0.0006477507997468799,
+   "null_sd": 0.03525165810759762,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.506,
+   "runtime_pairs_s": 2.486,
+   "runtime_null_s": 0.953
+  },
+  {
+   "col": 65,
+   "name": "rowz[spec_k0_tinf]",
+   "config": {
+    "kind": "rowz",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    }
+   },
+   "null_mean": 0.002422198290479703,
+   "null_sd": 0.9926823643541538,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.32,
+   "runtime_null_s": 0.914
+  },
+  {
+   "col": 66,
+   "name": "mr[spec_k0_tinf]",
+   "config": {
+    "kind": "mr",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "balanced": false
+   },
+   "null_mean": -8734.0990823163,
+   "null_sd": 5055.826125757449,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.785,
+   "runtime_null_s": 10.686
+  },
+  {
+   "col": 67,
+   "name": "mrbal[spec_k0_tinf]",
+   "config": {
+    "kind": "mr",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "balanced": true
+   },
+   "null_mean": -8746.96551160422,
+   "null_sd": 5056.119416470633,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 6.057,
+   "runtime_null_s": 22.794
+  },
+  {
+   "col": 68,
+   "name": "socos_q0.5[spec_k0_tinf]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 0.5,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.006083203197255427,
+   "null_sd": 0.018627296406924843,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.171,
+   "runtime_null_s": 0.982
+  },
+  {
+   "col": 69,
+   "name": "socos_q1[spec_k0_tinf]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 1.0,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.01148037730167414,
+   "null_sd": 0.025072082362308273,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 4.369,
+   "runtime_null_s": 1.87
+  },
+  {
+   "col": 70,
+   "name": "socos_q2[spec_k0_tinf]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 2.0,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.02185794757193761,
+   "null_sd": 0.034175102174332846,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 9.499,
+   "runtime_null_s": 3.67
+  },
+  {
+   "col": 71,
+   "name": "sojaccard_q0.5[spec_k0_tinf]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 0.5,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.003183917735159037,
+   "null_sd": 0.010287148391677728,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.135,
+   "runtime_null_s": 1.016
+  },
+  {
+   "col": 72,
+   "name": "sojaccard_q1[spec_k0_tinf]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 1.0,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.006034270521865601,
+   "null_sd": 0.014385349752438716,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 4.426,
+   "runtime_null_s": 1.947
+  },
+  {
+   "col": 73,
+   "name": "sojaccard_q2[spec_k0_tinf]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 2.0,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.011580087717389246,
+   "null_sd": 0.01880014407024251,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 9.396,
+   "runtime_null_s": 3.852
+  },
+  {
+   "col": 74,
+   "name": "rowz[spec_k0_t0.1]",
+   "config": {
+    "kind": "rowz",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    }
+   },
+   "null_mean": 0.0038287983272366983,
+   "null_sd": 0.9989362710851096,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 6.122,
+   "runtime_null_s": 2.207
+  },
+  {
+   "col": 75,
+   "name": "mr[spec_k0_t0.1]",
+   "config": {
+    "kind": "mr",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "balanced": false
+   },
+   "null_mean": -8735.02091286228,
+   "null_sd": 5057.293795487725,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 5.575,
+   "runtime_null_s": 18.819
+  },
+  {
+   "col": 76,
+   "name": "mrbal[spec_k0_t0.1]",
+   "config": {
+    "kind": "mr",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "balanced": true
+   },
+   "null_mean": -8737.01865331792,
+   "null_sd": 5057.377573321939,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 8.691,
+   "runtime_null_s": 22.341
+  },
+  {
+   "col": 77,
+   "name": "socos_q0.5[spec_k0_t0.1]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 0.5,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.004995550014943884,
+   "null_sd": 0.009562354650942477,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 1.772,
+   "runtime_null_s": 0.501
+  },
+  {
+   "col": 78,
+   "name": "socos_q1[spec_k0_t0.1]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 1.0,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.009836862976042296,
+   "null_sd": 0.009161902376327254,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.308,
+   "runtime_null_s": 0.885
+  },
+  {
+   "col": 79,
+   "name": "socos_q2[spec_k0_t0.1]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 2.0,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.019530159574346187,
+   "null_sd": 0.009137646751675995,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 3.974,
+   "runtime_null_s": 1.631
+  },
+  {
+   "col": 80,
+   "name": "sojaccard_q0.5[spec_k0_t0.1]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 0.5,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.0026082135470184248,
+   "null_sd": 0.0044890984829705945,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 1.043,
+   "runtime_null_s": 0.445
+  },
+  {
+   "col": 81,
+   "name": "sojaccard_q1[spec_k0_t0.1]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 1.0,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.005135162242795542,
+   "null_sd": 0.004284189395041578,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.023,
+   "runtime_null_s": 0.888
+  },
+  {
+   "col": 82,
+   "name": "sojaccard_q2[spec_k0_t0.1]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 2.0,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.010255268997671318,
+   "null_sd": 0.0043693752958091844,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 3.966,
+   "runtime_null_s": 1.638
+  },
+  {
+   "col": 83,
+   "name": "rowz[spec_k0_tlw]",
+   "config": {
+    "kind": "rowz",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": null,
+     "shrink": "lw",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    }
+   },
+   "null_mean": 0.0038642536935776513,
+   "null_sd": 0.9988511775895392,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.533,
+   "runtime_null_s": 0.844
+  },
+  {
+   "col": 84,
+   "name": "mr[spec_k0_tlw]",
+   "config": {
+    "kind": "mr",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": null,
+     "shrink": "lw",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "balanced": false
+   },
+   "null_mean": -8734.940840669016,
+   "null_sd": 5057.056677493089,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.013,
+   "runtime_null_s": 9.804
+  },
+  {
+   "col": 85,
+   "name": "mrbal[spec_k0_tlw]",
+   "config": {
+    "kind": "mr",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": null,
+     "shrink": "lw",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "balanced": true
+   },
+   "null_mean": -8736.94708761515,
+   "null_sd": 5057.121193609871,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 3.405,
+   "runtime_null_s": 12.005
+  },
+  {
+   "col": 86,
+   "name": "socos_q0.5[spec_k0_tlw]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": null,
+     "shrink": "lw",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 0.5,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.005005449835109471,
+   "null_sd": 0.009412584365542013,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 1.061,
+   "runtime_null_s": 0.462
+  },
+  {
+   "col": 87,
+   "name": "socos_q1[spec_k0_tlw]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": null,
+     "shrink": "lw",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 1.0,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.009844634863724049,
+   "null_sd": 0.009037949917600306,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.117,
+   "runtime_null_s": 0.913
+  },
+  {
+   "col": 88,
+   "name": "socos_q2[spec_k0_tlw]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": null,
+     "shrink": "lw",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 2.0,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.01955171141157363,
+   "null_sd": 0.009023837723935274,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 4.227,
+   "runtime_null_s": 1.715
+  },
+  {
+   "col": 89,
+   "name": "sojaccard_q0.5[spec_k0_tlw]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": null,
+     "shrink": "lw",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 0.5,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.0026121968550256026,
+   "null_sd": 0.004427261688876892,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 1.025,
+   "runtime_null_s": 0.441
+  },
+  {
+   "col": 90,
+   "name": "sojaccard_q1[spec_k0_tlw]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": null,
+     "shrink": "lw",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 1.0,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.0051368634200622066,
+   "null_sd": 0.004242251782599059,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.035,
+   "runtime_null_s": 0.885
+  },
+  {
+   "col": 91,
+   "name": "sojaccard_q2[spec_k0_tlw]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 0,
+     "tau": null,
+     "shrink": "lw",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 2.0,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.010259498023445135,
+   "null_sd": 0.004334886231620734,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 4.186,
+   "runtime_null_s": 1.728
+  },
+  {
+   "col": 92,
+   "name": "rowz[spec_k5_t0.1]",
+   "config": {
+    "kind": "rowz",
+    "base": {
+     "kind": "spectral",
+     "k": 5,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    }
+   },
+   "null_mean": 0.0038079085530592716,
+   "null_sd": 0.9990326019986953,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.417,
+   "runtime_null_s": 0.795
+  },
+  {
+   "col": 93,
+   "name": "mr[spec_k5_t0.1]",
+   "config": {
+    "kind": "mr",
+    "base": {
+     "kind": "spectral",
+     "k": 5,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "balanced": false
+   },
+   "null_mean": -8735.514794335792,
+   "null_sd": 5058.190810215694,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 1.942,
+   "runtime_null_s": 9.547
+  },
+  {
+   "col": 94,
+   "name": "mrbal[spec_k5_t0.1]",
+   "config": {
+    "kind": "mr",
+    "base": {
+     "kind": "spectral",
+     "k": 5,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "balanced": true
+   },
+   "null_mean": -8737.421215623997,
+   "null_sd": 5058.279466470161,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 3.245,
+   "runtime_null_s": 10.831
+  },
+  {
+   "col": 95,
+   "name": "socos_q0.5[spec_k5_t0.1]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 5,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 0.5,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.005003433873534612,
+   "null_sd": 0.009421332697819633,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 1.018,
+   "runtime_null_s": 0.441
+  },
+  {
+   "col": 96,
+   "name": "socos_q1[spec_k5_t0.1]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 5,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 1.0,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.00982749547444584,
+   "null_sd": 0.009034552723729983,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.017,
+   "runtime_null_s": 0.875
+  },
+  {
+   "col": 97,
+   "name": "socos_q2[spec_k5_t0.1]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 5,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 2.0,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.01954005596141223,
+   "null_sd": 0.009037308136371587,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 3.945,
+   "runtime_null_s": 1.619
+  },
+  {
+   "col": 98,
+   "name": "sojaccard_q0.5[spec_k5_t0.1]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 5,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 0.5,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.002611183127754473,
+   "null_sd": 0.004424141009559231,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 0.999,
+   "runtime_null_s": 0.432
+  },
+  {
+   "col": 99,
+   "name": "sojaccard_q1[spec_k5_t0.1]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 5,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 1.0,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.005126525097698186,
+   "null_sd": 0.004242318254116941,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.113,
+   "runtime_null_s": 0.867
+  },
+  {
+   "col": 100,
+   "name": "sojaccard_q2[spec_k5_t0.1]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 5,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 2.0,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.010253172897182762,
+   "null_sd": 0.004343072488957551,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 3.927,
+   "runtime_null_s": 1.609
+  },
+  {
+   "col": 101,
+   "name": "rowz[spec_k5_tinf]",
+   "config": {
+    "kind": "rowz",
+    "base": {
+     "kind": "spectral",
+     "k": 5,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    }
+   },
+   "null_mean": 0.0021863328512755284,
+   "null_sd": 0.9975386877355179,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.305,
+   "runtime_null_s": 0.818
+  },
+  {
+   "col": 102,
+   "name": "mr[spec_k5_tinf]",
+   "config": {
+    "kind": "mr",
+    "base": {
+     "kind": "spectral",
+     "k": 5,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "balanced": false
+   },
+   "null_mean": -8744.10673889764,
+   "null_sd": 5061.755155978001,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 1.889,
+   "runtime_null_s": 9.458
+  },
+  {
+   "col": 103,
+   "name": "mrbal[spec_k5_tinf]",
+   "config": {
+    "kind": "mr",
+    "base": {
+     "kind": "spectral",
+     "k": 5,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "balanced": true
+   },
+   "null_mean": -8751.030242832541,
+   "null_sd": 5063.1172068010865,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 3.286,
+   "runtime_null_s": 10.78
+  },
+  {
+   "col": 104,
+   "name": "socos_q0.5[spec_k5_tinf]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 5,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 0.5,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.005477492861676386,
+   "null_sd": 0.014577990296194748,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 1.058,
+   "runtime_null_s": 0.45
+  },
+  {
+   "col": 105,
+   "name": "socos_q1[spec_k5_tinf]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 5,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 1.0,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.010555654464414902,
+   "null_sd": 0.017963402782201536,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.082,
+   "runtime_null_s": 0.888
+  },
+  {
+   "col": 106,
+   "name": "socos_q2[spec_k5_tinf]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 5,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 2.0,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.020482861613711885,
+   "null_sd": 0.02274848478180807,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 4.135,
+   "runtime_null_s": 1.709
+  },
+  {
+   "col": 107,
+   "name": "sojaccard_q0.5[spec_k5_tinf]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 5,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 0.5,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.002856144137812371,
+   "null_sd": 0.007854502837486333,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 1.031,
+   "runtime_null_s": 0.44
+  },
+  {
+   "col": 108,
+   "name": "sojaccard_q1[spec_k5_tinf]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 5,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 1.0,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.005511244252130216,
+   "null_sd": 0.00981197509317006,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.032,
+   "runtime_null_s": 0.896
+  },
+  {
+   "col": 109,
+   "name": "sojaccard_q2[spec_k5_tinf]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 5,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 2.0,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.01076241085671201,
+   "null_sd": 0.011645092079299292,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 4.16,
+   "runtime_null_s": 1.699
+  },
+  {
+   "col": 110,
+   "name": "rowz[spec_k20_t0.1]",
+   "config": {
+    "kind": "rowz",
+    "base": {
+     "kind": "spectral",
+     "k": 20,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    }
+   },
+   "null_mean": 0.003716524662401597,
+   "null_sd": 0.998764549537104,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.174,
+   "runtime_null_s": 0.763
+  },
+  {
+   "col": 111,
+   "name": "mr[spec_k20_t0.1]",
+   "config": {
+    "kind": "mr",
+    "base": {
+     "kind": "spectral",
+     "k": 20,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "balanced": false
+   },
+   "null_mean": -8735.798783718192,
+   "null_sd": 5056.703630687957,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 1.894,
+   "runtime_null_s": 9.458
+  },
+  {
+   "col": 112,
+   "name": "mrbal[spec_k20_t0.1]",
+   "config": {
+    "kind": "mr",
+    "base": {
+     "kind": "spectral",
+     "k": 20,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "balanced": true
+   },
+   "null_mean": -8737.610103381836,
+   "null_sd": 5056.778712476911,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 3.211,
+   "runtime_null_s": 10.696
+  },
+  {
+   "col": 113,
+   "name": "socos_q0.5[spec_k20_t0.1]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 20,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 0.5,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.0050021838254757115,
+   "null_sd": 0.00908028363236682,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 1.039,
+   "runtime_null_s": 0.45
+  },
+  {
+   "col": 114,
+   "name": "socos_q1[spec_k20_t0.1]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 20,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 1.0,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.00985817915808978,
+   "null_sd": 0.008794359099965628,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.051,
+   "runtime_null_s": 0.887
+  },
+  {
+   "col": 115,
+   "name": "socos_q2[spec_k20_t0.1]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 20,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 2.0,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.019560724410613857,
+   "null_sd": 0.008840961026846271,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 4.182,
+   "runtime_null_s": 1.714
+  },
+  {
+   "col": 116,
+   "name": "sojaccard_q0.5[spec_k20_t0.1]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 20,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 0.5,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.0026064877007110736,
+   "null_sd": 0.004296368111449807,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 1.029,
+   "runtime_null_s": 0.448
+  },
+  {
+   "col": 117,
+   "name": "sojaccard_q1[spec_k20_t0.1]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 20,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 1.0,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.00513603524352347,
+   "null_sd": 0.004183498505255761,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.037,
+   "runtime_null_s": 0.881
+  },
+  {
+   "col": 118,
+   "name": "sojaccard_q2[spec_k20_t0.1]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 20,
+     "tau": "0.1",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 2.0,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.01024645656508753,
+   "null_sd": 0.004296071803465171,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 4.176,
+   "runtime_null_s": 1.708
+  },
+  {
+   "col": 119,
+   "name": "rowz[spec_k20_tinf]",
+   "config": {
+    "kind": "rowz",
+    "base": {
+     "kind": "spectral",
+     "k": 20,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    }
+   },
+   "null_mean": 0.0013345863911263535,
+   "null_sd": 1.0002713693311145,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.239,
+   "runtime_null_s": 0.788
+  },
+  {
+   "col": 120,
+   "name": "mr[spec_k20_tinf]",
+   "config": {
+    "kind": "mr",
+    "base": {
+     "kind": "spectral",
+     "k": 20,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "balanced": false
+   },
+   "null_mean": -8747.814147918785,
+   "null_sd": 5063.182397122085,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 1.905,
+   "runtime_null_s": 9.389
+  },
+  {
+   "col": 121,
+   "name": "mrbal[spec_k20_tinf]",
+   "config": {
+    "kind": "mr",
+    "base": {
+     "kind": "spectral",
+     "k": 20,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "balanced": true
+   },
+   "null_mean": -8751.337629249372,
+   "null_sd": 5064.78360779846,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 3.202,
+   "runtime_null_s": 10.756
+  },
+  {
+   "col": 122,
+   "name": "socos_q0.5[spec_k20_tinf]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 20,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 0.5,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.005102486772233779,
+   "null_sd": 0.010779690606343385,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 1.037,
+   "runtime_null_s": 0.446
+  },
+  {
+   "col": 123,
+   "name": "socos_q1[spec_k20_tinf]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 20,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 1.0,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.009982553251502333,
+   "null_sd": 0.011044755246242597,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.046,
+   "runtime_null_s": 0.882
+  },
+  {
+   "col": 124,
+   "name": "socos_q2[spec_k20_tinf]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 20,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 2.0,
+    "measure": "cos",
+    "balanced": true
+   },
+   "null_mean": 0.01969117071757014,
+   "null_sd": 0.012465638626239247,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 4.169,
+   "runtime_null_s": 1.704
+  },
+  {
+   "col": 125,
+   "name": "sojaccard_q0.5[spec_k20_tinf]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 20,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 0.5,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.0026485688090317505,
+   "null_sd": 0.005197822900440899,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 1.018,
+   "runtime_null_s": 0.445
+  },
+  {
+   "col": 126,
+   "name": "sojaccard_q1[spec_k20_tinf]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 20,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 1.0,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.005190161705622895,
+   "null_sd": 0.005202680590313662,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 2.035,
+   "runtime_null_s": 0.876
+  },
+  {
+   "col": 127,
+   "name": "sojaccard_q2[spec_k20_tinf]",
+   "config": {
+    "kind": "so",
+    "base": {
+     "kind": "spectral",
+     "k": 20,
+     "tau": "inf",
+     "shrink": "ridge",
+     "center": "gene",
+     "standardize": false,
+     "matrix": "CRISPRGeneEffect"
+    },
+    "q": 2.0,
+    "measure": "jaccard",
+    "balanced": true
+   },
+   "null_mean": 0.010310089342322422,
+   "null_sd": 0.005993736994283367,
+   "null_n": 200000,
+   "n_nonfinite": 0,
+   "runtime_prep_s": 0.0,
+   "runtime_pairs_s": 4.18,
+   "runtime_null_s": 1.697
+  }
+ ]
+}

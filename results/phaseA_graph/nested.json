@@ -1,0 +1,93 @@
+{
+ "all": {
+  "label": "all",
+  "n_candidates": 67,
+  "outer": [
+   {
+    "outer_fold": 0,
+    "selected": "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+    "inner_ap_ht": 0.46223143303279707,
+    "held_out_ap_ht": 0.45343795281650906
+   },
+   {
+    "outer_fold": 1,
+    "selected": "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+    "inner_ap_ht": 0.47448443642926796,
+    "held_out_ap_ht": 0.4044259392306253
+   },
+   {
+    "outer_fold": 2,
+    "selected": "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]",
+    "inner_ap_ht": 0.47707232140496686,
+    "held_out_ap_ht": 0.3819727521258375
+   },
+   {
+    "outer_fold": 3,
+    "selected": "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+    "inner_ap_ht": 0.4023808903328287,
+    "held_out_ap_ht": 0.6928401236163826
+   },
+   {
+    "outer_fold": 4,
+    "selected": "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+    "inner_ap_ht": 0.49387544641949604,
+    "held_out_ap_ht": 0.32686189926971315
+   }
+  ],
+  "nested_mean_held_out": 0.4519077334118135,
+  "selected_in_sample": {
+   "name": "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+   "ap_ht": 0.4604727369895395
+  }
+ },
+ "family": {
+  "label": "family_emb",
+  "n_candidates": 11,
+  "outer": [
+   {
+    "outer_fold": 0,
+    "selected": "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+    "inner_ap_ht": 0.46223143303279707,
+    "held_out_ap_ht": 0.45343795281650906
+   },
+   {
+    "outer_fold": 1,
+    "selected": "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+    "inner_ap_ht": 0.47448443642926796,
+    "held_out_ap_ht": 0.4044259392306253
+   },
+   {
+    "outer_fold": 2,
+    "selected": "rowz[emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]]",
+    "inner_ap_ht": 0.47707232140496686,
+    "held_out_ap_ht": 0.3819727521258375
+   },
+   {
+    "outer_fold": 3,
+    "selected": "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+    "inner_ap_ht": 0.4023808903328287,
+    "held_out_ap_ht": 0.6928401236163826
+   },
+   {
+    "outer_fold": 4,
+    "selected": "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+    "inner_ap_ht": 0.49387544641949604,
+    "held_out_ap_ht": 0.32686189926971315
+   }
+  ],
+  "nested_mean_held_out": 0.4519077334118135,
+  "selected_in_sample": {
+   "name": "emb_lap512[knn_union_lin_q0.25[spec_k20_t0.1_std]]",
+   "ap_ht": 0.4604727369895395
+  }
+ },
+ "current_best_fold_mean": 0.43475926039425217,
+ "current_best_folds": [
+  0.4418457657071362,
+  0.3711591322602949,
+  0.3613461988314303,
+  0.676486309984597,
+  0.32295889518780213
+ ],
+ "note": "current best was itself selected on these SEEDS[0] folds in earlier screens (not nested)"
+}

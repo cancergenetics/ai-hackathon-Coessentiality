@@ -1,0 +1,178 @@
+{
+ "method": "DESIGN v2 \u00a73.2 power check for the IFT, using DEV pairs only (no IFT labels or scores are touched).\n\nQuestion: with an IFT of the realised size and cluster structure, how often does a candidate whose true\nHT-weighted AP is (1+g) x the baseline's pass criterion \u00a73.7(ii) (observed relative gain >= 10% AND 95% paired\ncluster-bootstrap CI of dAP excluding 0)? g in {0 (type-I check), 0.10, 0.15, 0.20}.\n\nSimulation (semi-parametric, documented):\n  * Baseline score s0 = GLS signed t (Wainberg default variant, label-free) on all dev pairs, rank-normalised\n    to z0 (AP is rank-invariant).\n  * Candidate z1 = rho*z0 + sqrt(1-rho^2)*eps + delta*y, eps ~ N(0,1) per pair (fixed draw). rho = Pearson\n    correlation of rank-normalised GLS and Pearson-r scores over all dev pairs (label-free; a realistic\n    between-method agreement); sensitivity rho = 0.9. delta is calibrated by bisection so that the dev-universe\n    HT-weighted AP of z1 equals (1+g) x that of z0.\n  * Each replicate draws a pseudo-IFT from the DEV clusters with the same stratified procedure as the real IFT\n    (src.clusters strata + Kish rejection) and a positive fraction chosen so the expected positive count equals the\n    real IFT's (847); pairs = both proteins in drawn clusters. HT weights: between-cluster pairs 1/f with f = drawn\n    proteins / all scorable proteins (as on the real IFT).\n  * Within each replicate, a paired cluster bootstrap (B resamples) gives the dAP CI exactly as final_eval does.",
+ "rho_obs": 0.48270331245476017,
+ "real_ift": {
+  "pos": 847,
+  "neg": 40786
+ },
+ "real_ift_f": 0.26481149012567323,
+ "dev_ap_ht_gls": 0.271981146261229,
+ "reps": 200,
+ "boot": 200,
+ "margin": 0.1,
+ "settings": {
+  "rho=0.483": {
+   "calibration": {
+    "0.0": {
+     "delta": 1.464407541363471,
+     "ap_candidate": 0.2719812445182308,
+     "target": 0.271981146261229
+    },
+    "0.1": {
+     "delta": 1.540824481537129,
+     "ap_candidate": 0.2991793137687882,
+     "target": 0.2991792608873519
+    },
+    "0.15": {
+     "delta": 1.5787923459611193,
+     "ap_candidate": 0.312778411633746,
+     "target": 0.3127783182004133
+    },
+    "0.2": {
+     "delta": 1.6155337359050463,
+     "ap_candidate": 0.3263775977495276,
+     "target": 0.3263773755134748
+    }
+   },
+   "power": {
+    "0.0": {
+     "p_pass": 0.0,
+     "p_ci_excludes_0": 0.0,
+     "median_obs_rel_gain": -0.04640830485804759,
+     "q05_q95_obs_rel_gain": [
+      -0.19639782899228803,
+      0.23422989847528983
+     ]
+    },
+    "0.1": {
+     "p_pass": 0.0,
+     "p_ci_excludes_0": 0.0,
+     "median_obs_rel_gain": 0.047328587891454554,
+     "q05_q95_obs_rel_gain": [
+      -0.1110354492985871,
+      0.34547811864128714
+     ]
+    },
+    "0.15": {
+     "p_pass": 0.01,
+     "p_ci_excludes_0": 0.01,
+     "median_obs_rel_gain": 0.09314228994909113,
+     "q05_q95_obs_rel_gain": [
+      -0.07071684683850087,
+      0.40452772856969627
+     ]
+    },
+    "0.2": {
+     "p_pass": 0.02,
+     "p_ci_excludes_0": 0.02,
+     "median_obs_rel_gain": 0.14185085004957543,
+     "q05_q95_obs_rel_gain": [
+      -0.028706199767193012,
+      0.45842351892871636
+     ]
+    }
+   },
+   "pseudo_ift_pos": [
+    797,
+    870,
+    974
+   ],
+   "pseudo_ift_neg_median": 47085,
+   "pseudo_ift_clusters_median": 71
+  },
+  "rho=0.900": {
+   "calibration": {
+    "0.0": {
+     "delta": 0.42076290951445117,
+     "ap_candidate": 0.27198089408336673,
+     "target": 0.271981146261229
+    },
+    "0.1": {
+     "delta": 0.5030732603008801,
+     "ap_candidate": 0.29917934399342117,
+     "target": 0.2991792608873519
+    },
+    "0.15": {
+     "delta": 0.5452804176202335,
+     "ap_candidate": 0.3127782982719194,
+     "target": 0.3127783182004133
+    },
+    "0.2": {
+     "delta": 0.5877274213889905,
+     "ap_candidate": 0.32637725063513146,
+     "target": 0.3263773755134748
+    }
+   },
+   "power": {
+    "0.0": {
+     "p_pass": 0.0,
+     "p_ci_excludes_0": 0.0,
+     "median_obs_rel_gain": -0.0160564863265395,
+     "q05_q95_obs_rel_gain": [
+      -0.12023488408364548,
+      0.13709066018987748
+     ]
+    },
+    "0.1": {
+     "p_pass": 0.005,
+     "p_ci_excludes_0": 0.015,
+     "median_obs_rel_gain": 0.0792136268741237,
+     "q05_q95_obs_rel_gain": [
+      -0.032881243905534166,
+      0.2537422688383012
+     ]
+    },
+    "0.15": {
+     "p_pass": 0.045,
+     "p_ci_excludes_0": 0.045,
+     "median_obs_rel_gain": 0.1217210510648552,
+     "q05_q95_obs_rel_gain": [
+      0.008737143579229457,
+      0.31522778007266955
+     ]
+    },
+    "0.2": {
+     "p_pass": 0.215,
+     "p_ci_excludes_0": 0.225,
+     "median_obs_rel_gain": 0.16671379327978697,
+     "q05_q95_obs_rel_gain": [
+      0.05237510673886655,
+      0.38278691312062774
+     ]
+    }
+   },
+   "pseudo_ift_pos": [
+    797,
+    870,
+    974
+   ],
+   "pseudo_ift_neg_median": 47085,
+   "pseudo_ift_clusters_median": 71
+  }
+ },
+ "run_record": {
+  "git_commit": "1155d555c00b1ae6f6be54f9da5c8a21e40fd773",
+  "git_dirty": true,
+  "git_dirty_src": false,
+  "git_dirty_src_paths": [],
+  "allow_dirty": false,
+  "cache_sha256": {
+   "pairs.pkl": "72c2215525eb0a29e549690de2186f4a811637f8afa8c0bbb77ee2551d921030",
+   "CRISPRGeneEffect.f32.npy": "8a894d2449074934de71cf0e0b44e8d81ec2d70bc756b2d038367c34c9ad27f3",
+   "splits/protein_assignment.csv": "de301c9ec7e4bca3965b3b4e588a16357e597460215c98138b2a28cdac303b23"
+  },
+  "seed": 0,
+  "counts": {
+   "dev_pairs": 322528,
+   "dev_pos": 2299,
+   "n_pos_scorable": 3191
+  },
+  "runtime_s": 185.4,
+  "timestamp": "2026-10-27T13:27:33",
+  "machine": {
+   "cpu_count": 8,
+   "platform": "macOS-26.5.2-arm64-arm-64bit",
+   "python": "3.12.16"
+  }
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "gene_bins": {
+  "mean": 5,
+  "sd": 5,
+  "skew": 5,
+  "frac_dep": 5,
+  "nan_frac": 2,
+  "min": 5,
+  "p05": 5
+ },
+ "bin_edges": {
+  "mean": [
+   -0.1777000740252679,
+   -0.06386901976542694,
+   -0.004554069989246278,
+   0.050735409473676475
+  ],
+  "sd": [
+   0.12419923378419495,
+   0.1358575375282017,
+   0.1505414763068977,
+   0.19080450032938437
+  ],
+  "skew": [
+   -0.5492391553327906,
+   -0.281395434440927,
+   -0.10870220951503397,
+   0.0713761603528015
+  ],
+  "frac_dep": [
+   0.0007347538574577516,
+   0.0029390154298310064,
+   0.008082292432035268,
+   0.04041146216017634
+  ],
+  "nan_frac": [
+   0.0
+  ],
+  "min": [
+   -1.337354826927185,
+   -0.9045523405075072,
+   -0.7129857063293458,
+   -0.5699615836143493
+  ],
+  "p05": [
+   -0.4731600105762482,
+   -0.30135356783866885,
+   -0.22496638000011446,
+   -0.15817191898822783
+  ]
+ },
+ "binned_signature_uniqueness_dev_genes": {
+  "n_genes": 819,
+  "n_signatures": 296,
+  "frac_unique": 0.2442002442002442,
+  "median_genes_per_signature": 5.0
+ },
+ "raw_signature_uniqueness_dev_genes": {
+  "n_genes": 819,
+  "n_signatures": 819,
+  "frac_unique": 1.0,
+  "median_genes_per_signature": 1.0
+ },
+ "provisional_layers": [
+  "spec_k0_tinf",
+  "spec_k0_t0.1",
+  "spec_k5_t0.1",
+  "spec_k20_t0.1",
+  "spec_k20_tinf",
+  "spec_k0_t0_line",
+  "rowz[spec_k0_t0.1]",
+  "rowz[spec_k5_t0.1]",
+  "rowz[spec_k20_t0.1]",
+  "socos_q1[spec_k5_t0.1]",
+  "socos_q1[spec_k20_t0.1]",
+  "mrbal[spec_k20_t0.1]"
+ ],
+ "baselines": [
+  "pearson_signed",
+  "spearman_signed",
+  "gls_signed"
+ ],
+ "lgbm_defaults": {
+  "objective": "binary",
+  "num_leaves": 7,
+  "learning_rate": 0.05,
+  "n_estimators": 1500,
+  "min_child_samples": 2000,
+  "subsample": 0.8,
+  "subsample_freq": 1,
+  "colsample_bytree": 0.8,
+  "reg_lambda": 1.0,
+  "min_split_gain": 0.0,
+  "max_bin": 255,
+  "n_jobs": 4,
+  "verbose": -1,
+  "deterministic": true,
+  "force_row_wise": true,
+  "monotone_constraints_method": "intermediate"
+ },
+ "early_stop": 100,
+ "run_record": {
+  "git_commit": "006b3ec85f8b06d7269f7ed89f1e500330a8e8bb",
+  "git_dirty": true,
+  "git_dirty_src": false,
+  "git_dirty_src_paths": [],
+  "allow_dirty": false,
+  "cache_sha256": {
+   "pairs.pkl": "72c2215525eb0a29e549690de2186f4a811637f8afa8c0bbb77ee2551d921030",
+   "CRISPRGeneEffect.f32.npy": "8a894d2449074934de71cf0e0b44e8d81ec2d70bc756b2d038367c34c9ad27f3",
+   "splits/protein_assignment.csv": "de301c9ec7e4bca3965b3b4e588a16357e597460215c98138b2a28cdac303b23"
+  },
+  "seed": 0,
+  "counts": null,
+  "runtime_s": null,
+  "timestamp": "2026-10-27T13:58:13",
+  "machine": {
+   "cpu_count": 8,
+   "platform": "macOS-26.5.2-arm64-arm-64bit",
+   "python": "3.12.16"
+  },
+  "universe": "dev"
+ }
+}
