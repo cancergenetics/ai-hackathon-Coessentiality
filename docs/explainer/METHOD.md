@@ -88,7 +88,17 @@ The three views it combines are:
 
 **Why it is needed.** The partner list summarises where a gene sits in the genome-wide dependency network, and it is the raw material for Steps 3 and 4. The per-gene z-scores matter because some genes are similar to almost everything (hubs); without balancing, they would appear in every gene's list.
 
-**What goes wrong without it, or with other settings.** Keeping more partners made things worse (0.5%, 1% and 2% of genes all scored lower): weak partners dilute the signal. Unweighted lists (just "in or out") lost 0.04–0.11 AP: the strength of each link carries information.
+**Where 44 comes from.** The setting is a fraction, not a count: K = round(0.25% × number of background genes) = round(0.0025 × 17,525) = 44 ([method.py:138](../../mvp/src/coessential/method.py)). Background genes are those with less than 10% missing values. A DepMap release with a different number of such genes gives a different K. The 0.25% was chosen in the first screen ([turning point 4](JOURNEY.md#tp4)) as the best of the fractions tried, on development data (seed 0, B after Step 3's row z-score):
+
+| Fraction of background genes | K | HT-AP |
+|---|---|---|
+| 0.5% | 88 | 0.429 |
+| **0.25%** | **44** | **0.435** |
+| 0.1% | 18 | 0.424 |
+
+The optimum is flat: the differences are small next to the fold-to-fold spread (SD about 0.14), so any value from 0.1% to 0.5% would behave much the same. Because the choice was made on development data, it adds a little to the optimism of the development scores.
+
+**What goes wrong without it, or with other settings.** Keeping more partners made things worse (1% and 2% of genes scored lower still, on a related base): weak partners dilute the signal. Keeping fewer (0.1%) scored best before the row z-score but worse after it: with so few partners, overlaps rest on a handful of genes and become noisy. Unweighted lists (just "in or out") lost 0.04–0.11 AP: the strength of each link carries information.
 
 *Shaped by:* [turning point 4](JOURNEY.md#tp4). Per-gene balancing follows mutual-rank and balanced-correlation ideas [Obayashi & Kinoshita 2009; Rohde 2025].
 
