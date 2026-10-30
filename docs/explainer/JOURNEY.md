@@ -181,7 +181,7 @@ The prompt asked for a co-essentiality method that predicts co-complex membershi
 |---|---|---|
 | Olfactory-receptor correction for GLS (Wainberg/Boyle) | Lowered GLS (0.234 vs 0.255, all pairs) | Not used for the baseline |
 | Two-sided (absolute) scores | Worse than signed for every baseline | Anti-correlation does not indicate co-complex membership |
-| Avana-only cell lines, per-library gene effects | Worse (for example 0.149 vs 0.204 Pearson) | More cell lines beat library purity |
+| Restricting to Avana-screened cell lines; per-library gene effects | Per-library effects worse (0.149 vs 0.204 Pearson). Avana-flagged lines (1,048) tied with all lines; Avana-only lines (827) worse. A later check with the final method agreed: tie, and −0.039 [−0.063, −0.018] on matched pairs ([results](../../results/library_subsets/README.md)) | Library purity buys nothing once the profiles are cleaned; fewer lines cost |
 | Regressing out screen-quality and lineage covariates | ≤ +0.01 over component removal | Components already capture this |
 | Mutual rank, balanced mutual rank on first-order scores | ±0.01 of row z-score; no gain on the standardised base | Balancing helps weak scores, not the cleaned F |
 | Jaccard (unweighted) partner overlap | 0.04–0.11 lower than weighted cosine | Link strength matters |

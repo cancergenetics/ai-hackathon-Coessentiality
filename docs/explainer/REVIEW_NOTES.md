@@ -20,6 +20,7 @@ These are the discrepancies, open questions and judgement calls found while writ
 | 12 | S3 Text / AGENTS.md: the only human input was the prompt and one "continue" | The transcript also has "what is the method name specifically" (18:08) and questions at 20:18–20:24, all after the report and with no effect on the method. | JOURNEY mentions them |
 | 13 | docs/AGENTS.md: "process logs … stay in the private research repository" | The public release includes `reviews/` and the record files (RESEARCH_TREE, LESSONS). | Fixed in AGENTS.md |
 | 14 | Retro M3a cites commit "047dd58" | The actual hash is 47dd58b. | Uses 47dd58b |
+| 15 | JOURNEY dead ends (first version): "Avana-only cell lines … Worse" | `round1_data_biology.md`: Avana-flagged lines (1,048) tied with all lines after component removal; only Avana-only lines (827) were worse. Re-run with zavg_BEF on dev ([results/library_subsets](../../results/library_subsets/README.md)): tie (−0.003) and −0.039 on matched pairs. | Row corrected |
 
 ## Open questions and uncertain choices
 
@@ -34,5 +35,5 @@ These are the discrepancies, open questions and judgement calls found while writ
    - The BBSome is included as an honest failure.
 4. **Mechanistic explanations are marked "likely" or "believed".** These include why gene standardisation helps and why E helps small complexes. None was tested directly.
 5. **The SUMO-pathway remark in the worked example** (shared partners of SMC5 and SMC6 include SAE1, UBA2, UBE2I, RNF4 and NFATC2IP) is an observation. No enrichment test was run.
-6. **Links from the HTML page to repository files** point to `github.com/cancergenetics/ai-hackathon-Coessentiality/blob/main/…`. The `docs/explainer/` files do not exist there until the release is rebuilt and pushed, so those links are dead for now.
+6. **Links from the HTML page to repository files** point to `github.com/cancergenetics/ai-hackathon-Coessentiality/blob/main/…`. The `docs/explainer/` files do not exist there until the release is rebuilt and pushed, so those links are dead for now. (Resolved: the release with `docs/explainer/` was pushed on 2026-10-29.)
 7. **Times** are UTC, from the transcript and commits. S3 Text calls them "local times"; Irish time equalled UTC on that date, so both are right.
